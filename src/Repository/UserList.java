@@ -1,3 +1,5 @@
+package Repository;
+
 import java.util.Vector;
 
 public class UserList {
@@ -24,7 +26,7 @@ public class UserList {
     }
 
     public void printInfo() {
-        System.out.println("UserList:");
+        System.out.println("Repository.UserList:");
         for (User item : userList) {
             System.out.println("id:" + item.getId() + " password" + item.getPass() +
                     " ip:" + item.getIp() + " isLogin:" + item.isLogin());

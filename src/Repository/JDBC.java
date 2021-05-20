@@ -1,9 +1,11 @@
+package Repository;
+
 import javax.swing.*;
 import java.sql.*;
 
 public class JDBC {
     private Connection con;
-    // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
+    // MySQL 8.0 以上版本 - Repository.JDBC 驱动名及数据库 URL
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/oo?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
     private static final String USER = "root";

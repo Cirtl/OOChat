@@ -1,7 +1,6 @@
+package Repository;
+
 import javax.swing.*;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class User {
     private String id;

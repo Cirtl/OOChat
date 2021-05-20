@@ -1,6 +1,7 @@
+package Repository;
+
 import javax.swing.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -29,7 +30,7 @@ public class HandleRegister {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "注册失败，用户名重复", "警告", JOptionPane.WARNING_MESSAGE);
-            System.out.println("HandleRegister:"+e);
+            System.out.println("Repository.HandleRegister:"+e);
         }
         return false;
     }
