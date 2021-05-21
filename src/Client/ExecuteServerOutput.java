@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class ExecuteServerOutput implements Runnable{
     Socket serve;
     InputStream inputStream;
+
     public ExecuteServerOutput(Socket serve, InputStream inputStream) {
         this.serve = serve;
         this.inputStream = inputStream;
@@ -33,4 +34,5 @@ public class ExecuteServerOutput implements Runnable{
             e.printStackTrace();
         }
     }
+
 }
