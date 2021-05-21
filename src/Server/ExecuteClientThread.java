@@ -3,6 +3,7 @@ package Server;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.Date;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -41,10 +42,10 @@ public class ExecuteClientThread implements Runnable{
         try {
             Scanner receiver = new Scanner(client.getInputStream());
             clientMap.put("test",client);
-            String msg = null;
             while(true){
                 if(receiver.hasNext()){
-                    msg = receiver.nextLine();
+                    String msg = receiver.nextLine();
+                    System.out.println("从"+client.getInetAddress()+"收到信息: "+msg);
                     if(msg.equals(quitKey)){
                         System.out.println("服务器关闭");
                         break;
