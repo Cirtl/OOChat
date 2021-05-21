@@ -27,7 +27,7 @@ public class ExecuteServerInput implements Runnable{
     public void run() {
         try {
             Scanner scanner = new Scanner(serve.getInputStream());
-            while (scanner.hasNext()){
+            while (scanner.hasNextLine()){
                 callback(scanner.nextLine());
             }
             scanner.close();
