@@ -32,6 +32,7 @@ public class ExecuteClientThread implements Runnable{
                         break;
                     }
                     System.out.println("get mag:"+msg);
+                    sender.write("I get your msg".getBytes());
                 }
             }
             clientMap.remove("test");
