@@ -17,6 +17,8 @@ public class ExecuteClientThread implements Runnable{
 
     private String quitKey;//管理员设定关闭指令
 
+    private static Socket host;//管理员
+
     private static Map<String, Socket> clientMap = new ConcurrentHashMap<>();//存储所有的用户信息
 
     public ExecuteClientThread(Socket client,String quitKey) {
@@ -47,7 +49,7 @@ public class ExecuteClientThread implements Runnable{
                     String msg = receiver.nextLine();
                     System.out.println("从"+client.getInetAddress()+"收到信息: "+msg);
                     if(msg.equals(quitKey)){
-                        System.out.println("服务器关闭");
+                        sendToAll("test","退出了聊天");
                         break;
                     }
                     sendToAll("test",msg);

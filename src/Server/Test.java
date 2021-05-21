@@ -10,6 +10,6 @@ public class Test {
     public static void main(String[] args) throws IOException {
         /** 运行服务器 **/
         RoomServer roomServer = new RoomServer(maxNum,port);
-        roomServer.runServe();
+        roomServer.run();
     }
 }
