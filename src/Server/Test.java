@@ -1,10 +1,6 @@
 package Server;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.util.Scanner;
-
-import Client.Client;
 
 public class Test {
     static int port = 8000;

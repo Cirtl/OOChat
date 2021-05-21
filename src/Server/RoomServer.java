@@ -31,7 +31,7 @@ public class RoomServer {
             for(int i=0;i<maxNum;i++){
                 Socket client = serverSocket.accept();
                 System.out.println("新用户链接:"+client.getInetAddress()+",端口"+client.getPort());
-                executorService.execute(new ExecuteClientThread(client));//新建服务端线程去处理客户
+                executorService.execute(new ExecuteClientThread(client,null));//新建服务端线程去处理客户
             }
             executorService.shutdown();//不再接受新的客户
             //TODO:旧用户退出后 新用户可以加入
