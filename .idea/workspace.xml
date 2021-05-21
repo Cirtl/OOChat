@@ -20,15 +20,18 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:client" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:ydh" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/MyFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +47,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/Cirtl/OOChat.git" />
+      </set>
+    </option>
   </component>
   <component name="ProjectId" id="1spiTNvhXz2vzTRwHlG94j7CSi7" />
   <component name="ProjectViewState">
@@ -63,6 +73,9 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -70,7 +83,7 @@
       <recent name="D:\Documents\2021Spring\Java\OOC_client\src" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Test">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -91,8 +104,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.Client.Test" />
+      <module name="OOChat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.Client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.MyFrame" />
       </list>
     </recent_temporary>
@@ -111,6 +138,21 @@
       <workItem from="1621575948447" duration="2022000" />
       <workItem from="1621596081734" duration="2006000" />
     </task>
+    <task id="LOCAL-00001" summary="本地化完成">
+      <created>1621599476676</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1621599476676</updated>
+    </task>
+    <task id="LOCAL-00002" summary="添加客户端">
+      <created>1621599498627</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1621599498627</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,14 +163,59 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="ydh" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="本地化完成" />
+    <MESSAGE value="添加客户端" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加客户端" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="323" y="0" key="CommitChangelistDialog2" timestamp="1621599497343">
+      <screen x="62" y="0" width="1474" height="864" />
+    </state>
+    <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1621599497343" />
+    <state width="1433" height="207" key="GridCell.Tab.0.bottom" timestamp="1621600019126">
+      <screen x="62" y="0" width="1474" height="864" />
+    </state>
+    <state width="1433" height="207" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1621600019126" />
+    <state width="1433" height="207" key="GridCell.Tab.0.center" timestamp="1621600019126">
+      <screen x="62" y="0" width="1474" height="864" />
+    </state>
+    <state width="1433" height="207" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1621600019126" />
+    <state width="1433" height="207" key="GridCell.Tab.0.left" timestamp="1621600019126">
+      <screen x="62" y="0" width="1474" height="864" />
+    </state>
+    <state width="1433" height="207" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1621600019126" />
+    <state width="1433" height="207" key="GridCell.Tab.0.right" timestamp="1621600019126">
+      <screen x="62" y="0" width="1474" height="864" />
+    </state>
+    <state width="1433" height="207" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1621600019126" />
+    <state x="152" y="0" key="SettingsEditor" timestamp="1621599814186">
+      <screen x="62" y="0" width="1474" height="864" />
+    </state>
+    <state x="152" y="0" key="SettingsEditor/62.0.1474.864@62.0.1474.864" timestamp="1621599814186" />
+    <state x="292" y="100" key="Vcs.Push.Dialog.v2" timestamp="1621599517184">
+      <screen x="62" y="0" width="1474" height="864" />
+    </state>
+    <state x="292" y="100" key="Vcs.Push.Dialog.v2/62.0.1474.864@62.0.1474.864" timestamp="1621599517184" />
     <state x="474" y="176" key="git4idea.merge.GitPullDialog" timestamp="1621599459818">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
