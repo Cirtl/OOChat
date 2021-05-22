@@ -8,12 +8,12 @@ public class User {
     private String ip;
     private boolean isLogin;
 
-    User(String id, String pass) {
+    public User(String id, String pass) {
         this.id = id;
         this.pass = pass;
     }
 
-    User(String id, String pass, String ip) {
+    public User(String id, String pass, String ip) {
         this.id = id;
         this.pass = pass;
         this.ip = ip;
