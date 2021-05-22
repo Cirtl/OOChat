@@ -9,11 +9,11 @@ import java.util.Scanner;
 /*
     处理服务端输入
  */
-public class ExecuteServerInput implements Runnable{
+public class ChatServerInput implements Runnable{
     Socket serve;
     List<ClientInterface> clientInterfaceList;
 
-    public ExecuteServerInput(Socket serve, List<ClientInterface> list) {
+    public ChatServerInput(Socket serve, List<ClientInterface> list) {
         this.serve = serve;
         this.clientInterfaceList = list;
     }

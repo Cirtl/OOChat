@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    ExecuteServerInput serverInput;
-    ExecuteServerOutput serverOutput;
+    ChatServerInput serverInput;
+    ChatServerOutput serverOutput;
     Socket socket=null;
     List<ClientInterface> clientInterfaceList = new ArrayList<ClientInterface>();
     /**
@@ -24,8 +24,8 @@ public class Client {
 
     private void initConnect(String host, int port, InputStream inputStream) throws IOException {
         socket = new Socket(host,port);
-        serverInput = new ExecuteServerInput(socket,clientInterfaceList);
-        serverOutput = new ExecuteServerOutput(socket,inputStream);
+        serverInput = new ChatServerInput(socket,clientInterfaceList);
+        serverOutput = new ChatServerOutput(socket,inputStream);
     }
 
     public void closeClient() throws IOException {

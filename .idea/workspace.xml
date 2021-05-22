@@ -26,12 +26,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/ChatServerOutput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/MyFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/ExecuteServerInput.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/ExecuteServerOutput.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ExecuteServerInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ChatServerInput.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +68,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -152,7 +154,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621599498627</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="客户端测试&#10;&#10;能够从服务端获取函数并显示">
+      <created>1621600190884</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1621600190884</updated>
+    </task>
+    <task id="LOCAL-00004" summary="客户端测试 &#10;&#10;发送关闭指令">
+      <created>1621600392757</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1621600392757</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,29 +201,31 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="本地化完成" />
     <MESSAGE value="添加客户端" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加客户端" />
+    <MESSAGE value="客户端测试&#10;&#10;能够从服务端获取函数并显示" />
+    <MESSAGE value="客户端测试 &#10;&#10;发送关闭指令" />
+    <option name="LAST_COMMIT_MESSAGE" value="客户端测试 &#10;&#10;发送关闭指令" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="323" y="0" key="CommitChangelistDialog2" timestamp="1621599497343">
+    <state x="323" y="0" key="CommitChangelistDialog2" timestamp="1621600391265">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1621599497343" />
-    <state width="1433" height="207" key="GridCell.Tab.0.bottom" timestamp="1621600019126">
+    <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1621600391265" />
+    <state width="1433" height="207" key="GridCell.Tab.0.bottom" timestamp="1621651663269">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1433" height="207" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1621600019126" />
-    <state width="1433" height="207" key="GridCell.Tab.0.center" timestamp="1621600019126">
+    <state width="1433" height="207" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1621651663269" />
+    <state width="1433" height="207" key="GridCell.Tab.0.center" timestamp="1621651663269">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1433" height="207" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1621600019126" />
-    <state width="1433" height="207" key="GridCell.Tab.0.left" timestamp="1621600019126">
+    <state width="1433" height="207" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1621651663269" />
+    <state width="1433" height="207" key="GridCell.Tab.0.left" timestamp="1621651663268">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1433" height="207" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1621600019126" />
-    <state width="1433" height="207" key="GridCell.Tab.0.right" timestamp="1621600019126">
+    <state width="1433" height="207" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1621651663268" />
+    <state width="1433" height="207" key="GridCell.Tab.0.right" timestamp="1621651663269">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1433" height="207" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1621600019126" />
+    <state width="1433" height="207" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1621651663269" />
     <state x="152" y="0" key="SettingsEditor" timestamp="1621599814186">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
