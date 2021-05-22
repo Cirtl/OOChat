@@ -9,7 +9,7 @@ public class HandleRegister {
     Connection con;
     PreparedStatement preSql;
 
-    HandleRegister() {
+    public HandleRegister() {
         con = new JDBC().getCon();
     }
 

@@ -11,7 +11,7 @@ public class HandleLogin {
     PreparedStatement preSql;
     ResultSet rs;
 
-    HandleLogin() {
+    public HandleLogin() {
         con = new JDBC().getCon();
     }
 
