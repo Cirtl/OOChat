@@ -26,14 +26,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Client/ChatServerOutput.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/Chat/ChatInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/Chat/ChatThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/ExecuteServerInput.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/ExecuteServerOutput.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ExecuteServerInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ChatServerInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/ClientInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ChatServerInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Chat/ChatServerInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ChatServerOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Chat/ChatServerOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ExecuteServerOutput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +63,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1spiTNvhXz2vzTRwHlG94j7CSi7" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -85,7 +93,7 @@
       <recent name="D:\Documents\2021Spring\Java\OOC_client\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test">
+  <component name="RunManager" selected="Application.Test (1)">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -107,11 +115,24 @@
       </method>
     </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.Client.Server.User.Test" />
+      <module name="OOChat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.Client.Server.User.Chat.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.Client.Test" />
       <module name="OOChat" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="src.Client.*" />
+          <option name="PATTERN" value="src.Client.Writer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -121,6 +142,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Test (1)" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.MyFrame" />
       </list>
@@ -168,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621600392757</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="客户端测试 &#10;&#10;发送注册信息">
+      <created>1621651916862</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1621651916862</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,29 +232,46 @@
     <MESSAGE value="添加客户端" />
     <MESSAGE value="客户端测试&#10;&#10;能够从服务端获取函数并显示" />
     <MESSAGE value="客户端测试 &#10;&#10;发送关闭指令" />
-    <option name="LAST_COMMIT_MESSAGE" value="客户端测试 &#10;&#10;发送关闭指令" />
+    <MESSAGE value="客户端测试 &#10;&#10;发送注册信息" />
+    <option name="LAST_COMMIT_MESSAGE" value="客户端测试 &#10;&#10;发送注册信息" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="323" y="0" key="CommitChangelistDialog2" timestamp="1621600391265">
+    <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1622035919235">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.864@0.0.1536.864" timestamp="1622035919235" />
+    <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1622039880931">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1622039880931" />
+    <state x="323" y="0" key="CommitChangelistDialog2" timestamp="1621651914627">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1621600391265" />
-    <state width="1433" height="207" key="GridCell.Tab.0.bottom" timestamp="1621651663269">
-      <screen x="62" y="0" width="1474" height="864" />
+    <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1621651914627" />
+    <state x="526" y="128" key="FileChooserDialogImpl" timestamp="1622030819662">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1433" height="207" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1621651663269" />
-    <state width="1433" height="207" key="GridCell.Tab.0.center" timestamp="1621651663269">
-      <screen x="62" y="0" width="1474" height="864" />
+    <state x="526" y="128" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1622030819662" />
+    <state width="1435" height="206" key="GridCell.Tab.0.bottom" timestamp="1622041556919">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1433" height="207" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1621651663269" />
-    <state width="1433" height="207" key="GridCell.Tab.0.left" timestamp="1621651663268">
-      <screen x="62" y="0" width="1474" height="864" />
+    <state width="1435" height="206" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1622041556919" />
+    <state width="1433" height="206" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1621651937984" />
+    <state width="1435" height="206" key="GridCell.Tab.0.center" timestamp="1622041556919">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1433" height="207" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1621651663268" />
-    <state width="1433" height="207" key="GridCell.Tab.0.right" timestamp="1621651663269">
-      <screen x="62" y="0" width="1474" height="864" />
+    <state width="1435" height="206" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1622041556919" />
+    <state width="1433" height="206" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
+    <state width="1435" height="206" key="GridCell.Tab.0.left" timestamp="1622041556919">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1433" height="207" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1621651663269" />
+    <state width="1435" height="206" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1622041556919" />
+    <state width="1433" height="206" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
+    <state width="1435" height="206" key="GridCell.Tab.0.right" timestamp="1622041556919">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1435" height="206" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1622041556919" />
+    <state width="1433" height="206" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
     <state x="152" y="0" key="SettingsEditor" timestamp="1621599814186">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
