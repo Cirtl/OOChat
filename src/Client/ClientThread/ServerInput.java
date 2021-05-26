@@ -1,4 +1,4 @@
-package src.Client.Chat;
+package src.Client.ClientThread;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -8,12 +8,12 @@ import java.util.Scanner;
 /*
     处理服务端输入
  */
-public class ChatServerInput implements Runnable{
+public class ServerInput implements Runnable{
     Socket serve;
     List<ChatInterface> chatInterfaceList;
     Scanner scanner;
 
-    protected ChatServerInput(Socket serve, List<ChatInterface> list) throws IOException {
+    protected ServerInput(Socket serve, List<ChatInterface> list) throws IOException {
         this.serve = serve;
         this.chatInterfaceList = list;
         scanner = new Scanner(serve.getInputStream());

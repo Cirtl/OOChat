@@ -26,18 +26,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Client/Chat/ChatInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Client/Chat/ChatThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/ClientCallback.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/ClientInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ChatServerInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Chat/ChatServerInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ChatServerOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Chat/ChatServerOutput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ClientInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ExecuteServerOutput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Chat/ChatInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ChatInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Chat/ChatServerInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ServerInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Chat/ChatServerOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ServerOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Chat/ChatThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ClientThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +44,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -197,7 +193,28 @@
       <option name="project" value="LOCAL" />
       <updated>1621651916862</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="客户端&#10;&#10;简化流程">
+      <created>1622043109713</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1622043109713</updated>
+    </task>
+    <task id="LOCAL-00007" summary="客户端&#10;&#10;简化流程">
+      <created>1622043122036</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1622043122036</updated>
+    </task>
+    <task id="LOCAL-00008" summary="客户端&#10;&#10;简化流程">
+      <created>1622043129304</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1622043129304</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,20 +250,26 @@
     <MESSAGE value="客户端测试&#10;&#10;能够从服务端获取函数并显示" />
     <MESSAGE value="客户端测试 &#10;&#10;发送关闭指令" />
     <MESSAGE value="客户端测试 &#10;&#10;发送注册信息" />
-    <option name="LAST_COMMIT_MESSAGE" value="客户端测试 &#10;&#10;发送注册信息" />
+    <MESSAGE value="客户端&#10;&#10;简化流程" />
+    <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;简化流程" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1622035919235">
+    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1622045679391">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.864@0.0.1536.864" timestamp="1622035919235" />
+    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1622045679391" />
+    <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1622043790944">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.864@0.0.1536.864" timestamp="1622043790944" />
     <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1622039880931">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1622039880931" />
-    <state x="323" y="0" key="CommitChangelistDialog2" timestamp="1621651914627">
-      <screen x="62" y="0" width="1474" height="864" />
+    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1622043128112">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1622043128112" />
     <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1621651914627" />
     <state x="526" y="128" key="FileChooserDialogImpl" timestamp="1622030819662">
       <screen x="0" y="0" width="1536" height="864" />
@@ -284,5 +307,9 @@
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="474" y="176" key="git4idea.merge.GitPullDialog/62.0.1474.864@62.0.1474.864" timestamp="1621599459818" />
+    <state x="341" y="193" key="run.anything.popup" timestamp="1622043217879">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="341" y="193" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1622043217879" />
   </component>
 </project>
