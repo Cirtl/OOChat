@@ -40,6 +40,10 @@ public class Test {
         u1.addFriend(u3.getId());
         u1.inviteFriendToHouse(u3.getId(), h1);
 
+        u1.deleteFriend(u3.getId());
+        u1.deleteFriend(u3.getId());
+        u1.addFriend(u3.getId());
+
         HouseList.getInstance().printInfo();
         UserList.getInstance().printInfo();
     }
