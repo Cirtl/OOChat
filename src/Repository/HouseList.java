@@ -1,5 +1,3 @@
-package Repository;
-
 import javax.swing.*;
 import java.util.Vector;
 
@@ -27,7 +25,7 @@ public class HouseList {
     }
 
     public void printInfo() {
-        System.out.println("Repository.HouseList:");
+        System.out.println("HouseList:");
         for (House item : houseList) {
             System.out.println("id:" + item.getId() + " name:" + item.getName() +
                     " password:" + item.getPass() + " host:" + item.getHost_id());
