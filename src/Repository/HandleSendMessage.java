@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class HandleSendMessage {
-    Connection con;
-    PreparedStatement preSql;
+    private Connection con;
+    private PreparedStatement preSql;
 
     HandleSendMessage() {
         con = new JDBC().getCon();

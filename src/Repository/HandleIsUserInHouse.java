@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class HandleIsUserInHouse {
-    Connection con;
-    PreparedStatement preSql;
+    private Connection con;
+    private PreparedStatement preSql;
 
     HandleIsUserInHouse() {
         con = new JDBC().getCon();

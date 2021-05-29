@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class HandleCreateHouse {
-    Connection con;
-    PreparedStatement preSql;
+    private Connection con;
+    private PreparedStatement preSql;
 
     HandleCreateHouse() {
         con = new JDBC().getCon();
@@ -20,7 +20,7 @@ public class HandleCreateHouse {
             preSql.setInt(1, register.getId());
             preSql.setString(2, register.getName());
             preSql.setString(3, register.getPass());
-            preSql.setString(4, null);
+            preSql.setString(4, register.getIp());
             preSql.setString(5, register.getHost_id());
             int ok = preSql.executeUpdate();
             con.close();

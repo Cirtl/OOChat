@@ -6,20 +6,21 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class HandleRegister {
-    Connection con;
-    PreparedStatement preSql;
+    private Connection con;
+    private PreparedStatement preSql;
 
     public HandleRegister() {
         con = new JDBC().getCon();
     }
 
     public boolean writeRegisterModel(User user) {
-        String sqlStr = "insert into `user` values(?,?,?)";
+        String sqlStr = "insert into `user` values(?,?,?,?)";
         try {
             preSql = con.prepareStatement(sqlStr);
             preSql.setString(1, user.getId());
             preSql.setString(2, user.getPass());
-            preSql.setString(3, null);
+            preSql.setString(3, user.getIp());
+            preSql.setBoolean(4,false);
             int ok = preSql.executeUpdate();
             con.close();
             if (ok != 0) {

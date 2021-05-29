@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class HandleTransferHouse {
-    Connection con;
-    PreparedStatement preSql;
+    private Connection con;
+    private PreparedStatement preSql;
 
     HandleTransferHouse() {
         con = new JDBC().getCon();
@@ -30,7 +30,7 @@ public class HandleTransferHouse {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "房间更换群主失败", "警告", JOptionPane.WARNING_MESSAGE);
-            System.out.println("TransferHouse"+e);
+            System.out.println("TransferHouse" + e);
         }
         return false;
     }

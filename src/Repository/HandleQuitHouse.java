@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.sql.*;
 
 public class HandleQuitHouse {
-    Connection con;
-    PreparedStatement preSql;
+    private Connection con;
+    private PreparedStatement preSql;
 
     HandleQuitHouse() {
         con = new JDBC().getCon();

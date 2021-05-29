@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.sql.*;
 
 public class HandleEnterHouse {
-    Connection con;
-    PreparedStatement preSql;
+    private Connection con;
+    private PreparedStatement preSql;
 
     HandleEnterHouse() {
         con = new JDBC().getCon();

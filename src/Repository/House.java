@@ -10,14 +10,14 @@ public class House {
     private String ip;
     private String host_id;
 
-    House(String name, String pass, String host_id){
+    House(String name, String pass, String host_id) {
         this.id = new Random().nextInt(1000000000);
         this.name = name;
         this.pass = pass;
         this.host_id = host_id;
     }
 
-    House(String name, String pass, String ip, String host_id){
+    House(String name, String pass, String ip, String host_id) {
         this.id = new Random().nextInt(1000000000);
         this.name = name;
         this.pass = pass;
@@ -65,7 +65,12 @@ public class House {
         this.ip = ip;
     }
 
-    public Vector<String> getUser(){
+    public Vector<String> getUserList() {
         return new HandleSearchUserListByHouse().queryVerify(this.id);
+    }
+
+    public void printInfo() {
+        System.out.println("id:" + this.getId() + " name:" + this.getName() +
+                    " password:" + this.getPass() + " host:" + this.getHost_id());
     }
 }

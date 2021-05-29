@@ -4,8 +4,8 @@ import java.sql.*;
 import java.util.Vector;
 
 public class HandleSearchUserListByHouse {
-    Connection con;
-    PreparedStatement preSql;
+    private Connection con;
+    private PreparedStatement preSql;
 
     HandleSearchUserListByHouse() {
         con = new JDBC().getCon();
@@ -19,7 +19,7 @@ public class HandleSearchUserListByHouse {
             preSql.setInt(1, id);
             ResultSet rs = preSql.executeQuery();
             while(rs.next()){
-                userList.add(rs.getString("1"));
+                userList.add(rs.getString("user_id"));
             }
             con.close();
         } catch (SQLException e) {

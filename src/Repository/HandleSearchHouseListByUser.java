@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 public class HandleSearchHouseListByUser {
-    Connection con;
-    PreparedStatement preSql;
+    private Connection con;
+    private PreparedStatement preSql;
 
     HandleSearchHouseListByUser() {
         con = new JDBC().getCon();
@@ -22,7 +22,7 @@ public class HandleSearchHouseListByUser {
             preSql.setString(1, id);
             ResultSet rs = preSql.executeQuery();
             while(rs.next()){
-                houseList.add(rs.getString("1"));
+                houseList.add(rs.getString("house_id"));
             }
             con.close();
         } catch (SQLException e) {

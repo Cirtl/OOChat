@@ -9,6 +9,7 @@ CREATE TABLE `user`
     `id`       varchar(20) NOT NULL DEFAULT '',
     `password` varchar(20) NOT NULL DEFAULT '',
     `ip`       varchar(255)         DEFAULT '',
+    `isLogin` boolean DEFAULT FALSE,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 10
@@ -42,6 +43,15 @@ CREATE TABLE `user_house_message`
     `dateTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_user_message FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT fk_house_message FOREIGN KEY (`house_id`) REFERENCES `house` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 10
+  DEFAULT CHARSET = utf8;
+CREATE TABLE `friend`
+(
+    `id_1`  varchar(20)  NOT NULL DEFAULT '',
+    `id_2` varchar(20)  NOT NULL DEFAULT '',
+    CONSTRAINT fk_user_1 FOREIGN KEY (`id_1`) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_user_2 FOREIGN KEY (`id_2`) REFERENCES `user` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 10
   DEFAULT CHARSET = utf8;

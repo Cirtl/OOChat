@@ -1,11 +1,12 @@
+package Repository;
+
 import java.util.Vector;
 
 public class UserList {
     private static UserList list;
-    private Vector<User> userList;
+    private Vector<String> userList;
 
     private UserList() {
-        userList = new Vector<User>();
     }
 
     public static UserList getInstance() {
@@ -15,28 +16,19 @@ public class UserList {
         return list;
     }
 
-    public Vector<User> getUserList() {
+    public Vector<String> getUserList() {
+        userList = new HandleSearchUserListOfAll().queryVerify();
         return userList;
     }
 
-    public void setUserList(Vector<User> userList) {
+    public void setUserList(Vector<String> userList) {
         this.userList = userList;
     }
 
     public void printInfo() {
         System.out.println("UserList:");
-        for (User item : userList) {
-            System.out.println("id:" + item.getId() + " password" + item.getPass() +
-                    " ip:" + item.getIp() + " isLogin:" + item.isLogin());
+        for (String item : this.getUserList()) {
+            System.out.println("id: " + item);
         }
-    }
-
-    public User searchById(String id) {
-        for (User item : userList) {
-            if (item.getId().equals(id)) {
-                return item;
-            }
-        }
-        return null;
     }
 }
