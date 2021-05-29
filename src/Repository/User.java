@@ -148,6 +148,28 @@ public class User {
         return new HandleAddFriend().writeRegisterModel(this.id, id);
     }
 
+    public boolean deleteFriend(String id) {
+        if (!judgeLogin()) {
+            return false;
+        }
+        if (id.equals(this.id)) {
+            JOptionPane.showMessageDialog(null, "不能和自己删好友", "警告", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if (!new HandleIsUser().queryVerify(id)) {
+            JOptionPane.showMessageDialog(null, "不存在此用户", "警告", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if (!new HandleIsFriend().queryVerify(this.id, id)) {
+            JOptionPane.showMessageDialog(null, "你们还不是好友", "警告", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if (new HandleDeleteFriend().queryVerify(this.id,id) == -1) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean inviteFriendToHouse(String friendId, int houseId) {
         if (!judgeLogin()) {
             return false;
