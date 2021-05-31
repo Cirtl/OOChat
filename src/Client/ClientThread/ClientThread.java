@@ -9,7 +9,7 @@ public class ClientThread {
     ServerInput serverInput;
     ServerOutput serverOutput;
     Socket socket;
-    List<ChatInterface> chatInterfaceList = new ArrayList<>();
+    List<ChatCallback> chatCallbackList = new ArrayList<>();
 
     /**
      * 建立客户端并连接服务器
@@ -19,11 +19,12 @@ public class ClientThread {
      */
     public ClientThread(String host, int port) throws IOException {
         initConnect(host, port);
+        runThread();
     }
 
     public void initConnect(String host, int port) throws IOException {
         socket = new Socket(host,port);
-        serverInput = new ServerInput(socket, chatInterfaceList);
+        serverInput = new ServerInput(socket, chatCallbackList);
         serverOutput = new ServerOutput(socket);
     }
 
@@ -41,16 +42,16 @@ public class ClientThread {
      * 添加接收到信息的回调
      * @param e
      */
-    public void addCallback(ChatInterface e){
-        chatInterfaceList.add(e);
+    public void addCallback(ChatCallback e){
+        chatCallbackList.add(e);
     }
 
     /**
      * 移出回调
      * @param e
      */
-    public void removeCallback(ChatInterface e){
-        chatInterfaceList.remove(e);
+    public void removeCallback(ChatCallback e){
+        chatCallbackList.remove(e);
     }
 
     /**
@@ -59,5 +60,15 @@ public class ClientThread {
      */
     public void sendMsg(String msg){
         serverOutput.write(msg);
+    }
+
+    /**
+     * 向后端发送对象
+     * @param type
+     * @param object
+     * @throws IOException
+     */
+    public void sendObject(String type,Object object) throws IOException {
+        serverOutput.writeObject(object,type);
     }
 }
