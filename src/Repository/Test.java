@@ -1,5 +1,10 @@
 package Repository;
 
+/**
+ * 测试类
+ *
+ * @author 郭英贤
+ */
 public class Test {
     public static void main(String[] args) {
         User u1 = new User("u1", "123");

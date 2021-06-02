@@ -1,16 +1,25 @@
 package Repository;
 
-import javax.swing.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
+/**
+ * JDBC类，操作JDBC
+ *
+ * @author 郭英贤
+ */
 public class JDBC {
-    private Connection con;
     // MySQL 8.0 以上版本 - Repository.JDBC 驱动名及数据库 URL
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/oo?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PASSWORD = "12345";
+    private Connection con;
 
+    /**
+     * 构造
+     */
     JDBC() {
         try {
             Class.forName(JDBC_DRIVER);
@@ -24,6 +33,11 @@ public class JDBC {
         }
     }
 
+    /**
+     * Getter 连接
+     *
+     * @return 连接
+     */
     public Connection getCon() {
         return con;
     }

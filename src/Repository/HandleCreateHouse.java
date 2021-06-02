@@ -5,14 +5,26 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * 向数据库添加新房间
+ *
+ * @author 郭英贤
+ */
 public class HandleCreateHouse {
-    private Connection con;
+    private final Connection con;
     private PreparedStatement preSql;
 
     HandleCreateHouse() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库添加房间
+     *
+     * @param register 房间实例
+     * @return 房间号，失败返回-1
+     * @see SQLException
+     */
     public int writeRegisterModel(House register) {
         String sqlStr = "insert into `house` values(?,?,?,?,?)";
         try {
@@ -32,7 +44,7 @@ public class HandleCreateHouse {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "房间申请失败，请重试", "警告", JOptionPane.WARNING_MESSAGE);
-            System.out.println("CreateHouse:"+e);
+            System.out.println("CreateHouse:" + e);
         }
         return -1;
     }

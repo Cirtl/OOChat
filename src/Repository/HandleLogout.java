@@ -6,20 +6,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 数据库记录用户注销
+ *
+ * @author 郭英贤
+ */
 public class HandleLogout {
-    private Connection con;
-    private PreparedStatement preSql;
     ResultSet rs;
+    private final Connection con;
+    private PreparedStatement preSql;
 
     public HandleLogout() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库更新登录状态为未登录
+     *
+     * @param id 用户ID
+     * @return 更新状态成功与否
+     * @see SQLException
+     */
     public boolean queryVerify(String id, String pass) {
         String sqlStr = "update `user` set isLogin=? where id=? and password=?";
         try {
             preSql = con.prepareStatement(sqlStr);
-            preSql.setBoolean(1,false);
+            preSql.setBoolean(1, false);
             preSql.setString(2, id);
             preSql.setString(3, pass);
             int ok = preSql.executeUpdate();

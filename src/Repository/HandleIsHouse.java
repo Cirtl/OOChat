@@ -6,14 +6,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 数据库查询是否存在该房间
+ *
+ * @author 郭英贤
+ */
 public class HandleIsHouse {
-    private Connection con;
+    private final Connection con;
     private PreparedStatement preSql;
 
     HandleIsHouse() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库查询是否存在该房间
+     *
+     * @param hid 房间号
+     * @return 房间是否仍存在
+     * @see SQLException
+     */
     public boolean queryVerify(int hid) {
         String sqlStr = "select * from `house` where id=?";
         try {
