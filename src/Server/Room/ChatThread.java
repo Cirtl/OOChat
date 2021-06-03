@@ -15,6 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ChatThread implements Runnable{
     Socket client;
 
+    private static final String DIVIDER = " ";
+
     private String quitKey;//管理员设定关闭指令
 
     private static Socket host;//管理员
@@ -32,7 +34,7 @@ public class ChatThread implements Runnable{
             Socket socket = entry.getValue();
             try {
                 PrintStream printStream = new PrintStream(socket.getOutputStream(),true);
-                printStream.println(user+": "+msg);
+                printStream.println("msg" + DIVIDER + user + DIVIDER + msg);
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -51,8 +53,12 @@ public class ChatThread implements Runnable{
                     if(msg.equals(quitKey)){
                         sendToAll("test","退出了聊天");
                         break;
+                    }else{
+                        String[] info = msg.split(DIVIDER,2);
+                        if(info.length>1)
+                            sendToAll(info[0],info[1]);
                     }
-                    sendToAll("test",msg);
+
                 }
             }
             clientMap.remove("test");
