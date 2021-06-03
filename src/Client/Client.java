@@ -13,7 +13,7 @@ import src.Client.ClientThread.ClientThread;
  */
 public class Client {
     private static final String DIVIDER = " ";
-    private static int port_info = 8003;
+    private static int port_info = 8001;
     private static int port_user = 8000;
     private static int maxNum = 10;
     private static String host = "0.0.0.0";
@@ -23,6 +23,7 @@ public class Client {
     private boolean inRoom;
     private String name;
     private String id;
+
     public Client() throws IOException {
         callbackList = new ArrayList<>();
         isLogin = false;
@@ -31,8 +32,6 @@ public class Client {
         infoThread = new ClientThread(host,port_info);
         initUserThread();
         initInfoThread();
-        userThread.runThread();
-        infoThread.runThread();
     }
 
     /**
@@ -91,8 +90,8 @@ public class Client {
     /**
      * 向服务端请求房间端口
      */
-    public void requestRoomPort(){
-        if(isLogin)
+    public void enterRoom(String roomID){
+        if(isLogin&&!inRoom)
             infoThread.sendMsg("room_port");
     }
 
@@ -118,6 +117,10 @@ public class Client {
      */
     public boolean isLogin() {
         return isLogin;
+    }
+
+    public boolean isInRoom() {
+        return inRoom;
     }
 
     /**
@@ -175,6 +178,8 @@ public class Client {
                         inRoom = false;
                         for(ClientCallback clientCallback:callbackList)
                             clientCallback.onLeaveRoom();
+                        chatThread.closeThread();
+                        chatThread = null;
                     }
                 }
 
@@ -191,9 +196,9 @@ public class Client {
                 if(option.equals("room_port")){
                     //收到聊天端口后开启新的聊天服务器
                     try{
+                        System.out.println(info[0]);
                         int port = Integer.parseInt(info[0]);
                         initChatThread(port);
-                        chatThread.runThread();
                         inRoom = true;
                         for(ClientCallback callback:callbackList)
                             callback.onEnterRoom();

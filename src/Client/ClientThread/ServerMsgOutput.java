@@ -8,22 +8,15 @@ import java.net.Socket;
 /*
     向服务端发送数据
  */
-public class ServerOutput {
+public class ServerMsgOutput {
     Socket serve;
 
     PrintStream printStream;
 
-    ObjectOutputStream objectOutputStream;
 
-    protected ServerOutput(Socket serve) throws IOException {
+    protected ServerMsgOutput(Socket serve) throws IOException {
         this.serve = serve;
         printStream = new PrintStream(serve.getOutputStream());
-        objectOutputStream = new ObjectOutputStream(serve.getOutputStream());
-    }
-
-    protected void writeObject(Object object,String type) throws IOException {
-        write(type);
-        objectOutputStream.writeObject(object);
     }
 
     protected void write(String str){
@@ -31,7 +24,6 @@ public class ServerOutput {
     }
 
     protected void close() throws IOException {
-        objectOutputStream.close();
         printStream.close();
     }
 }

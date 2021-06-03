@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientThread {
-    ServerInput serverInput;
-    ServerOutput serverOutput;
+    ServerMsgInput serverMsgInput;
+    ServerMsgOutput serverMsgOutput;
     Socket socket;
     List<ChatCallback> chatCallbackList = new ArrayList<>();
 
@@ -24,18 +24,23 @@ public class ClientThread {
 
     public void initConnect(String host, int port) throws IOException {
         socket = new Socket(host,port);
-        serverInput = new ServerInput(socket, chatCallbackList);
-        serverOutput = new ServerOutput(socket);
+        serverMsgInput = new ServerMsgInput(socket, chatCallbackList);
+        serverMsgOutput = new ServerMsgOutput(socket);
     }
 
-    public void closeThread() throws IOException {
-        serverOutput.close();
-        serverInput.close();
-        socket.close();
+    public void closeThread(){
+        try{
+            serverMsgOutput.close();
+            serverMsgInput.close();
+            socket.close();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
     }
 
     public void runThread(){
-        new Thread(serverInput).start();
+        new Thread(serverMsgInput).start();
     }
 
     /**
@@ -59,16 +64,7 @@ public class ClientThread {
      * @param msg
      */
     public void sendMsg(String msg){
-        serverOutput.write(msg);
+        serverMsgOutput.write(msg);
     }
 
-    /**
-     * 向后端发送对象
-     * @param type
-     * @param object
-     * @throws IOException
-     */
-    public void sendObject(String type,Object object) throws IOException {
-        serverOutput.writeObject(object,type);
-    }
 }
