@@ -62,6 +62,7 @@ public class Test {
         client.enterRoom("213");
         client.enterRoom("213");
         Thread.sleep(3);
-        client.sendMsg("hello from me!!!!");
+        while(true)
+            client.sendMsg("hello from me!!!!");
     }
 }
