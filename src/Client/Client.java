@@ -21,7 +21,7 @@ public class Client {
     private List<ClientCallback> callbackList;
     private boolean isLogin;
     private boolean inRoom;
-    private String name;
+    private String name="test";
     private String id;
 
     public Client() throws IOException {
@@ -171,9 +171,14 @@ public class Client {
             chatThread.addCallback(new ChatCallback() {
                 @Override
                 public void onReceiveMessage(String option,String[] info) {
-                    if(option.equals("msg"))
+                    if(option.equals("msg")){
+                        StringBuilder builder = new StringBuilder();
+                        for(int i=1;i<info.length;i++)
+                            builder.append(info[i]).append(" ");
                         for(ClientCallback clientCallback:callbackList)
-                            clientCallback.onReceiveMsg(info[0],info[1]);
+                            clientCallback.onReceiveMsg(info[0],builder.toString());
+                    }
+
                     else if(option.equals("leave_room")){
                         inRoom = false;
                         for(ClientCallback clientCallback:callbackList)
