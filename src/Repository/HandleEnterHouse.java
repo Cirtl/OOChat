@@ -1,16 +1,33 @@
 package Repository;
 
 import javax.swing.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+/**
+ * 进入房子相关数据库操作
+ *
+ * @author 郭英贤
+ */
 public class HandleEnterHouse {
-    private Connection con;
+    private final Connection con;
     private PreparedStatement preSql;
 
     HandleEnterHouse() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库查询房间号和密码是否匹配，匹配则进入房间
+     *
+     * @param uid     用户ID
+     * @param houseId 房间号
+     * @param pass    用户输入的房间密码
+     * @return 进入成功与否
+     * @see SQLException
+     */
     public boolean queryVerify(String uid, int houseId, String pass) {
         String sqlStr = "select id from `house` where id=? and password=?";
         try {
@@ -25,7 +42,7 @@ public class HandleEnterHouse {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "进入失败", "警告", JOptionPane.WARNING_MESSAGE);
-            System.out.println("EnterHouse_select_house:"+e);
+            System.out.println("EnterHouse_select_house:" + e);
         }
 
         String sqlStrEnter = "insert into `user_house` values(?,?)";
@@ -43,7 +60,7 @@ public class HandleEnterHouse {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "进入失败", "警告", JOptionPane.WARNING_MESSAGE);
-            System.out.println("EnterHouse_insert_user_house:"+e);
+            System.out.println("EnterHouse_insert_user_house:" + e);
         }
         return false;
     }

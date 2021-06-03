@@ -1,19 +1,30 @@
 package Repository;
 
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 数据库查询是否登录
+ *
+ * @author 郭英贤
+ */
 public class HandleIsLogin {
-    private Connection con;
+    private final Connection con;
     private PreparedStatement preSql;
 
     HandleIsLogin() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库查询是否已登录
+     *
+     * @param id 用户ID
+     * @return 是否已登录
+     * @see SQLException
+     */
     public boolean queryVerify(String id) {
         String sqlStr = "select isLogin from `user` where id=?";
         try {

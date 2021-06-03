@@ -5,14 +5,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 数据库查询是否有此用户
+ *
+ * @author 郭英贤
+ */
 public class HandleIsUser {
-    private Connection con;
+    private final Connection con;
     private PreparedStatement preSql;
 
     HandleIsUser() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库查询是否有此用户
+     *
+     * @param id 用户ID
+     * @return 是否有此用户
+     * @see SQLException
+     */
     public boolean queryVerify(String id) {
         String sqlStr = "select * from `user` where id=?";
         try {

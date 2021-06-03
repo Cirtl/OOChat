@@ -3,17 +3,29 @@ package Repository;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 向数据库添加好友
+ *
+ * @author 郭英贤
+ */
 public class HandleAddFriend {
-    private Connection con;
+    private final Connection con;
     private PreparedStatement preSql;
 
     HandleAddFriend() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库添加好友
+     *
+     * @param id1 friend1.
+     * @param id2 friend2.
+     * @return 添加成功与否
+     * @see SQLException
+     */
     public boolean writeRegisterModel(String id1, String id2) {
         String sqlStr = "insert into `friend` values(?,?),(?,?)";
         try {

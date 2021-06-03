@@ -5,14 +5,28 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * 数据库操作转移房主
+ *
+ * @author 郭英贤
+ */
 public class HandleTransferHouse {
-    private Connection con;
+    private final Connection con;
     private PreparedStatement preSql;
 
     HandleTransferHouse() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库转移房主
+     *
+     * @param hid    房间号
+     * @param oldHid 原本房主ID
+     * @param newHid 新房主ID
+     * @return 更新成功与否
+     * @see SQLException
+     */
     public boolean queryVerify(int hid, String oldHid, String newHid) {
         String sqlStr = "update `house` set host=? where host=? and id=?";
         try {

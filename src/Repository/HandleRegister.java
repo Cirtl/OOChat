@@ -5,14 +5,26 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * 数据库操作用户注册
+ *
+ * @author 郭英贤
+ */
 public class HandleRegister {
-    private Connection con;
+    private final Connection con;
     private PreparedStatement preSql;
 
     public HandleRegister() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库添加新用户
+     *
+     * @param user 用户类
+     * @return 添加成功与否
+     * @see SQLException
+     */
     public boolean writeRegisterModel(User user) {
         String sqlStr = "insert into `user` values(?,?,?,?)";
         try {
@@ -20,7 +32,7 @@ public class HandleRegister {
             preSql.setString(1, user.getId());
             preSql.setString(2, user.getPass());
             preSql.setString(3, user.getIp());
-            preSql.setBoolean(4,false);
+            preSql.setBoolean(4, false);
             int ok = preSql.executeUpdate();
             con.close();
             if (ok != 0) {
@@ -31,7 +43,7 @@ public class HandleRegister {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "注册失败，用户名重复", "警告", JOptionPane.WARNING_MESSAGE);
-            System.out.println("Repository.HandleRegister:"+e);
+            System.out.println("Repository.HandleRegister:" + e);
         }
         return false;
     }

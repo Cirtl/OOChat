@@ -6,14 +6,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 数据库查询房间密码
+ *
+ * @author 郭英贤
+ */
 public class HandleGetHomePass {
-    private Connection con;
+    private final Connection con;
     private PreparedStatement preSql;
 
     HandleGetHomePass() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库查询房间密码
+     *
+     * @param hid 房间号
+     * @return 房间密码
+     * @see SQLException
+     */
     public String queryVerify(int hid) {
         String sqlStr = "select password from `house` where id=?";
         try {

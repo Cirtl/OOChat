@@ -5,14 +5,28 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * 数据库记录发送信息
+ *
+ * @author 郭英贤
+ */
 public class HandleSendMessage {
-    private Connection con;
+    private final Connection con;
     private PreparedStatement preSql;
 
     HandleSendMessage() {
         con = new JDBC().getCon();
     }
 
+    /**
+     * 向数据库添加新消息
+     *
+     * @param uid     用户ID
+     * @param hid     房间号
+     * @param message 消息
+     * @return 添加成功与否
+     * @see SQLException
+     */
     public boolean queryVerify(String uid, int hid, String message) {
         String sqlStrEnter = "insert into `user_house_message` values(?,?,?,default )";
         try {
