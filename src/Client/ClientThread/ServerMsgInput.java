@@ -39,7 +39,7 @@ public class ServerMsgInput implements Runnable{
         }
     }
 
-    protected void close() throws IOException {
+    protected void close(){
         scanner.close();
     }
 }

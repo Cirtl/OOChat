@@ -15,9 +15,8 @@ public interface InfoInterface {
     /**
      * 邀请好友加入房间
      * @param friendID 友人ID
-     * @param roomPort 房间号
      */
-    public void inviteFriend(String friendID,int roomPort);
+    public void inviteFriend(String friendID);
 
     /**
      * 关闭房间

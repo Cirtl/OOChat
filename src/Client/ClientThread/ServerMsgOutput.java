@@ -10,7 +10,6 @@ import java.net.Socket;
  */
 public class ServerMsgOutput {
     Socket serve;
-
     PrintStream printStream;
 
 
@@ -23,7 +22,7 @@ public class ServerMsgOutput {
         printStream.println(str);
     }
 
-    protected void close() throws IOException {
+    protected void close(){
         printStream.println("quit");
         printStream.close();
     }

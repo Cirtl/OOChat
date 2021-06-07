@@ -26,7 +26,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     private boolean isLogin;
     private boolean inRoom;
     private String id;
-
+    private int roomPort;
     /**
      * 新建服务端链接
      * @throws IOException 连接失败
@@ -138,67 +138,91 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
 
     @Override
     public void whisperMsg(String receiverID, String msg) {
+        if(isLogin&&inRoom){
+            String builder = "whisper" +  DIVIDER + receiverID + DIVIDER +
+                    msg;
+            chatThread.sendMsg(builder);
+        }
 
     }
 
     @Override
     public void removeFromRoom(String receiverID) {
-
+        if(isLogin&&inRoom){
+            chatThread.sendMsg("removeFromRoom" + DIVIDER + receiverID);
+        }
     }
 
     @Override
     public String getRoomInfo() {
-        return null;
+        return "roomInfo";
     }
 
     @Override
     public void leaveRoom() {
-
+        if(isLogin&&inRoom){
+            chatThread.sendMsg("leaveRoom");
+        }
     }
 
     @Override
     public void sendMsg(String msg) {
-
+        if(isLogin&&inRoom){
+            chatThread.sendMsg("sendMsg" + DIVIDER + msg);
+        }
     }
 
     @Override
     public void newRoom() {
-
+        if(isLogin&&!inRoom){
+            infoThread.sendMsg("newRoom" + DIVIDER + id);
+        }
     }
 
     @Override
     public void enterRoom(int roomPort) {
-
+        if(isLogin&&!inRoom){
+            infoThread.sendMsg("enterRoom" + DIVIDER + roomPort + DIVIDER + id);
+        }
     }
 
     @Override
-    public void inviteFriend(String friendID, int roomPort) {
-
+    public void inviteFriend(String friendID) {
+        if(isLogin&&inRoom){
+            String builder = "inviteFriend" + DIVIDER + friendID + DIVIDER +
+                    roomPort;
+            infoThread.sendMsg(builder);
+        }
     }
 
     @Override
     public void shutRoom(int roomPort) {
-
+        if(isLogin&&inRoom){
+            infoThread.sendMsg("shutRoom" + DIVIDER + roomPort);
+        }
     }
 
     @Override
     public void userLogout() {
-
+        if(isLogin)
+            userThread.sendMsg("logout");
     }
 
     @Override
     public void userLogin(String id, String pwd) {
-
+        if(isLogin)
+            userThread.sendMsg("login" + DIVIDER + id + DIVIDER + pwd);
     }
 
     @Override
     public void userRegister(String id, String pwd) {
-
+        userThread.sendMsg("register" + DIVIDER + id + DIVIDER + pwd);
     }
 
     @Override
-    public void makeFriend(String senderID, String receiverID) {
-
+    public void makeFriend(String receiverID) {
+        if(isLogin)
+            userThread.sendMsg("makeFriend" +  DIVIDER + receiverID);
     }
 }
 

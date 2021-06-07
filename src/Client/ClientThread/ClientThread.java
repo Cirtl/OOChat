@@ -19,7 +19,6 @@ public class ClientThread {
      */
     public ClientThread(String host, int port) throws IOException {
         initConnect(host, port);
-        runThread();
     }
 
     public void initConnect(String host, int port) throws IOException {

@@ -23,9 +23,8 @@ public interface UserInterface {
 
     /**
      * 交友请求
-     * @param senderID 发送者id
      * @param receiverID 接受者id
      */
-    public void makeFriend(String senderID,String receiverID);
+    public void makeFriend(String receiverID);
 
 }
