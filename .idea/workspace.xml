@@ -26,11 +26,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/out/production/OOChat/src/entity/House.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/OOChat/src/entity/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/OOChat/src/frame/HouseWindow.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/OOChat/src/frame/LoginWindow.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/OOChat/src/frame/RegisterWindow.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frame/HouseWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frame/LoginWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frame/MainWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frame/RegisterWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ServerInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Entry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Entry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/House.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/House.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,16 +95,16 @@
       <recent name="D:\Documents\2021Spring\Java\OOC_client\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test (1)">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+  <component name="RunManager" selected="Application.Entry">
+    <configuration name="Entry" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.Entry" />
+      <module name="OOChat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -146,15 +155,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.MyFrame" />
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.Test (1)" />
+      <item itemvalue="Application.Entry" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Entry" />
         <item itemvalue="Application.Test (1)" />
         <item itemvalue="Application.MyFrame" />
         <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -286,65 +313,5 @@
     <MESSAGE value="客户端&#10;&#10;实现获取房间和回调" />
     <MESSAGE value="客户端&#10;&#10;实现登录-&gt;获取-&gt;聊天流程" />
     <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;实现登录-&gt;获取-&gt;聊天流程" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1622722196488">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1622722196488" />
-    <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1622720090530">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.864@0.0.1536.864" timestamp="1622720090530" />
-    <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1622039880931">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1622039880931" />
-    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1622724291332">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1622724291332" />
-    <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1621651914627" />
-    <state x="526" y="128" key="FileChooserDialogImpl" timestamp="1622030819662">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="526" y="128" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1622030819662" />
-    <state width="1435" height="206" key="GridCell.Tab.0.bottom" timestamp="1622724841894">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
-    <state width="1433" height="206" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1621651937984" />
-    <state width="1435" height="206" key="GridCell.Tab.0.center" timestamp="1622724841894">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
-    <state width="1433" height="206" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state width="1435" height="206" key="GridCell.Tab.0.left" timestamp="1622724841894">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
-    <state width="1433" height="206" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state width="1435" height="206" key="GridCell.Tab.0.right" timestamp="1622724841894">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
-    <state width="1433" height="206" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state x="152" y="0" key="SettingsEditor" timestamp="1621599814186">
-      <screen x="62" y="0" width="1474" height="864" />
-    </state>
-    <state x="152" y="0" key="SettingsEditor/62.0.1474.864@62.0.1474.864" timestamp="1621599814186" />
-    <state x="240" y="100" key="Vcs.Push.Dialog.v2" timestamp="1622724309149">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="240" y="100" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1622724309149" />
-    <state x="292" y="100" key="Vcs.Push.Dialog.v2/62.0.1474.864@62.0.1474.864" timestamp="1621599517184" />
-    <state x="474" y="176" key="git4idea.merge.GitPullDialog" timestamp="1621599459818">
-      <screen x="62" y="0" width="1474" height="864" />
-    </state>
-    <state x="474" y="176" key="git4idea.merge.GitPullDialog/62.0.1474.864@62.0.1474.864" timestamp="1621599459818" />
-    <state x="341" y="193" key="run.anything.popup" timestamp="1622043217879">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="341" y="193" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1622043217879" />
   </component>
 </project>
