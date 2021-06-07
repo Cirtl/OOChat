@@ -25,15 +25,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Client/Interfaces/ChatterInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Client/Interfaces/InfoInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Client/Interfaces/UserInterface.java" afterDir="false" />
+    <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="接口优化&#10;&#10;增加了获取我的房间指令">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/ClientCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgOutput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Interfaces/InfoInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Interfaces/InfoInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +258,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622725546161</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="客户端&#10;&#10;重写了所有接口和回调，实现了规范化">
+      <created>1623047952654</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1623047952654</updated>
+    </task>
+    <task id="LOCAL-00015" summary="接口优化&#10;&#10;客户端和服务端都保存id和房间号，因此无需作为端口参数，保证了安全性">
+      <created>1623050190423</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1623050190423</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,14 +313,16 @@
     <MESSAGE value="客户端&#10;&#10;实现获取房间和回调" />
     <MESSAGE value="客户端&#10;&#10;实现登录-&gt;获取-&gt;聊天流程" />
     <MESSAGE value="客户端&#10;&#10;修复空格Bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;修复空格Bug" />
+    <MESSAGE value="客户端&#10;&#10;重写了所有接口和回调，实现了规范化" />
+    <MESSAGE value="接口优化&#10;&#10;客户端和服务端都保存id和房间号，因此无需作为端口参数，保证了安全性" />
+    <option name="LAST_COMMIT_MESSAGE" value="接口优化&#10;&#10;客户端和服务端都保存id和房间号，因此无需作为端口参数，保证了安全性" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="568" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1623047624829">
+    <state x="568" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1623051126766">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1622722196488" />
-    <state x="568" y="79" key="#com.intellij.ide.util.MemberChooser/62.0.1474.864@62.0.1474.864" timestamp="1623047624829" />
+    <state x="568" y="79" key="#com.intellij.ide.util.MemberChooser/62.0.1474.864@62.0.1474.864" timestamp="1623051126766" />
     <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1622720090530">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -319,11 +331,11 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1622039880931" />
-    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1622725544355">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="323" y="0" key="CommitChangelistDialog2" timestamp="1623051747854">
+      <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1622725544355" />
-    <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1621651914627" />
+    <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1623051747854" />
     <state x="526" y="128" key="FileChooserDialogImpl" timestamp="1622030819662">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

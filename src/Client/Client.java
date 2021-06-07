@@ -155,7 +155,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
 
     @Override
     public String getRoomInfo() {
-        return "roomInfo";
+        return String.format("room port:%d",roomPort);
     }
 
     @Override
@@ -173,16 +173,28 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     }
 
     @Override
-    public void newRoom() {
+    public void deleteRoom(int port) {
+        if(isLogin)
+            infoThread.sendMsg("deleteRoom"+DIVIDER+port);
+    }
+
+    @Override
+    public void getMyRooms() {
+        if(isLogin)
+            infoThread.sendMsg("myRooms");
+    }
+
+    @Override
+    public void newRoom(int pwd) {
         if(isLogin&&!inRoom){
-            infoThread.sendMsg("newRoom" + DIVIDER + id);
+            infoThread.sendMsg("newRoom" + DIVIDER + id + DIVIDER + pwd);
         }
     }
 
     @Override
-    public void enterRoom(int roomPort) {
+    public void enterRoom(int roomPort,int pwd) {
         if(isLogin&&!inRoom){
-            infoThread.sendMsg("enterRoom" + DIVIDER + roomPort + DIVIDER + id);
+            infoThread.sendMsg("enterRoom" + DIVIDER + roomPort + DIVIDER + id + DIVIDER + roomPort + DIVIDER + pwd);
         }
     }
 

@@ -33,6 +33,12 @@ public interface ClientCallback {
     void onLogout(int result);
 
     /**
+     * 删除房间
+     * @param result 0为成功,-1为房间运行中，-2为房间不存在
+     */
+    void onDeleteRoom(int result);
+
+    /**
      * 进入房间
      * @param result 0为成功，-1为失败
      * @param roomPort 成功时返回房间号，失败返回-1
@@ -44,6 +50,13 @@ public interface ClientCallback {
      * @param result 0为成功，1为由房主移出，2为房间关闭
      */
     void onLeaveRoom(int result);
+
+    /**
+     * 返回我的房间信息和对应密码
+     * @param rooms 房间号
+     * @param pwd 密码
+     */
+    void onMyRoomList(int[] rooms,int[] pwd);
 
     /**
      * 结交好友
