@@ -23,7 +23,7 @@ public class ServerMsgOutput {
     }
 
     protected void close(){
-        printStream.println("quit");
+        printStream.println("QUIT");
         printStream.close();
     }
 }

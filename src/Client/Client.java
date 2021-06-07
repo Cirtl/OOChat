@@ -12,6 +12,7 @@ import src.Client.Interfaces.UserInterface;
 
 /**
  * 向UI层提供的接口
+ * 需要手动启动和关闭
  * 顺序 user->info->chat
  */
 public class Client implements ChatterInterface, InfoInterface, UserInterface {
@@ -39,6 +40,14 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
         infoThread = new ClientThread(host, port_info);
         initUserThread();
         initInfoThread();
+    }
+
+    /**
+     * 启动服务器
+     */
+    public void runClient(){
+        userThread.runThread();
+        infoThread.runThread();
     }
 
     /**
