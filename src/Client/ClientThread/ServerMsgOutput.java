@@ -24,6 +24,7 @@ public class ServerMsgOutput {
     }
 
     protected void close() throws IOException {
+        printStream.println("quit");
         printStream.close();
     }
 }

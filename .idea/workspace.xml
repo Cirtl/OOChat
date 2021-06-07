@@ -26,11 +26,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Client/Interfaces/ChatterInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/Interfaces/InfoInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/Interfaces/UserInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ServerInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientCallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,12 +110,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="src.Client.Test" />
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.Client.Server.User.Test" />
       <module name="OOChat" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="src.Client.*" />
+          <option name="PATTERN" value="src.Client.Server.User.Chat.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -121,11 +124,11 @@
       </method>
     </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="src.Client.Server.User.Test" />
+      <option name="MAIN_CLASS_NAME" value="src.Client.Test" />
       <module name="OOChat" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="src.Client.Server.User.Chat.*" />
+          <option name="PATTERN" value="src.Client.Interfaces.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -245,7 +248,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622724294061</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="客户端&#10;&#10;修复空格Bug">
+      <created>1622725193536</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1622725193537</updated>
+    </task>
+    <task id="LOCAL-00013" summary="客户端&#10;&#10;修复空格Bug">
+      <created>1622725546161</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1622725546161</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,13 +302,15 @@
     <MESSAGE value="客户端&#10;&#10;简易接口" />
     <MESSAGE value="客户端&#10;&#10;实现获取房间和回调" />
     <MESSAGE value="客户端&#10;&#10;实现登录-&gt;获取-&gt;聊天流程" />
-    <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;实现登录-&gt;获取-&gt;聊天流程" />
+    <MESSAGE value="客户端&#10;&#10;修复空格Bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;修复空格Bug" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1622722196488">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="568" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1623047624829">
+      <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1622722196488" />
+    <state x="568" y="79" key="#com.intellij.ide.util.MemberChooser/62.0.1474.864@62.0.1474.864" timestamp="1623047624829" />
     <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1622720090530">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -300,43 +319,43 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1622039880931" />
-    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1622724291332">
+    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1622725544355">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1622724291332" />
+    <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1622725544355" />
     <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1621651914627" />
     <state x="526" y="128" key="FileChooserDialogImpl" timestamp="1622030819662">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="526" y="128" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1622030819662" />
-    <state width="1435" height="206" key="GridCell.Tab.0.bottom" timestamp="1622724841894">
+    <state width="1435" height="206" key="GridCell.Tab.0.bottom" timestamp="1622725466416">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
+    <state width="1435" height="206" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1622725466416" />
     <state width="1433" height="206" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1621651937984" />
-    <state width="1435" height="206" key="GridCell.Tab.0.center" timestamp="1622724841894">
+    <state width="1435" height="206" key="GridCell.Tab.0.center" timestamp="1622725466416">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
+    <state width="1435" height="206" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1622725466416" />
     <state width="1433" height="206" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state width="1435" height="206" key="GridCell.Tab.0.left" timestamp="1622724841894">
+    <state width="1435" height="206" key="GridCell.Tab.0.left" timestamp="1622725466416">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
+    <state width="1435" height="206" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1622725466416" />
     <state width="1433" height="206" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state width="1435" height="206" key="GridCell.Tab.0.right" timestamp="1622724841894">
+    <state width="1435" height="206" key="GridCell.Tab.0.right" timestamp="1622725466416">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
+    <state width="1435" height="206" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1622725466416" />
     <state width="1433" height="206" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
     <state x="152" y="0" key="SettingsEditor" timestamp="1621599814186">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="152" y="0" key="SettingsEditor/62.0.1474.864@62.0.1474.864" timestamp="1621599814186" />
-    <state x="240" y="100" key="Vcs.Push.Dialog.v2" timestamp="1622724309149">
+    <state x="240" y="100" key="Vcs.Push.Dialog.v2" timestamp="1622725557399">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="240" y="100" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1622724309149" />
+    <state x="240" y="100" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1622725557399" />
     <state x="292" y="100" key="Vcs.Push.Dialog.v2/62.0.1474.864@62.0.1474.864" timestamp="1621599517184" />
     <state x="474" y="176" key="git4idea.merge.GitPullDialog" timestamp="1621599459818">
       <screen x="62" y="0" width="1474" height="864" />

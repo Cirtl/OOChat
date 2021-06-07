@@ -6,93 +6,49 @@ import java.util.List;
 
 import src.Client.ClientThread.ChatCallback;
 import src.Client.ClientThread.ClientThread;
+import src.Client.Interfaces.ChatterInterface;
+import src.Client.Interfaces.InfoInterface;
+import src.Client.Interfaces.UserInterface;
 
 /**
  * 向UI层提供的接口
  * 顺序 user->info->chat
  */
-public class Client {
+public class Client implements ChatterInterface, InfoInterface, UserInterface {
     private static final String DIVIDER = " ";
-    private static int port_info = 8001;
-    private static int port_user = 8000;
-    private static int maxNum = 10;
-    private static String host = "0.0.0.0";
-    private ClientThread chatThread,userThread,infoThread;
-    private List<ClientCallback> callbackList;
+    private static final String host = "0.0.0.0";
+    private static final int port_user = 8000;
+    private static final int port_info = 8001;
+    private ClientThread chatThread;
+    private final ClientThread userThread;
+    private final ClientThread infoThread;
+    private final List<ClientCallback> callbackList;
     private boolean isLogin;
     private boolean inRoom;
-    private String name="test";
     private String id;
 
+    /**
+     * 新建服务端链接
+     * @throws IOException 连接失败
+     */
     public Client() throws IOException {
         callbackList = new ArrayList<>();
         isLogin = false;
         inRoom  = false;
-        userThread = new ClientThread(host,port_user);
-        infoThread = new ClientThread(host,port_info);
+        userThread = new ClientThread(host, port_user);
+        infoThread = new ClientThread(host, port_info);
         initUserThread();
         initInfoThread();
     }
 
     /**
-     * 获取当前房间信息
-     * @return 如果用户不在房间中,返回null
+     * 关闭服务端
      */
-    public String getRoomInfo(){
-        //TODO:完成获取房间信息
-        return  null;
-    }
-
-    /**
-     * 用户离开当前房间
-     */
-    public void leaveRoom(){
-        if(inRoom)
-            chatThread.sendMsg("leave_room" + DIVIDER + id);
-    }
-
-    /**
-     * 当前用户登出
-     */
-    public void userLogout(){
-        if(isLogin)
-            userThread.sendMsg("logout"+ DIVIDER +id);
-    }
-
-    /**
-     * 登录账号
-     * @param id 用户id
-     * @param pwd 用户密码
-     */
-    public void userLogin(String id,String pwd){
-        if(!isLogin)
-            userThread.sendMsg("login"+ DIVIDER +id+ DIVIDER +pwd);
-    }
-
-    /**
-     * 注册用户
-     * @param id 新用户id
-     * @param pwd 新用户密码
-     */
-    public void userRegister(String id,String pwd){
-        userThread.sendMsg("register"+DIVIDER+id+DIVIDER+pwd);
-    }
-
-    /**
-     * 当用户处于登录状态时，向聊天室发送信息
-     * @param msg 内容
-     */
-    public void sendMsg(String msg){
-        if(inRoom)
-            chatThread.sendMsg(name+DIVIDER+msg);
-    }
-
-    /**
-     * 向服务端请求房间端口
-     */
-    public void enterRoom(String roomID){
-        if(isLogin&&!inRoom)
-            infoThread.sendMsg("room_port");
+    public void closeClient(){
+        userThread.closeThread();
+        infoThread.closeThread();
+        if(chatThread!=null)
+            chatThread.closeThread();
     }
 
     /**
@@ -113,79 +69,53 @@ public class Client {
 
     /**
      * 当前是否登录
-     * @return 未登录返回false，已登录返回true
      */
     public boolean isLogin() {
         return isLogin;
     }
 
+    /**
+     * 查询是否在房间中
+     */
     public boolean isInRoom() {
         return inRoom;
     }
 
     /**
-     * 当前用户名
-     * @return 未登录返回Null 否则返回用户名
+     * 当前用户ID
+     * @return 未登录返回Null 否则返回ID
      */
-    public String getName() {
-        return name;
+    public String getID() {
+        return id;
     }
+
 
     private void initUserThread(){
         userThread.addCallback(new ChatCallback() {
             @Override
             public void onReceiveObject(String objectName, Object o) {
-
             }
 
             @Override
             public void onReceiveMessage(String option,String[] info) {
-                if(option.equals("login_success")){
-                    isLogin = true;
-                    for(ClientCallback callback:callbackList)
-                        callback.onLoginSuccess();
-                }
-                else if(option.equals("login_fail")){
-                    for(ClientCallback callback:callbackList)
-                        callback.onLoginFailed();
-                }
-                else if(option.equals("register_success")){
-                    for(ClientCallback callback:callbackList)
-                        callback.onRegisterSuccess();
-                }
-                else if(option.equals("register_fail")){
-                    for(ClientCallback callback:callbackList)
-                        callback.onRegisterFailed();
-                }
-                else if(option.equals("logout_success")){
-                    isLogin  = false;
-                    for (ClientCallback callback:callbackList)
-                        callback.onLogoutSuccess();
-                }
             }
         });
     }
 
-    private void initChatThread(int port_chat) throws IOException {
+    private void connectChatRoom(int port_chat) throws IOException {
+        try{
             chatThread = new ClientThread(host,port_chat);
+            initChatThread(port_chat);
+        }catch (IOException e) {
+            throw e;
+        }
+    }
+
+    private void initChatThread(int port_chat) throws IOException {
             chatThread.addCallback(new ChatCallback() {
                 @Override
                 public void onReceiveMessage(String option,String[] info) {
-                    if(option.equals("msg")){
-                        StringBuilder builder = new StringBuilder();
-                        for(int i=1;i<info.length;i++)
-                            builder.append(info[i]).append(" ");
-                        for(ClientCallback clientCallback:callbackList)
-                            clientCallback.onReceiveMsg(info[0],builder.toString());
-                    }
 
-                    else if(option.equals("leave_room")){
-                        inRoom = false;
-                        for(ClientCallback clientCallback:callbackList)
-                            clientCallback.onLeaveRoom();
-                        chatThread.closeThread();
-                        chatThread = null;
-                    }
                 }
 
                 @Override
@@ -198,21 +128,6 @@ public class Client {
         infoThread.addCallback(new ChatCallback() {
             @Override
             public void onReceiveMessage(String option,String[] info) {
-                if(option.equals("room_port")){
-                    //收到聊天端口后开启新的聊天服务器
-                    try{
-                        System.out.println(info[0]);
-                        int port = Integer.parseInt(info[0]);
-                        initChatThread(port);
-                        inRoom = true;
-                        for(ClientCallback callback:callbackList)
-                            callback.onEnterRoom();
-                    } catch (IOException e) {
-                        inRoom = false;
-                        for(ClientCallback callback:callbackList)
-                            callback.onException(e);
-                    }
-                }
             }
             @Override
             public void onReceiveObject(String objectName, Object o) {
@@ -221,6 +136,70 @@ public class Client {
         });
     }
 
+    @Override
+    public void whisperMsg(String receiverID, String msg) {
+
+    }
+
+    @Override
+    public void removeFromRoom(String receiverID) {
+
+    }
+
+    @Override
+    public String getRoomInfo() {
+        return null;
+    }
+
+    @Override
+    public void leaveRoom() {
+
+    }
+
+    @Override
+    public void sendMsg(String msg) {
+
+    }
+
+    @Override
+    public void newRoom() {
+
+    }
+
+    @Override
+    public void enterRoom(int roomPort) {
+
+    }
+
+    @Override
+    public void inviteFriend(String friendID, int roomPort) {
+
+    }
+
+    @Override
+    public void shutRoom(int roomPort) {
+
+    }
+
+    @Override
+    public void userLogout() {
+
+    }
+
+    @Override
+    public void userLogin(String id, String pwd) {
+
+    }
+
+    @Override
+    public void userRegister(String id, String pwd) {
+
+    }
+
+    @Override
+    public void makeFriend(String senderID, String receiverID) {
+
+    }
 }
 
 
