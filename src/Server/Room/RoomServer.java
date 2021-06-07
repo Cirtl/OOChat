@@ -29,7 +29,7 @@ public class RoomServer implements Runnable {
             for (int i = 0; i < maxNum; i++) {
                 Socket client = serverSocket.accept();
                 System.out.println("新用户链接:" + client.getInetAddress() + ",端口" + client.getPort());
-                executorService.execute(new ChatThread(client, null));//新建服务端线程去处理客户
+                executorService.execute(new ChatThread(client));//新建服务端线程去处理客户
             }
             System.out.println("full");
             executorService.shutdown();//不再接受新的客户

@@ -10,8 +10,10 @@ import java.util.Scanner;
 import Repository.HandleLogin;
 import Repository.HandleRegister;
 import Repository.User;
+import Server.Interfaces.InfoInterface;
+import Server.ServerThread;
 
-public class InfoThread implements Runnable{
+public class InfoThread  extends ServerThread implements  InfoInterface {
     private static final String ROOM_LIST= "room_list";
     private static final String ROOM_PORT= "room_port";
     private static final String QUIT = "quit";
@@ -21,9 +23,10 @@ public class InfoThread implements Runnable{
     //用户服务器
     Socket client;
 
-    InfoThread(Socket client) {
-        this.client = client;
+    public InfoThread(Socket client) {
+        super(client);
     }
+
 
     private boolean login(String id,String pwd){
         return true;
@@ -64,5 +67,35 @@ public class InfoThread implements Runnable{
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deleteRoom(int port) {
+
+    }
+
+    @Override
+    public void getMyRooms() {
+
+    }
+
+    @Override
+    public void newRoom(int pwd) {
+
+    }
+
+    @Override
+    public void enterRoom(int roomPort, int pwd) {
+
+    }
+
+    @Override
+    public void inviteFriend(String friendID) {
+
+    }
+
+    @Override
+    public void shutRoom(int roomPort) {
+
     }
 }
