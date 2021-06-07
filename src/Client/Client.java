@@ -194,16 +194,16 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     }
 
     @Override
-    public void newRoom(int pwd) {
+    public void newRoom(int roomPort,int pwd) {
         if(isLogin&&!inRoom){
-            infoThread.sendMsg("newRoom" + DIVIDER + id + DIVIDER + pwd);
+            infoThread.sendMsg("newRoom" + DIVIDER + id + DIVIDER + roomPort + DIVIDER + pwd);
         }
     }
 
     @Override
     public void enterRoom(int roomPort,int pwd) {
         if(isLogin&&!inRoom){
-            infoThread.sendMsg("enterRoom" + DIVIDER + roomPort + DIVIDER + id + DIVIDER + roomPort + DIVIDER + pwd);
+            infoThread.sendMsg("enterRoom" + DIVIDER + id + DIVIDER + roomPort + DIVIDER + pwd);
         }
     }
 

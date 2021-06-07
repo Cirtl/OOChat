@@ -14,9 +14,10 @@ public interface InfoInterface {
 
     /**
      * 用户请求开新房间
+     * @param roomPort 房间号
      * @param pwd 房间密码
      */
-    public void newRoom(int pwd);
+    public void newRoom(int roomPort,int pwd);
 
     /**
      * 向服务端请求进入某个房间
