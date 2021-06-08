@@ -27,10 +27,12 @@
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientCallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientInterfaces/ChatterInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientInterfaces/ChatterInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -322,7 +324,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623141534873</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="测试&#10;&#10;修复了shutroom的BUG">
+      <created>1623143705282</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1623143705282</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,7 +379,8 @@
     <MESSAGE value="接口优化&#10;&#10;新建房间需要用户提供房间号" />
     <MESSAGE value="接口优化&#10;&#10;将指令保存在接口中 便于对接" />
     <MESSAGE value="测试&#10;&#10;通过信息和注册登录" />
-    <option name="LAST_COMMIT_MESSAGE" value="测试&#10;&#10;通过信息和注册登录" />
+    <MESSAGE value="测试&#10;&#10;修复了shutroom的BUG" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试&#10;&#10;修复了shutroom的BUG" />
   </component>
   <component name="WindowStateProjectService">
     <state x="568" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1623051126766">
@@ -386,35 +396,35 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1622039880931" />
-    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1623141532318">
+    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1623143703478">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1623141532318" />
+    <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1623143703478" />
     <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1623111834474" />
     <state x="526" y="128" key="FileChooserDialogImpl" timestamp="1623133139192">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="526" y="128" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1623133139192" />
     <state x="567" y="128" key="FileChooserDialogImpl/62.0.1474.864@62.0.1474.864" timestamp="1623070159251" />
-    <state width="1510" height="269" key="GridCell.Tab.0.bottom" timestamp="1623143510118">
+    <state width="1510" height="269" key="GridCell.Tab.0.bottom" timestamp="1623148387909">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1510" height="269" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1623143510118" />
+    <state width="1510" height="269" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1623148387909" />
     <state width="1433" height="206" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1621651937984" />
-    <state width="1510" height="269" key="GridCell.Tab.0.center" timestamp="1623143510118">
+    <state width="1510" height="269" key="GridCell.Tab.0.center" timestamp="1623148387909">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1510" height="269" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1623143510118" />
+    <state width="1510" height="269" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1623148387909" />
     <state width="1433" height="206" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state width="1510" height="269" key="GridCell.Tab.0.left" timestamp="1623143510118">
+    <state width="1510" height="269" key="GridCell.Tab.0.left" timestamp="1623148387909">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1510" height="269" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1623143510118" />
+    <state width="1510" height="269" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1623148387909" />
     <state width="1433" height="206" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state width="1510" height="269" key="GridCell.Tab.0.right" timestamp="1623143510118">
+    <state width="1510" height="269" key="GridCell.Tab.0.right" timestamp="1623148387909">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1510" height="269" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1623143510118" />
+    <state width="1510" height="269" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1623148387909" />
     <state width="1433" height="206" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
     <state x="152" y="0" key="SettingsEditor" timestamp="1621599814186">
       <screen x="62" y="0" width="1474" height="864" />

@@ -15,7 +15,7 @@ public class Test {
 
             @Override
             public void onReceiveMsg(String senderName, String msg, int isWhisper) {
-
+                System.out.println(senderName + ":" + msg);
             }
 
             @Override
@@ -40,7 +40,6 @@ public class Test {
 
             @Override
             public void onEnterRoom(int result, int roomPort) {
-
             }
 
             @Override
@@ -54,7 +53,7 @@ public class Test {
             }
 
             @Override
-            public void onMyRoomList(int[] rooms, int[] pwd) {
+            public void onMyRoomList(int result,int[] rooms,int[] pwd) {
 
             }
 
@@ -78,11 +77,13 @@ public class Test {
         client.userLogin("test","test");
         Thread.sleep(30);
         client.newRoom(8003,"new room");
-        Thread.sleep(30);
-        client.shutRoom(8003);
         Thread.sleep(300);
         client.getMyRooms();
-        Thread.sleep(10000);
+        Thread.sleep(300);
+        client.enterRoom(8003,"8003");
+        Thread.sleep(300);
+        client.sendMsg("123456");
+        Thread.sleep(15000);
         client.closeClient();
     }
 }

@@ -19,9 +19,7 @@ public class ServerMsgOutput {
     }
 
     protected void write(String str){
-        System.out.println("ready to print: " + str);
         printStream.println(str);
-        System.out.println("print: " + str);
     }
 
     protected void close(){

@@ -7,7 +7,6 @@ public interface ChatterInterface {
     public static String LEAVE_ROOM = "leaveRoom";
     public static String SEND_MSG = "sendMsg";
     public static String ROOM_INFO = "roomInfo";
-
     /**
      * 向房间用户发送私聊
      * @param receiverID 对方ID
