@@ -20,7 +20,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public static final String FAIL = "FAIL";
     public static final String SUCCESS = "SUCCESS";
     public static final String DIVIDER = " ";
-    private static final String host = "192.168.43.119";
+    private static final String host = "0.0.0.0";
     private static final int port_user = 8000;
     private static final int port_info = 8001;
     private ClientThread chatThread;
@@ -289,7 +289,6 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                     msg;
             chatThread.sendMsg(builder);
         }
-
     }
 
     @Override
@@ -308,6 +307,9 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public void leaveRoom() {
         if (isLogin && inRoom) {
             chatThread.sendMsg(LEAVE_ROOM);
+        }else{
+            for(ClientCallback callback:callbackList)
+                callback.onLeaveRoom(-3);
         }
     }
 
@@ -322,21 +324,29 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public void deleteRoom(int port) {
         if (isLogin)
             infoThread.sendMsg(InfoInterface.DELETE_ROOM + DIVIDER + id + DIVIDER + port);
+        else{
+            for(ClientCallback callback:callbackList)
+                callback.onDeleteRoom(-3);
+        }
     }
 
     @Override
     public void getMyRooms() {
         if (isLogin)
             infoThread.sendMsg(InfoInterface.MY_ROOMS);
+        else{
+            for(ClientCallback callback:callbackList)
+                callback.onMyRoomList(-1,null,null);
+        }
     }
 
     @Override
     public void newRoom(int roomPort, String pwd) {
-        if (isLogin && !inRoom) {
+        if (isLogin) {
             infoThread.sendMsg(InfoInterface.NEW_ROOM + DIVIDER + id + DIVIDER + roomPort + DIVIDER + pwd);
         }else{
             for(ClientCallback callback:callbackList)
-                callback.onEnterRoom(-1,-1);
+                callback.onNewRoom(-1,-3);
         }
     }
 
@@ -365,6 +375,9 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public void shutRoom(int roomPort) {
         if (isLogin) {
             infoThread.sendMsg(InfoInterface.SHUT_ROOM + DIVIDER + id + DIVIDER + roomPort);
+        }else{
+            for(ClientCallback callback:callbackList)
+                callback.onShutRoom(-1);
         }
     }
 
@@ -372,6 +385,10 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public void userLogout() {
         if (isLogin)
             userThread.sendMsg(UserInterface.LOGOUT);
+        else{
+            for(ClientCallback callback:callbackList)
+                callback.onLogout(-1);
+        }
     }
 
     @Override
@@ -393,6 +410,10 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public void makeFriend(String receiverID) {
         if (isLogin)
             userThread.sendMsg(UserInterface.MAKE_FRIEND + DIVIDER + receiverID);
+        else{
+            for(ClientCallback callback:callbackList)
+                callback.onMakeFriend(-4);
+        }
     }
 }
 

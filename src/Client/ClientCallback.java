@@ -2,6 +2,7 @@ package src.Client;
 
 /**
  * 客户端受到服务端信息时的回调
+ * 非负数为成功返回码，负数为失败返回码，其他错误一般是指未登录、未进入房间、未登出时进行的无权限操作。
  */
 public interface ClientCallback {
 
@@ -40,7 +41,7 @@ public interface ClientCallback {
 
     /**
      * 删除房间
-     * @param result 0为成功,-1为房间运行中，-2为房间不存在
+     * @param result 0为成功,-1为房间运行中，-2为房间不存在，-3为其他错误
      */
     void onDeleteRoom(int result);
 
@@ -60,13 +61,13 @@ public interface ClientCallback {
 
     /**
      * 离开房间
-     * @param result 0为成功，1为由房主移出，2为房间关闭
+     * @param result 0为成功，1为由房主移出，2为房间关闭,-3为其他错误
      */
     void onLeaveRoom(int result);
 
     /**
      * 返回我的房间信息和对应密码
-     * @param result 0表示有房间，-1表示无房间
+     * @param result 0表示有房间，-1表示无房间，-2其他错误
      * @param rooms 房间号，无房间时为null
      * @param pwd 密码，无房间时为null
      */
@@ -74,13 +75,13 @@ public interface ClientCallback {
 
     /**
      * 结交好友
-     * @param result 0为成功，-1表示对方拒绝，-2表示用户不存在,-3表示房间不存在
+     * @param result 0为成功，-1表示对方拒绝，-2表示用户不存在,-3表示用户不存在，-4其他错误
      */
     void onMakeFriend(int result);
 
     /**
      * 关闭房间
-     * @param result 0为成功，-1表示无权限
+     * @param result 0为成功，-1表示无权限，-2其他错误
      */
     void onShutRoom(int result);
 
@@ -93,7 +94,7 @@ public interface ClientCallback {
 
     /**
      * 邀请别人的结果
-     * @param result 0成功发送邀请，-1房间不存在，-2用户不存在
+     * @param result 0成功发送邀请，-1房间不存在，-2用户不存在，-3其他错误
      */
     void onInviteFriend(int result);
 
