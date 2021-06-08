@@ -25,6 +25,8 @@ public class RoomServer implements Runnable {
 
     protected Socket host;//管理员
 
+    protected ServerSocket serverSocket;
+
     protected RoomServer(int portNum,Socket host) throws IOException {
         this.portNum = portNum;
         this.host = host;
@@ -44,17 +46,16 @@ public class RoomServer implements Runnable {
                 //新建服务端线程去处理客户
                 executorService.submit(new ChatThread(client,clientMap,this));
             }
-            System.out.println(portNum+"聊天室关闭");
-            //不再接受新的客户
-            executorService.shutdown();
-            serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    protected void closeServer(){
+    protected void closeServer() throws IOException {
+        System.out.println(portNum+"聊天室关闭");
         isRunning = false;
+        executorService.shutdown();
+        serverSocket.close();
         for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
             stringChatThreadEntry.getValue().closeThread();
         }
