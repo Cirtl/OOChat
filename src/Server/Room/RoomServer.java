@@ -32,6 +32,8 @@ public class RoomServer implements Runnable {
         this.host = host;
         this.executorService = Executors.newFixedThreadPool(100);
         this.clientMap = new ConcurrentHashMap<>();
+        serverSocket = new ServerSocket(portNum);
+        System.out.println(serverSocket.getLocalSocketAddress() + " 聊天服务器建立完毕，房间号：" + portNum );
     }
 
     public boolean inRoom(String id){
@@ -45,9 +47,6 @@ public class RoomServer implements Runnable {
     @Override
     public void run() {
         try {
-            //根据端口号新建房间
-            ServerSocket serverSocket = new ServerSocket(portNum);
-            System.out.println(serverSocket.getLocalSocketAddress() + " 聊天服务器建立完毕，房间号：" + portNum );
             while(isRunning) {
                 Socket client = serverSocket.accept();
                 System.out.println("新用户链接房间:" + client.getInetAddress() + ",端口" + client.getPort());

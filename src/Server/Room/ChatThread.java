@@ -128,7 +128,6 @@ public class ChatThread extends ServerThread implements ChatterInterface {
                 } else if(data.startsWith(DISCONNECT)){
                     leaveRoom(0);
                 }
-                break;
             }
         }
     }
