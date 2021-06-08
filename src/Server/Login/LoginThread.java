@@ -18,29 +18,22 @@ import Server.Interfaces.UserInterface;
 import Server.ServerThread;
 
 public class LoginThread extends ServerThread implements UserInterface {
-    private static final String FAIL = "fail";
-    private static final String SUCCESS = "success";
-    private static final String DIVIDER = " ";
-
     //储存所有登录线程的用户
     private Map<String, LoginThread> clientMap;//存储所有的用户信息
 
-    //用户服务器
-    Socket client;
-
     //用户信息
-    User user;
+    private User user;
 
     //读入器
-    Scanner scanner;
+    private Scanner scanner;
 
-    //是否登录成功
-    Boolean isLogin;
+    //
+    private boolean isRunning;
 
     LoginThread(Socket client, Map<String, LoginThread> clientMap) {
         super(client);
         this.clientMap = clientMap;
-        isLogin = false;
+        isRunning = true;
         user = null;
     }
 
@@ -57,9 +50,10 @@ public class LoginThread extends ServerThread implements UserInterface {
     @Override
     public void closeThread() {
         try{
-            userLogout();
+            isRunning = false;
             scanner.close();
             client.close();
+            clientMap.remove(this);
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,8 +70,10 @@ public class LoginThread extends ServerThread implements UserInterface {
             System.out.println(client.toString());
             scanner = new Scanner(client.getInputStream());
             sendToMe("进入登录注册服务器");
-            while (scanner.hasNext()) {
-                String data = scanner.nextLine();
+            while (isRunning) {
+                String data = "";
+                if(scanner.hasNext())
+                    data = scanner.nextLine();
                 if (data.startsWith(UserInterface.LOGIN)) {
                     String[] info = data.split(DIVIDER,3);
                     if(info.length>2)
@@ -93,6 +89,7 @@ public class LoginThread extends ServerThread implements UserInterface {
                     if(info.length>2)
                         userRegister(info[1],info[2]);
                 } else if(data.startsWith(DISCONNECT)){
+                    userLogout();
                     closeThread();
                     break;
                 }

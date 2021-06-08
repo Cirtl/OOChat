@@ -52,6 +52,7 @@ public class ChatThread extends ServerThread implements ChatterInterface {
             this.isRunning = false;
             receiver.close();
             client.close();
+            clientMap.remove(this);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -91,6 +92,7 @@ public class ChatThread extends ServerThread implements ChatterInterface {
     private void init(String userID) {
         if (this.userID != null && !this.clientMap.containsKey(userID)) {
             this.clientMap.put(userID, this);
+            sendToAll(userID + "进入聊天室");
         }
     }
 
@@ -122,6 +124,8 @@ public class ChatThread extends ServerThread implements ChatterInterface {
                     String[] info = data.split(DIVIDER, 2);
                     if (info.length > 1)
                         init(info[1]);
+                } else if(data.startsWith(DISCONNECT)){
+                    leaveRoom(0);
                 }
                 break;
             }
@@ -153,7 +157,6 @@ public class ChatThread extends ServerThread implements ChatterInterface {
     @Override
     public void leaveRoom(int way) {
         sendToMe(ChatterInterface.LEAVE_ROOM+DIVIDER+way);
-        clientMap.remove(this);
         closeThread();
     }
 
