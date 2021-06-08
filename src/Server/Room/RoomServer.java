@@ -23,15 +23,23 @@ public class RoomServer implements Runnable {
 
     protected Map<String, ChatThread> clientMap;//存储所有的用户信息
 
-    protected Socket host;//管理员
+    protected String host;//管理员
 
     protected ServerSocket serverSocket;
 
-    protected RoomServer(int portNum,Socket host) throws IOException {
+    public RoomServer(int portNum, String host) throws IOException {
         this.portNum = portNum;
         this.host = host;
         this.executorService = Executors.newFixedThreadPool(100);
         this.clientMap = new ConcurrentHashMap<>();
+    }
+
+    public boolean inRoom(String id){
+        for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
+            if(stringChatThreadEntry.getValue().sameUser(id))
+                return true;
+        }
+        return false;
     }
 
     @Override
@@ -51,7 +59,7 @@ public class RoomServer implements Runnable {
         }
     }
 
-    protected void closeServer() throws IOException {
+    public void closeServer() throws IOException {
         System.out.println(portNum+"聊天室关闭");
         isRunning = false;
         executorService.shutdown();

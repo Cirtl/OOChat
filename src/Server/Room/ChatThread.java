@@ -36,6 +36,10 @@ public class ChatThread extends ServerThread implements ChatterInterface {
         this.receiver = new Scanner(client.getInputStream());
     }
 
+    public boolean sameUser(String id){
+        return  id==userID;
+    }
+
     @Override
     public void sendToMe(String msg) {
         try {
