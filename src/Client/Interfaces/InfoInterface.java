@@ -1,6 +1,13 @@
 package src.Client.Interfaces;
 
 public interface InfoInterface {
+    public static String DELETE_ROOM = "deleteRoom";
+    public static String MY_ROOMS = "myRooms";
+    public static String NEW_ROOM = "newRoom";
+    public static String ENTER_ROOM = "enterRoom";
+    public static String INVITE_FRIEND = "inviteFriend";
+    public static String SHUT_ROOM = "shutRoom";
+
     /**
      * 删除房间
      * @param port 房间号

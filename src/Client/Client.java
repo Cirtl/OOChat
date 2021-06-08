@@ -148,7 +148,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     @Override
     public void whisperMsg(String receiverID, String msg) {
         if(isLogin&&inRoom){
-            String builder = "whisper" +  DIVIDER + receiverID + DIVIDER +
+            String builder = ChatterInterface.WHISPER +  DIVIDER + receiverID + DIVIDER +
                     msg;
             chatThread.sendMsg(builder);
         }
@@ -158,7 +158,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     @Override
     public void removeFromRoom(String receiverID) {
         if(isLogin&&inRoom){
-            chatThread.sendMsg("removeFromRoom" + DIVIDER + receiverID);
+            chatThread.sendMsg(ChatterInterface.REMOVE_FROM_ROOM + DIVIDER + receiverID);
         }
     }
 
@@ -170,47 +170,47 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     @Override
     public void leaveRoom() {
         if(isLogin&&inRoom){
-            chatThread.sendMsg("leaveRoom");
+            chatThread.sendMsg(ChatterInterface.LEAVE_ROOM);
         }
     }
 
     @Override
     public void sendMsg(String msg) {
         if(isLogin&&inRoom){
-            chatThread.sendMsg("sendMsg" + DIVIDER + msg);
+            chatThread.sendMsg(ChatterInterface.SEND_MSG + DIVIDER + msg);
         }
     }
 
     @Override
     public void deleteRoom(int port) {
         if(isLogin)
-            infoThread.sendMsg("deleteRoom"+DIVIDER+port);
+            infoThread.sendMsg(InfoInterface.DELETE_ROOM+DIVIDER+port);
     }
 
     @Override
     public void getMyRooms() {
         if(isLogin)
-            infoThread.sendMsg("myRooms");
+            infoThread.sendMsg(InfoInterface.MY_ROOMS);
     }
 
     @Override
     public void newRoom(int roomPort,int pwd) {
         if(isLogin&&!inRoom){
-            infoThread.sendMsg("newRoom" + DIVIDER + id + DIVIDER + roomPort + DIVIDER + pwd);
+            infoThread.sendMsg(InfoInterface.NEW_ROOM + DIVIDER + id + DIVIDER + roomPort + DIVIDER + pwd);
         }
     }
 
     @Override
     public void enterRoom(int roomPort,int pwd) {
         if(isLogin&&!inRoom){
-            infoThread.sendMsg("enterRoom" + DIVIDER + id + DIVIDER + roomPort + DIVIDER + pwd);
+            infoThread.sendMsg(InfoInterface.ENTER_ROOM + DIVIDER + id + DIVIDER + roomPort + DIVIDER + pwd);
         }
     }
 
     @Override
     public void inviteFriend(String friendID) {
         if(isLogin&&inRoom){
-            String builder = "inviteFriend" + DIVIDER + friendID + DIVIDER +
+            String builder = InfoInterface.INVITE_FRIEND + DIVIDER + friendID + DIVIDER +
                     roomPort;
             infoThread.sendMsg(builder);
         }
@@ -219,31 +219,31 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     @Override
     public void shutRoom(int roomPort) {
         if(isLogin&&inRoom){
-            infoThread.sendMsg("shutRoom" + DIVIDER + roomPort);
+            infoThread.sendMsg(InfoInterface.SHUT_ROOM + DIVIDER + roomPort);
         }
     }
 
     @Override
     public void userLogout() {
         if(isLogin)
-            userThread.sendMsg("logout");
+            userThread.sendMsg(UserInterface.LOGOUT);
     }
 
     @Override
     public void userLogin(String id, String pwd) {
         if(isLogin)
-            userThread.sendMsg("login" + DIVIDER + id + DIVIDER + pwd);
+            userThread.sendMsg(UserInterface.LOGIN + DIVIDER + id + DIVIDER + pwd);
     }
 
     @Override
     public void userRegister(String id, String pwd) {
-        userThread.sendMsg("register" + DIVIDER + id + DIVIDER + pwd);
+        userThread.sendMsg(UserInterface.REGISTER + DIVIDER + id + DIVIDER + pwd);
     }
 
     @Override
     public void makeFriend(String receiverID) {
         if(isLogin)
-            userThread.sendMsg("makeFriend" +  DIVIDER + receiverID);
+            userThread.sendMsg(UserInterface.MAKE_FRIEND +  DIVIDER + receiverID);
     }
 }
 

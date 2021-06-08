@@ -2,6 +2,12 @@ package src.Client.Interfaces;
 
 public interface UserInterface {
 
+    public static String LOGOUT = "logout";
+    public static String LOGIN = "login";
+    public static String REGISTER = "register";
+    public static String MAKE_FRIEND = "makeFriend";
+
+
     /**
      * 当前用户登出请求
      */
