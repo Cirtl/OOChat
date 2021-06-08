@@ -22,9 +22,8 @@ public interface ChatterInterface {
 
     /**
      * 获取当前房间信息
-     * @return 如果用户不在房间中,返回null
      */
-    public String getRoomInfo();
+    public void getRoomInfo();
 
     /**
      * 离开当前房间

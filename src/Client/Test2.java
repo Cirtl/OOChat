@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Test {
+public class Test2 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Client client = new Client();
@@ -69,6 +69,7 @@ public class Test {
 
             @Override
             public boolean onAskedBeFriend(String friendID) {
+                System.out.println("refuse friend " + friendID);
                 return false;
             }
 
@@ -98,24 +99,8 @@ public class Test {
 
             }
         });
-        client.userLogin("杨东浩","test1");
-        Thread.sleep(300);
-        client.newRoom(8003,"123");
-        Thread.sleep(300);
-        client.enterRoom(8003,"456");
-        Thread.sleep(300);
-        client.enterRoom(8003,"123");
-        Thread.sleep(300);
-        client.deleteRoom(8003);
-        Thread.sleep(300);
-        client.leaveRoom();
-        Thread.sleep(300);
-        client.shutRoom(8003);
-        Thread.sleep(300);
-        client.deleteRoom(8003);
-        Thread.sleep(300);
-        client.makeFriend("test2");
-        Thread.sleep(15000);
+        client.userLogin("test2","test2");
+        Thread.sleep(30000);
         Scanner scanner = new Scanner(System.in);
 //        while(true){
 //            String s = scanner.nextLine();

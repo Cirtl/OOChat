@@ -27,7 +27,9 @@ public class ServerMsgInput implements Runnable{
     }
 
     private void onReceiveMsg(String msg){
-        System.out.println('\"' + msg + "\" from | " + this);
+        //todo:remove test info
+        System.out.println("| from " + this +":     "+msg);
+        //
         String[] tmp  = msg.split(DIVIDER);
         String[] info;
         if(tmp.length>1)

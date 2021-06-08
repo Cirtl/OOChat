@@ -2,6 +2,7 @@ package src.Client;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import src.Client.ClientThread.ChatCallback;
@@ -19,6 +20,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public static final String DISCONNECT = "QUIT";
     public static final String FAIL = "FAIL";
     public static final String SUCCESS = "SUCCESS";
+    public static final String UNCONFIRMED = "UNCONFIRMED";
     public static final String DIVIDER = " ";
     private static final String host = "0.0.0.0";
     private static final int port_user = 8000;
@@ -146,8 +148,26 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                     }
                 } else if (option.startsWith(UserInterface.MAKE_FRIEND)) {
                     if (info[0].equals(SUCCESS)) {
+                        for(ClientCallback callback:callbackList)
+                            callback.onMakeFriend(0,info[2]);
                     } else if (info[0].equals(FAIL)) {
-
+                        int result;
+                        try{
+                            result = Integer.parseInt(info[1]);
+                        }catch (Exception e){
+                            result = -3;
+                        }
+                        for(ClientCallback callback:callbackList)
+                            callback.onMakeFriend(result,info[2]);
+                    } else if(info[0].equals(UNCONFIRMED)){
+                        boolean flag = true;
+                        String toID = info[1];
+                        for(ClientCallback callback:callbackList)
+                            flag = flag && callback.onAskedBeFriend(toID);
+                        if(flag)
+                            makeFriend(toID,SUCCESS);
+                        else
+                            makeFriend(toID,FAIL);
                     }
                 }
             }
@@ -185,6 +205,10 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                     }
                     for(ClientCallback callback:callbackList)
                         callback.onLeaveRoom(way);
+                }else if(option.startsWith(ROOM_INFO)){
+                    List<String> users = new ArrayList<>(Arrays.asList(info));
+                    for(ClientCallback callback:callbackList)
+                        callback.onGetRoomInfo(0,users);
                 }
             }
 
@@ -294,13 +318,18 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     @Override
     public void removeFromRoom(String receiverID) {
         if (isLogin && inRoom) {
-            chatThread.sendMsg(ChatterInterface.REMOVE_FROM_ROOM + DIVIDER + receiverID);
+            chatThread.sendMsg(REMOVE_FROM_ROOM + DIVIDER + receiverID);
         }
     }
 
     @Override
-    public String getRoomInfo() {
-        return String.format("room port:%d", roomPort);
+    public void getRoomInfo() {
+        if(isLogin&&inRoom){
+            chatThread.sendMsg(ROOM_INFO);
+        }else{
+            for(ClientCallback callback:callbackList)
+                callback.onGetRoomInfo(-1,null);
+        }
     }
 
     @Override
@@ -384,7 +413,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     @Override
     public void userLogout() {
         if (isLogin)
-            userThread.sendMsg(UserInterface.LOGOUT);
+            userThread.sendMsg(LOGOUT);
         else{
             for(ClientCallback callback:callbackList)
                 callback.onLogout(-1);
@@ -409,11 +438,15 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     @Override
     public void makeFriend(String receiverID) {
         if (isLogin)
-            userThread.sendMsg(UserInterface.MAKE_FRIEND + DIVIDER + receiverID);
+            makeFriend(receiverID,UNCONFIRMED);
         else{
             for(ClientCallback callback:callbackList)
-                callback.onMakeFriend(-4);
+                callback.onMakeFriend(-3,null);
         }
+    }
+
+    private void makeFriend(String receiverID,String state){
+        userThread.sendMsg(UserInterface.MAKE_FRIEND + DIVIDER + receiverID + DIVIDER + state);
     }
 }
 

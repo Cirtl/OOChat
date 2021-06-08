@@ -1,5 +1,7 @@
 package src.Client;
 
+import java.util.List;
+
 /**
  * 客户端受到服务端信息时的回调
  * 非负数为成功返回码，负数为失败返回码，其他错误一般是指未登录、未进入房间、未登出时进行的无权限操作。
@@ -41,14 +43,14 @@ public interface ClientCallback {
 
     /**
      * 删除房间
-     * @param result 0为成功,-1为房间运行中，-2为房间不存在，-3为其他错误
+     * @param result 0为成功,-1为房间运行中，-2为房间不存在，-3为不是房主，-4为其他错误
      */
     void onDeleteRoom(int result);
 
     /**
      * 进入房间
      * @param result 0为成功，-1为失败
-     * @param roomPort 成功时返回房间号，失败返回-1表示用户已在房间内，-2表示房间不存在，-3表示其他错误
+     * @param roomPort 成功时返回房间号，失败返回:-1表示用户已在房间内，-2表示房间不存在，-3表示密码错误，-4表示其他错误
      */
     void onEnterRoom(int result,int roomPort);
 
@@ -75,13 +77,21 @@ public interface ClientCallback {
 
     /**
      * 结交好友
-     * @param result 0为成功，-1表示对方拒绝，-2表示用户不存在,-3表示用户不存在，-4其他错误
+     * @param result 0为成功，-1表示对方拒绝，-2表示用户不在线,-3其他错误
+     * @param friendID 失败返回null 成功返回ID
      */
-    void onMakeFriend(int result);
+    void onMakeFriend(int result,String friendID);
+
+    /**
+     * 收到来自f某个用户的交友邀请
+     * @param friendID 对方用户ID
+     * @return 同意或拒绝
+     */
+    boolean onAskedBeFriend(String friendID);
 
     /**
      * 关闭房间
-     * @param result 0为成功，-1表示无权限，-2其他错误
+     * @param result 0为成功，-1表示不是房主，-2其他错误
      */
     void onShutRoom(int result);
 
@@ -103,5 +113,12 @@ public interface ClientCallback {
      * @param e 异常
      */
     void onException(Exception e);
+
+    /**
+     * 用户当前房间信息
+     * @param result 结果码，成功为0，其他错误为-1
+     * @param chatters 如果用户不在房间中,返回null 否则返回当前用户列表，按顺序为每个用户的ID
+     */
+    void onGetRoomInfo(int result, List<String> chatters);
 
 }

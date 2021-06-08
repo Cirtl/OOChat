@@ -40,7 +40,6 @@ public class ClientThread {
 
     public void runThread(){
         new Thread(serverMsgInput).start();
-        System.out.println(this.socket.getLocalSocketAddress() + " run success ");
     }
 
     /**
