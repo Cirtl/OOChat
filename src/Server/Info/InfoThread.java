@@ -115,7 +115,11 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
 
     @Override
     public void getMyRooms() {
-
+        StringBuilder builder = new StringBuilder();
+        for(Integer port:rooms.keySet()){
+            builder.append(port).append(DIVIDER);
+        }
+        sendToMe(makeOrder(InfoInterface.MY_ROOMS,builder.toString()));
     }
 
     @Override
