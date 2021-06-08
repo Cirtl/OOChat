@@ -29,8 +29,9 @@ public interface ChatterInterface {
 
     /**
      * 离开当前房间
+     * @param way 离开方式,0表示自己离开，1表示被放逐，2表示房间关闭
      */
-    public void leaveRoom();
+    public void leaveRoom(int way);
 
 
     /**

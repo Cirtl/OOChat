@@ -57,7 +57,7 @@ public class RoomServer implements Runnable {
         executorService.shutdown();
         serverSocket.close();
         for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
-            stringChatThreadEntry.getValue().closeThread();
+            stringChatThreadEntry.getValue().leaveRoom(2);
         }
     }
 
