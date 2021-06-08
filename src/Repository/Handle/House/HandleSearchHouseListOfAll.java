@@ -1,4 +1,6 @@
-package Repository;
+package Repository.Handle.House;
+
+import Repository.Handle.JDBC;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +18,7 @@ public class HandleSearchHouseListOfAll {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleSearchHouseListOfAll() {
+    public HandleSearchHouseListOfAll() {
         con = new JDBC().getCon();
     }
 

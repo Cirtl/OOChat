@@ -1,6 +1,7 @@
-package Repository;
+package Repository.Handle.User;
 
-import javax.swing.*;
+import Repository.Handle.JDBC;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class HandleDeleteFriend {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleDeleteFriend() {
+    public HandleDeleteFriend() {
         con = new JDBC().getCon();
     }
 
@@ -38,7 +39,7 @@ public class HandleDeleteFriend {
             preSql.setString(2, id1);
             ok = ok + preSql.executeUpdate();
             if (ok != 0) {
-                JOptionPane.showMessageDialog(null, "已双向删除好友", "警告", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "已双向删除好友", "警告", JOptionPane.WARNING_MESSAGE);
                 con.close();
                 return true;
             }

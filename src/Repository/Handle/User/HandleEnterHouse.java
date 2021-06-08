@@ -1,6 +1,7 @@
-package Repository;
+package Repository.Handle.User;
 
-import javax.swing.*;
+import Repository.Handle.JDBC;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ public class HandleEnterHouse {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleEnterHouse() {
+    public HandleEnterHouse() {
         con = new JDBC().getCon();
     }
 
@@ -36,12 +37,12 @@ public class HandleEnterHouse {
             preSql.setString(2, pass);
             ResultSet rs = preSql.executeQuery();
             if (rs.next() == false) {
-                JOptionPane.showMessageDialog(null, "进入失败,房间号或密码错误", "警告", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "进入失败,房间号或密码错误", "警告", JOptionPane.WARNING_MESSAGE);
                 con.close();
                 return false;
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "进入失败", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "进入失败", "警告", JOptionPane.WARNING_MESSAGE);
             System.out.println("EnterHouse_select_house:" + e);
         }
 
@@ -53,13 +54,13 @@ public class HandleEnterHouse {
             int ok = preSql.executeUpdate();
             con.close();
             if (ok != 0) {
-                JOptionPane.showMessageDialog(null, "进入成功", "恭喜", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "进入成功", "恭喜", JOptionPane.WARNING_MESSAGE);
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "进入失败，增加信息失败", "警告", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "进入失败，增加信息失败", "警告", JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "进入失败", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "进入失败", "警告", JOptionPane.WARNING_MESSAGE);
             System.out.println("EnterHouse_insert_user_house:" + e);
         }
         return false;

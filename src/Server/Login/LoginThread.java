@@ -1,7 +1,7 @@
 package Server.Login;
 
-import Repository.HandleLogin;
-import Repository.HandleRegister;
+import Repository.Handle.User.HandleLogin;
+import Repository.Handle.User.HandleRegister;
 import Repository.User;
 
 import java.io.IOException;

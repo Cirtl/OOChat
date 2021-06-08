@@ -1,6 +1,7 @@
-package Repository;
+package Repository.Handle.User;
 
-import javax.swing.*;
+import Repository.Handle.JDBC;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class HandleAddFriend {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleAddFriend() {
+    public HandleAddFriend() {
         con = new JDBC().getCon();
     }
 
@@ -37,10 +38,10 @@ public class HandleAddFriend {
             int ok = preSql.executeUpdate();
             con.close();
             if (ok != 0) {
-                JOptionPane.showMessageDialog(null, "好友添加成功", "恭喜", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "好友添加成功", "恭喜", JOptionPane.WARNING_MESSAGE);
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "好友添加失败，请重试", "警告", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "好友添加失败，请重试", "警告", JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException e) {
             System.out.println("AddFriend:" + e);

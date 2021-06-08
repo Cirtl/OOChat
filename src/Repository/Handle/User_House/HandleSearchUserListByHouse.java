@@ -1,4 +1,6 @@
-package Repository;
+package Repository.Handle.User_House;
+
+import Repository.Handle.JDBC;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,36 +9,38 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 /**
- * 数据库查询所有用户
+ * 数据库查询房间内用户列表
  *
  * @author 郭英贤
  */
-public class HandleSearchUserListOfAll {
+public class HandleSearchUserListByHouse {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleSearchUserListOfAll() {
+    public HandleSearchUserListByHouse() {
         con = new JDBC().getCon();
     }
 
     /**
-     * 向数据库查询所有用户
+     * 向数据库查询房间内用户列表
      *
-     * @return 所有用户ID列表
+     * @param id 房间号
+     * @return 房间内用户ID列表
      * @see SQLException
      */
-    public Vector<String> queryVerify() {
-        String sqlStr = "select * from `user`";
+    public Vector<String> queryVerify(int id) {
+        String sqlStr = "select user_id from `user_house` where house_id=?";
         Vector<String> userList = new Vector<String>();
         try {
             preSql = con.prepareStatement(sqlStr);
+            preSql.setInt(1, id);
             ResultSet rs = preSql.executeQuery();
             while (rs.next()) {
-                userList.add(rs.getString("id"));
+                userList.add(rs.getString("user_id"));
             }
             con.close();
         } catch (SQLException e) {
-            System.out.println("SearchUserListOfAll:" + e);
+            System.out.println("SearchUserListByHouse:" + e);
         }
         return userList;
     }

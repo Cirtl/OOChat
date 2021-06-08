@@ -1,4 +1,6 @@
-package Repository;
+package Repository.Handle.User_House;
+
+import Repository.Handle.JDBC;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +17,7 @@ public class HandleSearchHouseListByUser {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleSearchHouseListByUser() {
+    public HandleSearchHouseListByUser() {
         con = new JDBC().getCon();
     }
 

@@ -1,6 +1,8 @@
-package Repository;
+package Repository.Handle.User;
 
-import javax.swing.*;
+import Repository.House;
+import Repository.Handle.JDBC;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -14,7 +16,7 @@ public class HandleCreateHouse {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleCreateHouse() {
+    public HandleCreateHouse() {
         con = new JDBC().getCon();
     }
 
@@ -37,13 +39,13 @@ public class HandleCreateHouse {
             int ok = preSql.executeUpdate();
             con.close();
             if (ok != 0) {
-                JOptionPane.showMessageDialog(null, "房间申请成功", "恭喜", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "房间申请成功", "恭喜", JOptionPane.WARNING_MESSAGE);
                 return register.getId();
             } else {
-                JOptionPane.showMessageDialog(null, "房间申请失败，请重试", "警告", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "房间申请失败，请重试", "警告", JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "房间申请失败，请重试", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "房间申请失败，请重试", "警告", JOptionPane.WARNING_MESSAGE);
             System.out.println("CreateHouse:" + e);
         }
         return -1;

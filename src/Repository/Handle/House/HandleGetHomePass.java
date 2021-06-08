@@ -1,6 +1,7 @@
-package Repository;
+package Repository.Handle.House;
 
-import javax.swing.*;
+import Repository.Handle.JDBC;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ public class HandleGetHomePass {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleGetHomePass() {
+    public HandleGetHomePass() {
         con = new JDBC().getCon();
     }
 
@@ -38,7 +39,7 @@ public class HandleGetHomePass {
                 return pass;
             } else {
                 con.close();
-                JOptionPane.showMessageDialog(null, "房间不存在或已被销毁", "警告", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "房间不存在或已被销毁", "警告", JOptionPane.WARNING_MESSAGE);
                 return "";
             }
         } catch (SQLException e) {

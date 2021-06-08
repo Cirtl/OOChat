@@ -1,4 +1,4 @@
-package Repository;
+package Repository.Handle;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * @author 郭英贤
  */
 public class JDBC {
-    // MySQL 8.0 以上版本 - Repository.JDBC 驱动名及数据库 URL
+    // MySQL 8.0 以上版本 - Repository.Handle.JDBC 驱动名及数据库 URL
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/oo?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
     private static final String USER = "root";
@@ -20,7 +20,7 @@ public class JDBC {
     /**
      * 构造
      */
-    JDBC() {
+    public JDBC() {
         try {
             Class.forName(JDBC_DRIVER);
         } catch (Exception e) {

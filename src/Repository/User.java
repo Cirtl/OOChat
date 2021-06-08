@@ -1,6 +1,13 @@
 package Repository;
 
-import javax.swing.*;
+import Repository.Handle.User_House.HandleIsUserInHouse;
+import Repository.Handle.User_House.HandleSearchHouseListByUser;
+import Repository.Handle.House.HandleGetHomePass;
+import Repository.Handle.House.HandleIsHost;
+import Repository.Handle.House.HandleIsHouse;
+import Repository.Handle.House.HandleIsLogin;
+import Repository.Handle.User.*;
+
 import java.util.Vector;
 
 /**
@@ -113,7 +120,7 @@ public class User {
      */
     private boolean judgeLogin() {
         if (!new HandleIsLogin().queryVerify(this.id)) {
-            JOptionPane.showMessageDialog(null, "请先登录", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "请先登录", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
@@ -135,7 +142,7 @@ public class User {
      */
     public boolean login() {
         if (new HandleIsLogin().queryVerify(this.id)) {
-            JOptionPane.showMessageDialog(null, "您已登录，不能重复登陆", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "您已登录，不能重复登陆", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return new HandleLogin().queryVerify(this.id, this.pass);
@@ -178,7 +185,7 @@ public class User {
             return false;
         }
         if (new HandleIsUserInHouse().queryVerify(this.id, houseId)) {
-            JOptionPane.showMessageDialog(null, "已经在房间，不能重复进入", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "已经在房间，不能重复进入", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return new HandleEnterHouse().queryVerify(this.id, houseId, pass);
@@ -194,7 +201,7 @@ public class User {
             return;
         }
         if (!new HandleIsUserInHouse().queryVerify(this.id, houseId)) {
-            JOptionPane.showMessageDialog(null, "不在房间", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "不在房间", "警告", JOptionPane.WARNING_MESSAGE);
             return;
         }
         new HandleQuitHouse().queryVerify(this.id, houseId);
@@ -212,7 +219,7 @@ public class User {
             return false;
         }
         if (newHostId.equals(this.id)) {
-            JOptionPane.showMessageDialog(null, "群主已经是本人", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "群主已经是本人", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return new HandleTransferHouse().queryVerify(houseId, this.id, newHostId);
@@ -230,7 +237,7 @@ public class User {
             return false;
         }
         if (!new HandleIsUserInHouse().queryVerify(this.id, houseId)) {
-            JOptionPane.showMessageDialog(null, "不在房间", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "不在房间", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return new HandleSendMessage().queryVerify(this.id, houseId, message);
@@ -247,15 +254,15 @@ public class User {
             return false;
         }
         if (id.equals(this.id)) {
-            JOptionPane.showMessageDialog(null, "不能和自己加好友", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "不能和自己加好友", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         if (!new HandleIsUser().queryVerify(id)) {
-            JOptionPane.showMessageDialog(null, "不存在此用户", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "不存在此用户", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         if (new HandleIsFriend().queryVerify(this.id, id)) {
-            JOptionPane.showMessageDialog(null, "你们已经是好友", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "你们已经是好友", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return new HandleAddFriend().writeRegisterModel(this.id, id);
@@ -272,15 +279,15 @@ public class User {
             return false;
         }
         if (id.equals(this.id)) {
-            JOptionPane.showMessageDialog(null, "不能和自己删好友", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "不能和自己删好友", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         if (!new HandleIsUser().queryVerify(id)) {
-            JOptionPane.showMessageDialog(null, "不存在此用户", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "不存在此用户", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         if (!new HandleIsFriend().queryVerify(this.id, id)) {
-            JOptionPane.showMessageDialog(null, "你们还不是好友", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "你们还不是好友", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return !new HandleDeleteFriend().queryVerify(this.id, id);
@@ -298,11 +305,11 @@ public class User {
             return false;
         }
         if (!new HandleIsFriend().queryVerify(id, friendId)) {
-            JOptionPane.showMessageDialog(null, "不存在该好友", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "不存在该好友", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         if (new HandleIsUserInHouse().queryVerify(friendId, houseId)) {
-            JOptionPane.showMessageDialog(null, "好友已经在房间，不能重复进入", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "好友已经在房间，不能重复进入", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return new HandleEnterHouse().queryVerify(friendId, houseId, new HandleGetHomePass().queryVerify(houseId));

@@ -1,6 +1,7 @@
-package Repository;
+package Repository.Handle.User;
 
-import javax.swing.*;
+import Repository.Handle.JDBC;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class HandleSendMessage {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleSendMessage() {
+    public HandleSendMessage() {
         con = new JDBC().getCon();
     }
 
@@ -37,13 +38,13 @@ public class HandleSendMessage {
             int ok = preSql.executeUpdate();
             con.close();
             if (ok != 0) {
-                JOptionPane.showMessageDialog(null, "发送消息成功", "恭喜", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "发送消息成功", "恭喜", JOptionPane.WARNING_MESSAGE);
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "发送消息失败", "警告", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "发送消息失败", "警告", JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "发送消息失败", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "发送消息失败", "警告", JOptionPane.WARNING_MESSAGE);
             System.out.println("SendMessage:" + e);
         }
         return false;
