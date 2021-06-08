@@ -43,6 +43,7 @@ public class LoginThread extends ServerThread implements UserInterface {
     @Override
     public void closeThread() {
         try{
+            sendToMe(makeOrder(DISCONNECT,"LOGIN"));
             isRunning = false;
             scanner.close();
             client.close();

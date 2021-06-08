@@ -19,5 +19,6 @@ public class Test {
         InfoServer infoServer = new InfoServer(port_info);
         new Thread(infoServer).start();
         new Thread(loginServer).start();
+
     }
 }

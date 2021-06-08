@@ -49,6 +49,7 @@ public class ChatThread extends ServerThread implements ChatterInterface {
     @Override
     public void closeThread() {
         try {
+            sendToMe(makeOrder(DISCONNECT,"CHAT"));
             this.isRunning = false;
             receiver.close();
             client.close();

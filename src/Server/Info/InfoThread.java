@@ -42,6 +42,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
     @Override
     public void closeThread() {
         try{
+            sendToMe(makeOrder(DISCONNECT,"INFO"));
             isRunning = false;
             scanner.close();
             client.close();
@@ -55,7 +56,6 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
     public void run() {
         //建立输入输出流
         try{
-
             if (clientMap.containsValue(this))
                 return;
             clientMap.put(client.toString(), this);
