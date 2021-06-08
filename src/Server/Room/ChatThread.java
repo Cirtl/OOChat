@@ -5,55 +5,168 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+
+import Server.ServerInterfaces.ChatterInterface;
+import Server.ServerThread;
 
 /**
  * 服务器线程处理，一个线程对应一个客户端
  */
-public class ChatThread implements Runnable {
-    private static Socket host;//管理员
-    private static final Map<String, Socket> clientMap = new ConcurrentHashMap<>();//存储所有的用户信息
-    Socket client;
-    private final String quitKey;//管理员设定关闭指令
+public class ChatThread extends ServerThread implements ChatterInterface {
 
-    public ChatThread(Socket client, String quitKey) {
-        this.client = client;
-        this.quitKey = (quitKey == null ? "QUIT" : quitKey);
+    private boolean isRunning;
+
+    private String userID;
+
+    private RoomServer roomServer;
+
+    protected Map<String, ChatThread> clientMap;
+
+    private Scanner receiver;
+
+    public ChatThread(Socket client, Map<String, ChatThread> clientMap, RoomServer roomServer) {
+        super(client);
+        this.clientMap = clientMap;
+        this.roomServer = roomServer;
+        this.isRunning = true;
     }
 
-    private void sendToAll(String user, String msg) {
-        Set<Map.Entry<String, Socket>> entrySet = clientMap.entrySet();
-        for (Map.Entry<String, Socket> entry : entrySet) {
-            Socket socket = entry.getValue();
-            try {
-                PrintStream printStream = new PrintStream(socket.getOutputStream(), true);
-                printStream.println(user + ": " + msg);
-            } catch (IOException e) {
-                e.printStackTrace();
+    public boolean sameUser(String id){
+        return id.equals(userID);
+    }
+
+    @Override
+    public void sendToMe(String msg) {
+        try {
+            PrintStream printStream = new PrintStream(client.getOutputStream());
+            printStream.println(msg);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void closeThread() {
+        try {
+            sendToMe(makeOrder(DISCONNECT,"CHAT"));
+            this.isRunning = false;
+            receiver.close();
+            client.close();
+            System.out.println(userID + "leave room");
+            clientMap.remove(userID);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+
+    }
+
+    @Override
+    public void sendToAll(String msg) {
+        for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
+            stringChatThreadEntry.getValue().sendToMe(msg);
+        }
+    }
+
+    @Override
+    public void sendToSomeOne(String toID, String msg) {
+        for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
+            if (stringChatThreadEntry.getKey().equals(toID)) {
+                stringChatThreadEntry.getValue().sendToMe(msg);
+                break;
             }
+        }
+    }
+
+    /**
+     * 初始化聊天端口并加入房间
+     *
+     * @param userID
+     */
+    private void init(String userID) {
+        this.userID = userID;
+        if (this.userID != null && !this.clientMap.containsKey(userID)) {
+            this.clientMap.put(userID, this);
+            sendMsg("我进入了聊天室，请大家欢迎我！");
+        }else{
+            sendToMe(SEND_MSG + DIVIDER + userID + "你已经在聊天室中啦");
+            leaveRoom(0);
         }
     }
 
     @Override
     public void run() {
-        try {
-            Scanner receiver = new Scanner(client.getInputStream());
-            clientMap.put("test", client);
-            while (true) {
+        while (isRunning) {
+            try{
+                this.receiver = new Scanner(client.getInputStream());
                 if (receiver.hasNext()) {
-                    String msg = receiver.nextLine();
-                    System.out.println("从" + client.getInetAddress() + "收到信息: " + msg);
-                    if (msg.equals(quitKey)) {
-                        sendToAll("test", "退出了聊天");
-                        break;
+                    String data = receiver.nextLine();
+                    System.out.println("receive from CHAT " + client + " " + data);
+                    if (data.startsWith(ChatterInterface.SEND_MSG)) {
+                        String[] info = data.split(DIVIDER, 2);
+                        if (userID==null) {
+                            //初始化
+                            if (info.length > 1)
+                                init(info[1]);
+                        }
+                        else{
+                            //群发
+                            if (info.length > 1) {
+                                sendMsg(info[1]);
+                            }
+                        }
+                    } else if (data.startsWith(WHISPER)) {
+                        //私发
+                        String[] info = data.split(DIVIDER, 3);
+                        if (info.length > 2) {
+                            whisperMsg(info[1],info[2]);
+                        }
+                    } else if (data.startsWith(LEAVE_ROOM)) {
+                        leaveRoom(0);
+                    } else if (data.startsWith(REMOVE_FROM_ROOM)) {
+                        String[] info = data.split(DIVIDER, 2);
+                        if (info.length > 1) {
+                            removeFromRoom(info[1]);
+                        }
+                    } else if(data.startsWith(DISCONNECT)){
+                        leaveRoom(0);
                     }
-                    sendToAll("test", msg);
+                }
+            }catch (IOException e){
+                System.out.println(e);
+            }
+        }
+    }
+
+    @Override
+    public void whisperMsg(String receiverID, String msg) {
+        sendToSomeOne(receiverID,ChatterInterface.WHISPER + DIVIDER + userID + DIVIDER + msg);
+    }
+
+    @Override
+    public void removeFromRoom(String receiverID) {
+        if(this.userID.equals(roomServer.host)){
+            for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
+                if (stringChatThreadEntry.getKey().equals(receiverID)) {
+                    stringChatThreadEntry.getValue().leaveRoom(1);
+                    break;
                 }
             }
-            clientMap.remove("test");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+    }
+
+    @Override
+    public String getRoomInfo() {
+        return null;
+    }
+
+    @Override
+    public void leaveRoom(int way) {
+        sendToMe(ChatterInterface.LEAVE_ROOM+DIVIDER+way);
+        closeThread();
+    }
+
+    @Override
+    public void sendMsg(String msg) {
+        sendToAll(ChatterInterface.SEND_MSG + DIVIDER + userID + DIVIDER + msg);
     }
 }

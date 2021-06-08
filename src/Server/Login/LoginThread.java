@@ -1,65 +1,143 @@
 package Server.Login;
 
-import Repository.Handle.User.HandleLogin;
-import Repository.Handle.User.HandleRegister;
-import Repository.User;
-
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
-public class LoginThread implements Runnable {
+import Repository.User;
+import Server.ServerInterfaces.UserInterface;
+import Server.ServerThread;
 
+public class LoginThread extends ServerThread implements UserInterface {
     //储存所有登录线程的用户
-    private static final List<LoginThread> loginThreadList = new ArrayList<>();
-    //用户服务器
-    Socket client;
-    //用户信息
-    User user;
-    //是否登录成功
-    Boolean isLogin;
-    Boolean isRegister;
-    //对数据的访问
-    HandleLogin handleLogin;
-    HandleRegister handleRegister;
+    private Map<String, LoginThread> clientMap;//存储所有的用户信息
 
-    LoginThread(Socket client) {
-        this.client = client;
-        isLogin = false;
-        handleLogin = new HandleLogin();
-        handleRegister = new HandleRegister();
+    //用户信息
+    private User user;
+
+    //读入器
+    private Scanner scanner;
+
+    //
+    private boolean isRunning;
+
+    LoginThread(Socket client, Map<String, LoginThread> clientMap) {
+        super(client);
+        this.clientMap = clientMap;
+        isRunning = true;
+        user = null;
+    }
+
+    @Override
+    public void sendToMe(String msg) {
+        try {
+            PrintStream printStream = new PrintStream(client.getOutputStream());
+            printStream.println(msg);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void closeThread() {
+        try{
+            sendToMe(makeOrder(DISCONNECT,"LOGIN"));
+            isRunning = false;
+            scanner.close();
+            client.close();
+            clientMap.remove(this);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void sendToSomeOne(String toID, String msg) {
+
+    }
+
+    @Override
+    public void sendToAll(String msg) {
+
     }
 
     @Override
     public void run() {
         //建立输入输出流
         try {
-            loginThreadList.add(this);
-            Scanner inputStream = new Scanner(client.getInputStream());
-            PrintStream outputStream = new PrintStream(client.getOutputStream(), true);
-            outputStream.println("进入登录注册服务器");
-            while (!isLogin) {
-                String info = inputStream.nextLine();
-                String[] strings = info.split(",");
-                outputStream.println("正在验证》》》");
-                if (strings.length == 3) {
-                    String id = strings[1], pwd = strings[2];
-                    if (strings[0].equals("Login")) {
-                        isLogin = handleLogin.queryVerify(id, pwd);
-                        outputStream.print(isLogin);
-                    } else if (strings[0].equals("Register")) {
-                        isRegister = handleRegister.writeRegisterModel(new User(id, pwd));
-                        outputStream.print(isRegister);
-                    }
+            //初始化，如果已存在则返回
+            if (clientMap.containsValue(this))
+                return;
+            clientMap.put(client.toString(), this);
+            scanner = new Scanner(client.getInputStream());
+            sendToMe("进入登录注册服务器");
+            while (isRunning) {
+                String data = "";
+                if(scanner.hasNext())
+                    data = scanner.nextLine();
+                System.out.println("receive from LOGIN " + client + " " + data);
+                if (data.startsWith(UserInterface.LOGIN)) {
+                    String[] info = data.split(DIVIDER,3);
+                    if(info.length>2)
+                        userLogin(info[1],info[2]);
+                } else if (data.startsWith(UserInterface.LOGOUT)) {
+                    userLogout();
+                } else if (data.startsWith(UserInterface.MAKE_FRIEND)) {
+                    String[] info = data.split(DIVIDER,2);
+                    if(info.length>1)
+                        makeFriend(info[1]);
+                } else if (data.startsWith(UserInterface.REGISTER)) {
+                    String[] info = data.split(DIVIDER,3);
+                    if(info.length>2)
+                        userRegister(info[1],info[2]);
+                } else if(data.startsWith(DISCONNECT)){
+                    userLogout();
+                    closeThread();
+                    break;
                 }
             }
-            client.close();
-            loginThreadList.remove(this);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void userLogout() {
+        //todo:对接数据库的操作
+        this.user = null;
+        sendToMe(UserInterface.LOGOUT + DIVIDER + SUCCESS);
+    }
+
+    @Override
+    public void userLogin(String id, String pwd) {
+        if(this.user==null){
+            //todo:对接数据库
+            user = new User(id,pwd);
+            if(true)
+                sendToMe(UserInterface.LOGIN + DIVIDER + SUCCESS + DIVIDER + id);
+        }else{
+            sendToMe(UserInterface.LOGIN + DIVIDER + FAIL + DIVIDER + id);
+        }
+    }
+
+    @Override
+    public void userRegister(String id, String pwd) {
+        //todo:对接数据库
+        if(true){
+            sendToMe(UserInterface.REGISTER + DIVIDER + SUCCESS);
+        }else{
+            sendToMe(UserInterface.REGISTER + DIVIDER + FAIL);
+        }
+
+    }
+
+    @Override
+    public void makeFriend(String receiverID) {
+        //todo:实现交友
+        if(user!=null){
+
         }
     }
 }

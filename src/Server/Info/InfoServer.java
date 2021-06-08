@@ -1,4 +1,4 @@
-package Server.Login;
+package Server.Info;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -8,10 +8,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import Server.Login.LoginThread;
 import Server.Room.ChatThread;
-import Server.ServerThread;
+import Server.Room.RoomServer;
 
-public class LoginServer implements Runnable {
+public class InfoServer implements Runnable{
 
     ServerSocket serverSocket;
 
@@ -19,14 +20,14 @@ public class LoginServer implements Runnable {
 
     Boolean isRunning = false;
 
-    protected Map<String, LoginThread> clientMap;//存储所有的用户信息
+    protected Map<String, InfoThread> clientMap;//存储所有的用户信息
 
-    public LoginServer(int port) throws IOException {
+    public InfoServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
         isRunning = true;
         clientMap = new ConcurrentHashMap<>();
         this.executorService = Executors.newFixedThreadPool(100);
-        System.out.println(serverSocket.getLocalSocketAddress() + ":登录注册服务器启动");
+        System.out.println(serverSocket.getLocalSocketAddress() + ":信息服务器启动");
     }
 
     @Override
@@ -34,9 +35,9 @@ public class LoginServer implements Runnable {
         while (isRunning) {
             try {
                 Socket client = serverSocket.accept();
-                System.out.println("新用户链接登录服务器:" + client.getInetAddress() + ",端口" + client.getPort());
+                System.out.println("新用户链接信息端口:" + client.getInetAddress() + ",端口" + client.getPort());
                 //新建服务端线程去处理客户
-                executorService.submit(new LoginThread(client,clientMap));
+                executorService.submit(new InfoThread(client,clientMap));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -44,7 +45,7 @@ public class LoginServer implements Runnable {
     }
 
     public void closeServer() throws IOException {
-        for (Map.Entry<String, LoginThread> stringChatThreadEntry : clientMap.entrySet()) {
+        for (Map.Entry<String, InfoThread> stringChatThreadEntry : clientMap.entrySet()) {
             stringChatThreadEntry.getValue().closeThread();
         }
         this.isRunning = false;
