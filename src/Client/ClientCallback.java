@@ -6,6 +6,12 @@ package src.Client;
 public interface ClientCallback {
 
     /**
+     * 断开连接
+     * @param channel 1表示和登录服务器断开，2表示和信息服务器断开，3表示和房间断开
+     */
+    void onDisconnect(int channel);
+
+    /**
      * 受到信息
      * @param senderName 发送者
      * @param msg 信息
@@ -41,9 +47,16 @@ public interface ClientCallback {
     /**
      * 进入房间
      * @param result 0为成功，-1为失败
-     * @param roomPort 成功时返回房间号，失败返回-1
+     * @param roomPort 成功时返回房间号，失败返回-1表示用户已在房间内，-2表示房间不存在
      */
     void onEnterRoom(int result,int roomPort);
+
+    /**
+     * 新开房间
+     * @param result 0为成功，-1为失败
+     * @param roomPort 成功时返回房间号，房间号非法返回-1,房间已存在返回-2，其他错误-3
+     */
+    void onNewRoom(int result,int roomPort);
 
     /**
      * 离开房间

@@ -1,4 +1,4 @@
-package src.Client.Interfaces;
+package src.Client.ClientInterfaces;
 
 public interface UserInterface {
 

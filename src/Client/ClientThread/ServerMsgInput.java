@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import src.Client.Client;
+
 /*
     处理服务端输入
  */
@@ -16,6 +18,7 @@ public class ServerMsgInput implements Runnable{
     Socket serve;
     List<ChatCallback> chatCallbackList;
     Scanner scanner;
+    String DIVIDER = Client.DIVIDER;
 
     protected ServerMsgInput(Socket serve, List<ChatCallback> list) throws IOException {
         this.serve = serve;
@@ -24,9 +27,9 @@ public class ServerMsgInput implements Runnable{
     }
 
     private void onReceiveMsg(String msg){
-        System.out.println(msg);
-        String[] tmp  = msg.split(" ");
-        String[] info = new String[tmp.length-1];
+        System.out.println('\"' + msg + "\" from | " + this);
+        String[] tmp  = msg.split(DIVIDER);
+        String[] info = new String[tmp.length];
         if (tmp.length - 1 >= 0) System.arraycopy(tmp, 1, info, 0, tmp.length - 1);
         for(ChatCallback e: chatCallbackList)
             e.onReceiveMessage(tmp[0],info);
@@ -34,7 +37,7 @@ public class ServerMsgInput implements Runnable{
 
     @Override
     public void run() {
-        while (scanner.hasNext()){
+        while (scanner.hasNextLine()){
             onReceiveMsg(scanner.nextLine());
         }
     }

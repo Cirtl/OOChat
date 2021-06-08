@@ -15,10 +15,11 @@ public class ServerMsgOutput {
 
     protected ServerMsgOutput(Socket serve) throws IOException {
         this.serve = serve;
-        printStream = new PrintStream(serve.getOutputStream());
+        printStream = new PrintStream(serve.getOutputStream(),true);
     }
 
     protected void write(String str){
+        System.out.println("ready to print: " + str);
         printStream.println(str);
     }
 

@@ -1,4 +1,4 @@
-package src.Client.Interfaces;
+package src.Client.ClientInterfaces;
 
 public interface InfoInterface {
     public static String DELETE_ROOM = "deleteRoom";
@@ -24,14 +24,14 @@ public interface InfoInterface {
      * @param roomPort 房间号
      * @param pwd 房间密码
      */
-    public void newRoom(int roomPort,int pwd);
+    public void newRoom(int roomPort,String pwd);
 
     /**
      * 向服务端请求进入某个房间
      * @param roomPort 房间号
      * @param pwd 房间密码
      */
-    public void enterRoom(int roomPort,int pwd);
+    public void enterRoom(int roomPort,String pwd);
 
     /**
      * 邀请好友加入房间
