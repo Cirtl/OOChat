@@ -60,26 +60,18 @@ public class ChatThread extends ServerThread implements ChatterInterface {
 
     }
 
-    /**
-     * 向所有人发送消息，通过调用sendToMe实现
-     *
-     * @param msg 消息
-     */
-    private void sendToAll(String msg) {
+    @Override
+    public void sendToAll(String msg) {
         for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
             stringChatThreadEntry.getValue().sendToMe(msg);
         }
     }
 
-    /**
-     * 向所有人发送消息，通过调用sendToMe实现
-     *
-     * @param msg 消息
-     */
-    private void sendTSomeOne(String toID, String msg) {
+    @Override
+    public void sendToSomeOne(String toID, String msg) {
         for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
             if (stringChatThreadEntry.getKey().equals(toID)) {
-                stringChatThreadEntry.getValue().sendToMe(WHISPER + DIVIDER + userID + DIVIDER + msg);
+                stringChatThreadEntry.getValue().sendToMe(msg);
                 break;
             }
         }
@@ -97,6 +89,7 @@ public class ChatThread extends ServerThread implements ChatterInterface {
             sendMsg("我进入了聊天室，请大家欢迎我！");
         }else{
             sendToMe(SEND_MSG + DIVIDER + userID + "你已经在聊天室中啦");
+            leaveRoom(0);
         }
     }
 
@@ -146,7 +139,7 @@ public class ChatThread extends ServerThread implements ChatterInterface {
 
     @Override
     public void whisperMsg(String receiverID, String msg) {
-        sendTSomeOne(receiverID,ChatterInterface.WHISPER + DIVIDER + userID + DIVIDER + msg);
+        sendToSomeOne(receiverID,ChatterInterface.WHISPER + DIVIDER + userID + DIVIDER + msg);
     }
 
     @Override

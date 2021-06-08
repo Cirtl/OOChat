@@ -54,6 +54,16 @@ public class LoginThread extends ServerThread implements UserInterface {
     }
 
     @Override
+    public void sendToSomeOne(String toID, String msg) {
+
+    }
+
+    @Override
+    public void sendToAll(String msg) {
+
+    }
+
+    @Override
     public void run() {
         //建立输入输出流
         try {

@@ -51,6 +51,16 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
     }
 
     @Override
+    public void sendToSomeOne(String toID, String msg) {
+
+    }
+
+    @Override
+    public void sendToAll(String msg) {
+
+    }
+
+    @Override
     public void run() {
         //建立输入输出流
         try{
@@ -93,6 +103,16 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
                 }else if(data.startsWith(InfoInterface.DELETE_ROOM)){
 
                 }else if(data.startsWith(InfoInterface.INVITE_FRIEND)){
+                    String[] info = data.split(DIVIDER,4);
+                    if(info.length>3){
+                        int port;
+                        try {
+                            port = Integer.parseInt(info[2]);
+                        }catch (Exception e){
+                            port = -1;
+                        }
+                        inviteFriend(info[1],port,info[3]);
+                    }
 
                 }else if(data.startsWith(InfoInterface.SHUT_ROOM)){
                     String[] info = data.split(DIVIDER,3);
@@ -171,7 +191,11 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
 
     @Override
     public void inviteFriend(String userID, int roomPort, String friendID) {
+        if(rooms.containsKey(roomPort)){
 
+        }else{
+            sendToMe(makeOrder(INVITE_FRIEND,FAIL,String.valueOf(-3)));
+        }
     }
 
     @Override
@@ -180,6 +204,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
             RoomServer roomServer = rooms.get(roomPort);
             try {
                 roomServer.closeServer();
+                rooms.remove(roomPort);
             } catch (IOException e) {
                 e.printStackTrace();
                 sendToMe(makeOrder(InfoInterface.SHUT_ROOM,FAIL));

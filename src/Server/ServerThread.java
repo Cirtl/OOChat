@@ -22,7 +22,7 @@ public abstract class ServerThread implements Runnable {
     }
 
     /**
-     * 向用户发送消息
+     * 向自己发送消息
      * @param msg 消息
      */
     public abstract void sendToMe(String msg);
@@ -32,6 +32,11 @@ public abstract class ServerThread implements Runnable {
      */
     public abstract void closeThread();
 
+    /**
+     * 产生符合格式的指令
+     * @param strings 需要合并的指令
+     * @return 添加了DIVIDER的字符串
+     */
     public String makeOrder(String...strings){
         StringBuilder builder = new StringBuilder();
         for(String s:strings){
@@ -39,6 +44,17 @@ public abstract class ServerThread implements Runnable {
         }
         return builder.toString();
     }
+    /**
+     * 向所有人发送消息，通过调用sendToMe实现
+     * @param toID 对方ID
+     * @param msg 消息
+     */
+    public abstract void sendToSomeOne(String toID, String msg);
 
+    /**
+     * 向所有人发送消息，通过调用sendToMe实现
+     * @param msg 消息
+     */
+    public abstract void sendToAll(String msg);
 
 }
