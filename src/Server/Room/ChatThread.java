@@ -139,7 +139,7 @@ public class ChatThread extends ServerThread implements ChatterInterface {
 
     @Override
     public void removeFromRoom(String receiverID) {
-        if(this.client.equals(roomServer.host)){
+        if(this.userID.equals(roomServer.host)){
             for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
                 if (stringChatThreadEntry.getKey().equals(receiverID)) {
                     stringChatThreadEntry.getValue().leaveRoom(1);

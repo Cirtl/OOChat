@@ -23,6 +23,9 @@ public abstract class ServerThread implements Runnable {
 
     public static final String DISCONNECT = "QUIT";
 
+    public static final String FAIL = "FAIL";
+
+    public static final String SUCCESS = "SUCCESS";
 
     public ServerThread(Socket client){
         this.client = client;
@@ -38,5 +41,13 @@ public abstract class ServerThread implements Runnable {
      * 关闭连接
      */
     public abstract void closeThread();
+
+    public String makeOrder(String...strings){
+        StringBuilder builder = new StringBuilder();
+        for(String s:strings){
+            builder.append(s).append(DIVIDER);
+        }
+        return builder.toString();
+    }
 
 }

@@ -16,10 +16,8 @@ public class Test {
     public static void main(String[] args) throws IOException {
         /** 运行服务器 **/
         LoginServer loginServer = new LoginServer(port_login);
-        RoomServer roomServer = new RoomServer(maxNum,port_chat);
         InfoServer infoServer = new InfoServer(port_info);
         new Thread(infoServer).start();
         new Thread(loginServer).start();
-        new Thread(roomServer).start();
     }
 }

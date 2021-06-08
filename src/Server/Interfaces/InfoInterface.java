@@ -12,7 +12,7 @@ public interface InfoInterface {
      * 删除房间
      * @param port 房间号
      */
-    public void deleteRoom(int port);
+    public void deleteRoom(String userID,int port);
 
     /**
      * 获取我的房间列表
@@ -24,23 +24,23 @@ public interface InfoInterface {
      * @param roomPort 房间号
      * @param pwd 房间密码
      */
-    public void newRoom(int roomPort,int pwd);
+    public void newRoom(String userID,int roomPort,String pwd);
 
     /**
      * 向服务端请求进入某个房间
      * @param roomPort 房间号
      * @param pwd 房间密码
      */
-    public void enterRoom(int roomPort,int pwd);
+    public void enterRoom(String userID,int roomPort,String pwd);
 
     /**
      * 邀请好友加入房间
      * @param friendID 友人ID
      */
-    public void inviteFriend(String friendID);
+    public void inviteFriend(String userID,int roomPort,String friendID);
 
     /**
      * 关闭房间
      */
-    public void shutRoom(int roomPort);
+    public void shutRoom(String userID,int roomPort);
 }
