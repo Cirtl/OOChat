@@ -32,6 +32,7 @@ public class RoomServer implements Runnable {
         this.host = host;
         this.executorService = Executors.newFixedThreadPool(100);
         this.clientMap = new ConcurrentHashMap<>();
+        this.isRunning = true;
         serverSocket = new ServerSocket(portNum);
         System.out.println(serverSocket.getLocalSocketAddress() + " 聊天服务器建立完毕，房间号：" + portNum );
     }
@@ -54,7 +55,7 @@ public class RoomServer implements Runnable {
                 executorService.submit(new ChatThread(client,clientMap,this));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 

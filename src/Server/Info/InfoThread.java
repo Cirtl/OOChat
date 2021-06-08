@@ -61,7 +61,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
             sendToMe("进入信息服务器");
             while(isRunning){
                 String data="";
-                if(scanner.hasNextLine())
+                if(scanner.hasNext())
                     data = scanner.nextLine();
                 System.out.println("receive from INFO " + client + " " + data);
                 if(data.startsWith(InfoInterface.NEW_ROOM)){
@@ -123,10 +123,14 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
     @Override
     public void getMyRooms() {
         StringBuilder builder = new StringBuilder();
-        for(Integer port:rooms.keySet()){
-            builder.append(port).append(DIVIDER);
+        if(rooms.keySet().isEmpty()){
+            sendToMe(makeOrder(InfoInterface.MY_ROOMS,"empty"));
+        }else{
+            for(Integer port:rooms.keySet()){
+                builder.append(port).append(DIVIDER);
+            }
+            sendToMe(makeOrder(InfoInterface.MY_ROOMS,builder.toString()));
         }
-        sendToMe(makeOrder(InfoInterface.MY_ROOMS,builder.toString()));
     }
 
     @Override
@@ -174,13 +178,13 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
     public void shutRoom(String userID, int roomPort) {
         if(rooms.containsKey(roomPort)){
             RoomServer roomServer = rooms.get(roomPort);
-            try{
+            try {
                 roomServer.closeServer();
-                sendToMe(makeOrder(InfoInterface.SHUT_ROOM,SUCCESS));
-                System.out.println(rooms.keySet());
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
+                sendToMe(makeOrder(InfoInterface.SHUT_ROOM,FAIL));
             }
+            sendToMe(makeOrder(InfoInterface.SHUT_ROOM,SUCCESS));
         }else{
             sendToMe(makeOrder(InfoInterface.SHUT_ROOM,FAIL));
         }
