@@ -50,7 +50,7 @@ public class RoomServer implements Runnable {
             System.out.println(serverSocket.getLocalSocketAddress() + " 聊天服务器建立完毕，房间号：" + portNum );
             while(isRunning) {
                 Socket client = serverSocket.accept();
-                System.out.println("新用户链接:" + client.getInetAddress() + ",端口" + client.getPort());
+                System.out.println("新用户链接房间:" + client.getInetAddress() + ",端口" + client.getPort());
                 //新建服务端线程去处理客户
                 executorService.submit(new ChatThread(client,clientMap,this));
             }

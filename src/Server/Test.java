@@ -13,12 +13,11 @@ public class Test {
     static int maxNum = 10;
     static String host = "127.0.0.1";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         /** 运行服务器 **/
         LoginServer loginServer = new LoginServer(port_login);
         InfoServer infoServer = new InfoServer(port_info);
         new Thread(infoServer).start();
         new Thread(loginServer).start();
-
     }
 }

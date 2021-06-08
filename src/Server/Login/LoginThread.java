@@ -61,13 +61,13 @@ public class LoginThread extends ServerThread implements UserInterface {
             if (clientMap.containsValue(this))
                 return;
             clientMap.put(client.toString(), this);
-            System.out.println(client.toString());
             scanner = new Scanner(client.getInputStream());
             sendToMe("进入登录注册服务器");
             while (isRunning) {
                 String data = "";
                 if(scanner.hasNext())
                     data = scanner.nextLine();
+                System.out.println("receive from LOGIN " + client + " " + data);
                 if (data.startsWith(UserInterface.LOGIN)) {
                     String[] info = data.split(DIVIDER,3);
                     if(info.length>2)

@@ -5,6 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import Server.Room.ChatThread;
 import Server.ServerThread;
@@ -12,6 +14,8 @@ import Server.ServerThread;
 public class LoginServer implements Runnable {
 
     ServerSocket serverSocket;
+
+    protected final ExecutorService executorService;
 
     Boolean isRunning = false;
 
@@ -21,6 +25,7 @@ public class LoginServer implements Runnable {
         serverSocket = new ServerSocket(port);
         isRunning = true;
         clientMap = new ConcurrentHashMap<>();
+        this.executorService = Executors.newFixedThreadPool(100);
         System.out.println(serverSocket.getLocalSocketAddress() + ":登录注册服务器启动");
     }
 
@@ -29,7 +34,9 @@ public class LoginServer implements Runnable {
         while (isRunning) {
             try {
                 Socket client = serverSocket.accept();
-                new Thread(new LoginThread(client,clientMap)).start();
+                System.out.println("新用户链接登录服务器:" + client.getInetAddress() + ",端口" + client.getPort());
+                //新建服务端线程去处理客户
+                executorService.submit(new LoginThread(client,clientMap));
             } catch (IOException e) {
                 e.printStackTrace();
             }
