@@ -21,7 +21,7 @@ public abstract class ServerThread implements Runnable {
 
     public static final String DIVIDER = " ";
 
-    public static final String disconnect = "QUIT";
+    public static final String DISCONNECT = "QUIT";
 
 
     public ServerThread(Socket client){
