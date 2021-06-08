@@ -41,7 +41,7 @@ public class RoomThread extends ServerThread implements ChatterInterface {
             PrintStream printStream = new PrintStream(client.getOutputStream());
             printStream.println(msg);
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e + "   when room send to me");
         }
     }
 
@@ -55,7 +55,7 @@ public class RoomThread extends ServerThread implements ChatterInterface {
             System.out.println(userID + " leave room " + client.getPort());
             clientMap.remove(userID);
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("in close chat" + "  "+e);
         }
 
     }
@@ -98,7 +98,6 @@ public class RoomThread extends ServerThread implements ChatterInterface {
         try {
             this.receiver = new Scanner(client.getInputStream());
             while (isRunning) {
-                System.out.println("ready read CHAT ");
                 String data = "";
                 if (receiver.hasNext())
                     data = receiver.nextLine();
@@ -140,7 +139,7 @@ public class RoomThread extends ServerThread implements ChatterInterface {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e + "in room running");
         }
     }
 

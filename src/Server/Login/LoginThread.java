@@ -7,10 +7,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 import Repository.User;
+import Server.Info.InfoThread;
 import Server.ServerInterfaces.UserInterface;
 import Server.ServerThread;
 
 public class LoginThread extends ServerThread implements UserInterface {
+
     //储存所有登录线程的用户
     private Map<String, LoginThread> clientMap;//存储所有的用户信息
 
@@ -36,7 +38,7 @@ public class LoginThread extends ServerThread implements UserInterface {
             PrintStream printStream = new PrintStream(client.getOutputStream());
             printStream.println(msg);
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e + "  when send to me");
         }
     }
 
@@ -49,13 +51,18 @@ public class LoginThread extends ServerThread implements UserInterface {
             client.close();
             clientMap.remove(this);
         }catch (IOException e) {
-            System.out.println(e);
+            System.out.println("in close login" + "  "+e);
         }
     }
 
     @Override
     public void sendToSomeOne(String toID, String msg) {
-
+        for (Map.Entry<String, LoginThread> stringChatThreadEntry : clientMap.entrySet()) {
+            if (stringChatThreadEntry.getKey().equals(toID)) {
+                stringChatThreadEntry.getValue().sendToMe(msg);
+                break;
+            }
+        }
     }
 
     @Override
@@ -82,7 +89,7 @@ public class LoginThread extends ServerThread implements UserInterface {
                     closeThread();
                     break;
                 }
-                System.out.println("receive from LOGIN " + client + " " + data);
+                System.out.println("receive from LOGIN " + client +  " " + data);
                 System.out.println(client.isOutputShutdown());
                 if (data.startsWith(UserInterface.LOGIN)) {
                     String[] info = data.split(DIVIDER,3);
@@ -91,9 +98,9 @@ public class LoginThread extends ServerThread implements UserInterface {
                 } else if (data.startsWith(UserInterface.LOGOUT)) {
                     userLogout();
                 } else if (data.startsWith(UserInterface.MAKE_FRIEND)) {
-                    String[] info = data.split(DIVIDER,2);
+                    String[] info = data.split(DIVIDER,3);
                     if(info.length>1)
-                        makeFriend(info[1]);
+                        makeFriend(info[1],info[2]);
                 } else if (data.startsWith(UserInterface.REGISTER)) {
                     String[] info = data.split(DIVIDER,3);
                     if(info.length>2)
@@ -105,14 +112,15 @@ public class LoginThread extends ServerThread implements UserInterface {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e + "  " + " in login running");
         }
     }
 
     @Override
     public void userLogout() {
         //todo:对接数据库的操作
-        this.user = null;
+        clientMap.remove(user.getId());
+        user = null;
         sendToMe(UserInterface.LOGOUT + DIVIDER + SUCCESS);
     }
 
@@ -121,10 +129,12 @@ public class LoginThread extends ServerThread implements UserInterface {
         if(this.user==null){
             //todo:对接数据库
             user = new User(id,pwd);
-            if(true)
+            if(true){
+                clientMap.put(id,this);
                 sendToMe(UserInterface.LOGIN + DIVIDER + SUCCESS + DIVIDER + id);
+            }
         }else{
-            sendToMe(UserInterface.LOGIN + DIVIDER + FAIL + DIVIDER + id);
+            sendToMe(UserInterface.LOGIN + DIVIDER + FAIL + DIVIDER + -1);
         }
     }
 
@@ -140,10 +150,28 @@ public class LoginThread extends ServerThread implements UserInterface {
     }
 
     @Override
-    public void makeFriend(String receiverID) {
+    public void makeFriend(String toID,String state) {
         //todo:实现交友
         if(user!=null){
-
+            if(state.equals(SUCCESS)){
+                //由接受邀请方发来，交友成功
+                sendToSomeOne(toID,makeOrder(MAKE_FRIEND,SUCCESS,String.valueOf(0),user.getId()));
+                sendToMe(makeOrder(MAKE_FRIEND,SUCCESS,String.valueOf(0),toID));
+            }else if(state.equals(FAIL)){
+                //由接受邀请方发来，交友拒绝
+                sendToSomeOne(toID,makeOrder(MAKE_FRIEND,FAIL,String.valueOf(-1),user.getId()));
+            }else if(state.equals(UNCONFIRMED)){
+                //由发送邀请方发来，请求未决
+                System.out.println(clientMap.keySet());
+                if(clientMap.containsKey(toID)){
+                    sendToSomeOne(toID,makeOrder(MAKE_FRIEND,UNCONFIRMED,user.getId()));
+                }else{
+                    //用户不在线
+                    sendToMe(makeOrder(MAKE_FRIEND,FAIL,String.valueOf(-2),toID));
+                }
+            }
+        }else{
+            sendToMe(makeOrder(MAKE_FRIEND,FAIL,String.valueOf(-3),toID));
         }
     }
 }

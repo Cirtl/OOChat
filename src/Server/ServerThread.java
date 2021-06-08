@@ -17,6 +17,8 @@ public abstract class ServerThread implements Runnable {
 
     public static final String SUCCESS = "SUCCESS";
 
+    public static final String UNCONFIRMED = "UNCONFIRMED";
+
     public ServerThread(Socket client){
         this.client = client;
     }

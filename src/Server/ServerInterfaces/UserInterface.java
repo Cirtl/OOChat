@@ -29,8 +29,9 @@ public interface UserInterface {
 
     /**
      * 交友请求
-     * @param receiverID 接受者id
+     * @param toID 接受者ID
+     * @param state 请求状态，包括SUCCESS FAIL UNCONFIRMED 三种，根据不同的请求状态返回不同的值
      */
-    public void makeFriend(String receiverID);
+    public void makeFriend(String toID,String state);
 
 }

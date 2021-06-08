@@ -33,7 +33,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
             PrintStream printStream = new PrintStream(client.getOutputStream());
             printStream.println(msg);
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e + "   when info send to me");
         }
     }
 
@@ -46,7 +46,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
             client.close();
             clientMap.remove(this);
         }catch (IOException e) {
-            System.out.println(e);
+            System.out.println("in close info" + "  "+e);
         }
     }
 
@@ -111,7 +111,16 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
                 }else if(data.startsWith(InfoInterface.MY_ROOMS)){
                     getMyRooms();
                 }else if(data.startsWith(InfoInterface.DELETE_ROOM)){
-
+                    String[] info = data.split(DIVIDER,3);
+                    if(info.length>2){
+                        int port;
+                        try {
+                            port = Integer.parseInt(info[2]);
+                        }catch (Exception e){
+                            port = -1;
+                        }
+                        deleteRoom(info[1],port);
+                    }
                 }else if(data.startsWith(InfoInterface.INVITE_FRIEND)){
                     String[] info = data.split(DIVIDER,4);
                     if(info.length>3){
@@ -141,13 +150,26 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
                 }
             }
         }catch (IOException e){
-            e.printStackTrace();
+            System.out.println(e + "  " + "in info running");
         }
     }
 
     @Override
     public void deleteRoom(String userID, int port) {
-
+        //需要数据库访问
+        if(rooms.containsKey(port)){
+            //房间运行中 无法删除
+            sendToMe(makeOrder(DELETE_ROOM,FAIL,String.valueOf(-1)));
+        }else{
+            //todo:对数据库操作,并发送返回
+            if(true){
+                //删除成功
+                sendToMe(makeOrder(DELETE_ROOM,SUCCESS,String.valueOf(0)));
+            }else{
+                //房间不存在-2 不是房主-3
+                sendToMe(makeOrder(DELETE_ROOM,FAIL,String.valueOf(-2)));
+            }
+        }
     }
 
     @Override
@@ -173,7 +195,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
             sendToMe(makeOrder(InfoInterface.NEW_ROOM,FAIL, String.valueOf(-2)));
         }else{
             try{
-                RoomServer roomServer = new RoomServer(roomPort,userID);
+                RoomServer roomServer = new RoomServer(roomPort,userID,pwd);
                 rooms.put(roomPort,roomServer);
                 new Thread(roomServer).start();
                 sendToMe(makeOrder(InfoInterface.NEW_ROOM,SUCCESS, String.valueOf(roomPort)));
@@ -192,6 +214,8 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
             RoomServer roomServer = rooms.get(roomPort);
             if(roomServer.inRoom(userID))
                 sendToMe(makeOrder(InfoInterface.ENTER_ROOM,FAIL, String.valueOf(-1)));
+            else if(!roomServer.checkPassword(pwd))
+                sendToMe(makeOrder(ENTER_ROOM,FAIL,String.valueOf(-3)));
             else
                 sendToMe(makeOrder(InfoInterface.ENTER_ROOM,SUCCESS, String.valueOf(roomPort)));
         }
@@ -222,7 +246,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
                 roomServer.closeServer();
                 rooms.remove(roomPort);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println(e + "in shut room");
                 sendToMe(makeOrder(InfoInterface.SHUT_ROOM,FAIL,String.valueOf(-1)));
             }
             sendToMe(makeOrder(InfoInterface.SHUT_ROOM,SUCCESS,String.valueOf(0)));

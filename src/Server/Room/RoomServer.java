@@ -23,11 +23,14 @@ public class RoomServer implements Runnable {
 
     protected String host;//管理员
 
+    protected String passWord;
+
     protected ServerSocket serverSocket;
 
-    public RoomServer(int portNum, String host) throws IOException {
+    public RoomServer(int portNum, String host ,String pwd) throws IOException {
         this.portNum = portNum;
         this.host = host;
+        this.passWord = pwd;
         this.executorService = Executors.newFixedThreadPool(100);
         this.clientMap = new ConcurrentHashMap<>();
         this.isRunning = true;
@@ -43,6 +46,10 @@ public class RoomServer implements Runnable {
         return false;
     }
 
+    public boolean checkPassword(String pwd){
+        return pwd.equals(passWord);
+    }
+
     @Override
     public void run() {
         try {
@@ -53,7 +60,7 @@ public class RoomServer implements Runnable {
                 executorService.submit(new RoomThread(client,clientMap,this));
             }
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e + "  when roomServer");
         }
     }
 

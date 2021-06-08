@@ -18,6 +18,17 @@ public class Test {
         InfoServer infoServer = new InfoServer(port_info);
         new Thread(infoServer).start();
         new Thread(loginServer).start();
+
+        while(true){
+            int nbRunning = 0;
+            for (Thread t : Thread.getAllStackTraces().keySet()) {
+                if (t.getState()==Thread.State.RUNNABLE)
+                    nbRunning++;
+            }
+            System.out.println("当前运行线程" + nbRunning);
+            Thread.sleep(5000);
+        }
+
     }
 
 }
