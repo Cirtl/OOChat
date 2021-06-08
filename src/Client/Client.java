@@ -246,6 +246,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
 
     @Override
     public void getMyRooms() {
+        System.out.println(isLogin);
         if (isLogin)
             infoThread.sendMsg(InfoInterface.MY_ROOMS);
     }

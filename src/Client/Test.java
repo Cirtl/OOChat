@@ -73,33 +73,16 @@ public class Test {
 
             }
         });
-        Thread.sleep(3);
-        client.userLogin("213","213");
-        Thread.sleep(3);
-        client.userRegister("213","213");
-        Thread.sleep(3);
         client.getMyRooms();
-        Thread.sleep(3);
-        client.userLogout();
-        Thread.sleep(3);
-        client.getMyRooms();
-        Thread.sleep(3);
+        Thread.sleep(30);
         client.userLogin("test","test");
-        Thread.sleep(3);
+        Thread.sleep(30);
         client.newRoom(8003,"new room");
-        Thread.sleep(3);
-        client.enterRoom(-1,"we");
-        Thread.sleep(3);
-        client.enterRoom(100000,"we");
-        Thread.sleep(3);
-        client.enterRoom(8003,"new room");
-        Thread.sleep(3);
+        Thread.sleep(30);
         client.shutRoom(8003);
-        Thread.sleep(3);
-        client.deleteRoom(8003);
-        Thread.sleep(3);
-        client.inviteFriend("wqe");
-        Thread.sleep(3);
+        Thread.sleep(300);
+        client.getMyRooms();
+        Thread.sleep(10000);
         client.closeClient();
     }
 }
