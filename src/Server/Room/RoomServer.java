@@ -1,8 +1,12 @@
 package Server.Room;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -10,33 +14,50 @@ import java.util.concurrent.Executors;
  * 房间服务器 保持运行
  */
 public class RoomServer implements Runnable {
-    private final ExecutorService executorService;
-    private ServerSocket serverSocket;
-    private final int maxNum;
-    private final int portNum;
 
-    public RoomServer(int maxNum, int portNum) {
-        this.maxNum = maxNum;
+    protected final ExecutorService executorService;
+
+    protected final int portNum;
+
+    protected boolean isRunning;
+
+    protected Map<String, ChatThread> clientMap;//存储所有的用户信息
+
+    protected Socket host;//管理员
+
+    protected RoomServer(int portNum,Socket host) throws IOException {
         this.portNum = portNum;
-        this.executorService = Executors.newFixedThreadPool(maxNum);//加入线程池
+        this.host = host;
+        this.executorService = Executors.newFixedThreadPool(100);
+        this.clientMap = new ConcurrentHashMap<>();
     }
 
     @Override
     public void run() {
         try {
-            serverSocket = new ServerSocket(portNum);//根据端口号新建房间
-            System.out.println(serverSocket.getLocalSocketAddress() + ":聊天服务器建立完毕");
-            for (int i = 0; i < maxNum; i++) {
+            //根据端口号新建房间
+            ServerSocket serverSocket = new ServerSocket(portNum);
+            System.out.println(serverSocket.getLocalSocketAddress() + " 聊天服务器建立完毕，房间号：" + portNum );
+            while(isRunning) {
                 Socket client = serverSocket.accept();
                 System.out.println("新用户链接:" + client.getInetAddress() + ",端口" + client.getPort());
-                executorService.execute(new ChatThread(client));//新建服务端线程去处理客户
+                //新建服务端线程去处理客户
+                executorService.submit(new ChatThread(client,clientMap,this));
             }
-            System.out.println("full");
-            executorService.shutdown();//不再接受新的客户
-            //TODO:旧用户退出后 新用户可以加入
+            System.out.println(portNum+"聊天室关闭");
+            //不再接受新的客户
+            executorService.shutdown();
             serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    protected void closeServer(){
+        isRunning = false;
+        for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
+            stringChatThreadEntry.getValue().closeThread();
+        }
+    }
+
 }

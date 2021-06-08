@@ -25,14 +25,19 @@ public class LoginThread  extends ServerThread implements UserInterface {
     private static final String QUIT = "quit";
     private static final String LOGOUT = "logout";
     private static final String DIVIDER = " ";
+
     //储存所有登录线程的用户
     private static List<LoginThread> loginThreadList = new ArrayList<>();
+
     //用户服务器
     Socket client;
+
     //用户信息
     User user;
+
     //是否登录成功
     Boolean isLogin;
+
     //对数据的访问
     HandleLogin handleLogin;
     HandleRegister handleRegister;
@@ -42,6 +47,11 @@ public class LoginThread  extends ServerThread implements UserInterface {
         isLogin = false;
         handleLogin = new HandleLogin();
         handleRegister = new HandleRegister();
+    }
+
+    @Override
+    public void closeThread() {
+
     }
 
     private boolean login(String id,String pwd){
@@ -56,9 +66,6 @@ public class LoginThread  extends ServerThread implements UserInterface {
 
     }
 
-    private void closeThread(){
-
-    }
 
     @Override
     public void run() {
