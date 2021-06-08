@@ -6,6 +6,7 @@ public interface InfoInterface {
     public static String NEW_ROOM = "newRoom";
     public static String ENTER_ROOM = "enterRoom";
     public static String INVITE_FRIEND = "inviteFriend";
+    public static String BE_INVITED = "beInvited";
     public static String SHUT_ROOM = "shutRoom";
 
     /**

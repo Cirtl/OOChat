@@ -85,8 +85,22 @@ public interface ClientCallback {
     void onShutRoom(int result);
 
     /**
+     * 被邀请加入房间
+     * @param invitorID 邀请人ID
+     * @param roomPort 房间ID
+     */
+    void onBeingInvited(String invitorID, int roomPort);
+
+    /**
+     * 邀请别人的结果
+     * @param result 0成功发送邀请，-1房间不存在，-2用户不存在
+     */
+    void onInviteFriend(int result);
+
+    /**
      * 产生异常
      * @param e 异常
      */
     void onException(Exception e);
+
 }

@@ -20,7 +20,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public static final String FAIL = "FAIL";
     public static final String SUCCESS = "SUCCESS";
     public static final String DIVIDER = " ";
-    private static final String host = "0.0.0.0";
+    private static final String host = "192.168.43.119";
     private static final int port_user = 8000;
     private static final int port_info = 8001;
     private ClientThread chatThread;
@@ -255,9 +255,23 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                 } else if (option.startsWith(InfoInterface.DELETE_ROOM)) {
 
                 } else if (option.startsWith(InfoInterface.SHUT_ROOM)) {
-
-                } else if (option.startsWith(InfoInterface.INVITE_FRIEND)) {
-
+                    int result = Integer.parseInt(info[1]);
+                    if(info[0].equals(SUCCESS)){
+                        for (ClientCallback callback : callbackList)
+                            callback.onShutRoom(result);
+                    }else{
+                        for (ClientCallback callback : callbackList)
+                            callback.onShutRoom(result);
+                    }
+                } else if (option.startsWith(BE_INVITED)) {
+                    String invitor = info[0];
+                    int roomPort = Integer.parseInt(info[1]);
+                    for (ClientCallback callback : callbackList)
+                        callback.onBeingInvited(invitor,roomPort);
+                } else if(option.startsWith(INVITE_FRIEND)){
+                    int result = Integer.parseInt(info[0]);
+                    for (ClientCallback callback : callbackList)
+                        callback.onShutRoom(result);
                 }
             }
 
@@ -341,6 +355,9 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
         if (isLogin && inRoom) {
             String builder = InfoInterface.INVITE_FRIEND + DIVIDER + id  + DIVIDER + roomPort + DIVIDER + friendID;
             infoThread.sendMsg(builder);
+        }else{
+            for(ClientCallback callback:callbackList)
+                callback.onInviteFriend(-1);
         }
     }
 

@@ -1,6 +1,7 @@
 package src.Client;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Test {
 
@@ -71,34 +72,32 @@ public class Test {
             }
 
             @Override
+            public void onBeingInvited(String invitorID, int roomPort) {
+
+            }
+
+            @Override
+            public void onInviteFriend(int result) {
+
+            }
+
+            @Override
             public void onException(Exception e) {
 
             }
         });
-        client.getMyRooms();
-        Thread.sleep(30);
-        client.userLogin("test","test");
-        Thread.sleep(30);
-        client.newRoom(8003,"new room");
+        client.userLogin("杨东浩","test1");
         Thread.sleep(300);
-        client.newRoom(8003,"new room");
+        client.newRoom(8003,"123");
         Thread.sleep(300);
-        client.newRoom(8004,"new room");
+        client.enterRoom(8003,"123");
         Thread.sleep(300);
-        client.getMyRooms();
-        Thread.sleep(300);
-        client.shutRoom(8004);
-        Thread.sleep(300);
-        client.getMyRooms();
-        Thread.sleep(300);
-        client.enterRoom(8003,"8003");
-        Thread.sleep(300);
-        client.sendMsg("12 34 56");
-        Thread.sleep(300);
-        client.whisperMsg("test","12 34 56");
-        Thread.sleep(300);
-        client.getMyRooms();
-        Thread.sleep(15000);
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            String s = scanner.nextLine();
+            if(s.equals("QUIT")) break;
+            client.sendMsg(s);
+        }
         client.closeClient();
     }
 }
