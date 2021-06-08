@@ -36,7 +36,7 @@ public class LoginThread extends ServerThread implements UserInterface {
             PrintStream printStream = new PrintStream(client.getOutputStream());
             printStream.println(msg);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -49,7 +49,7 @@ public class LoginThread extends ServerThread implements UserInterface {
             client.close();
             clientMap.remove(this);
         }catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -77,7 +77,13 @@ public class LoginThread extends ServerThread implements UserInterface {
                 String data = "";
                 if(scanner.hasNext())
                     data = scanner.nextLine();
+                if(data.isEmpty()){
+                    System.out.println("login break down ");
+                    closeThread();
+                    break;
+                }
                 System.out.println("receive from LOGIN " + client + " " + data);
+                System.out.println(client.isOutputShutdown());
                 if (data.startsWith(UserInterface.LOGIN)) {
                     String[] info = data.split(DIVIDER,3);
                     if(info.length>2)

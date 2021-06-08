@@ -1,11 +1,9 @@
 package Server.Room;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,7 +19,7 @@ public class RoomServer implements Runnable {
 
     protected boolean isRunning;
 
-    protected Map<String, ChatThread> clientMap;//存储所有的用户信息
+    protected Map<String, RoomThread> clientMap;//存储所有的用户信息
 
     protected String host;//管理员
 
@@ -34,11 +32,11 @@ public class RoomServer implements Runnable {
         this.clientMap = new ConcurrentHashMap<>();
         this.isRunning = true;
         serverSocket = new ServerSocket(portNum);
-        System.out.println(serverSocket.getLocalSocketAddress() + " 聊天服务器建立完毕，房间号：" + portNum );
+        System.out.println(serverSocket.getInetAddress() + " 聊天服务器建立完毕，房间号：" + portNum );
     }
 
     public boolean inRoom(String id){
-        for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
+        for (Map.Entry<String, RoomThread> stringChatThreadEntry : clientMap.entrySet()) {
             if(stringChatThreadEntry.getValue().sameUser(id))
                 return true;
         }
@@ -52,7 +50,7 @@ public class RoomServer implements Runnable {
                 Socket client = serverSocket.accept();
                 System.out.println("新用户链接房间:" + client.getInetAddress() + ",端口" + client.getPort());
                 //新建服务端线程去处理客户
-                executorService.submit(new ChatThread(client,clientMap,this));
+                executorService.submit(new RoomThread(client,clientMap,this));
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -60,11 +58,11 @@ public class RoomServer implements Runnable {
     }
 
     public void closeServer() throws IOException {
-        System.out.println(portNum+"聊天室关闭");
+        System.out.println(portNum+" 聊天室关闭 ");
         isRunning = false;
         executorService.shutdown();
         serverSocket.close();
-        for (Map.Entry<String, ChatThread> stringChatThreadEntry : clientMap.entrySet()) {
+        for (Map.Entry<String, RoomThread> stringChatThreadEntry : clientMap.entrySet()) {
             stringChatThreadEntry.getValue().leaveRoom(2);
         }
     }

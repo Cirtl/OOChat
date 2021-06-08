@@ -39,8 +39,10 @@ public abstract class ServerThread implements Runnable {
      */
     public String makeOrder(String...strings){
         StringBuilder builder = new StringBuilder();
-        for(String s:strings){
-            builder.append(s).append(DIVIDER);
+        for(int i=0;i<strings.length;i++){
+            builder.append(strings[i]);
+            if(i!=strings.length-1)
+                builder.append(DIVIDER);
         }
         return builder.toString();
     }

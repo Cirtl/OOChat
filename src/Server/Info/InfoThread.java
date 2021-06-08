@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
-import Server.Room.ChatThread;
 import Server.ServerInterfaces.InfoInterface;
 import Server.Room.RoomServer;
 import Server.ServerThread;
@@ -34,7 +33,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
             PrintStream printStream = new PrintStream(client.getOutputStream());
             printStream.println(msg);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -47,7 +46,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
             client.close();
             clientMap.remove(this);
         }catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -79,6 +78,11 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
                 String data="";
                 if(scanner.hasNext())
                     data = scanner.nextLine();
+                if(data.isEmpty()){
+                    System.out.println("info break down ");
+                    closeThread();
+                    break;
+                }
                 System.out.println("receive from INFO " + client + " " + data);
                 if(data.startsWith(InfoInterface.NEW_ROOM)){
                     String[] info = data.split(DIVIDER,4);
