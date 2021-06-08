@@ -74,7 +74,7 @@ public interface ClientCallback {
 
     /**
      * 结交好友
-     * @param result 0为成功，-1表示对方拒绝，-2表示用户不存在
+     * @param result 0为成功，-1表示对方拒绝，-2表示用户不存在,-3表示房间不存在
      */
     void onMakeFriend(int result);
 

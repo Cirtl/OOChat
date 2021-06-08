@@ -15,22 +15,25 @@ public class Test {
 
             @Override
             public void onReceiveMsg(String senderName, String msg, int isWhisper) {
-                System.out.println(senderName + ":" + msg);
+                if(isWhisper==0)
+                    System.out.println(senderName + ":" + msg);
+                else
+                    System.out.println(senderName + "[私聊]:" + msg);
             }
 
             @Override
             public void onLogin(int result, String ID) {
-                System.out.println(result + " " +ID + "from login");
+                System.out.println(result + " " +ID + " from login");
             }
 
             @Override
             public void onRegister(int result) {
-                System.out.println(result + " " + "from register");
+                System.out.println(result + " " + " from register");
             }
 
             @Override
             public void onLogout(int result) {
-                System.out.println(result + " " + "from logout");
+                System.out.println(result + " " + " from logout");
             }
 
             @Override
@@ -78,11 +81,23 @@ public class Test {
         Thread.sleep(30);
         client.newRoom(8003,"new room");
         Thread.sleep(300);
+        client.newRoom(8003,"new room");
+        Thread.sleep(300);
+        client.newRoom(8004,"new room");
+        Thread.sleep(300);
+        client.getMyRooms();
+        Thread.sleep(300);
+        client.shutRoom(8004);
+        Thread.sleep(300);
         client.getMyRooms();
         Thread.sleep(300);
         client.enterRoom(8003,"8003");
         Thread.sleep(300);
-        client.sendMsg("123456");
+        client.sendMsg("12 34 56");
+        Thread.sleep(300);
+        client.whisperMsg("test","12 34 56");
+        Thread.sleep(300);
+        client.getMyRooms();
         Thread.sleep(15000);
         client.closeClient();
     }

@@ -29,7 +29,11 @@ public class ServerMsgInput implements Runnable{
     private void onReceiveMsg(String msg){
         System.out.println('\"' + msg + "\" from | " + this);
         String[] tmp  = msg.split(DIVIDER);
-        String[] info = new String[tmp.length];
+        String[] info;
+        if(tmp.length>1)
+            info = new String[tmp.length-1];
+        else
+            info = tmp;
         if (tmp.length - 1 >= 0) System.arraycopy(tmp, 1, info, 0, tmp.length - 1);
         for(ChatCallback e: chatCallbackList)
             e.onReceiveMessage(tmp[0],info);
@@ -37,7 +41,7 @@ public class ServerMsgInput implements Runnable{
 
     @Override
     public void run() {
-        while (scanner.hasNextLine()){
+        while (scanner.hasNext()){
             onReceiveMsg(scanner.nextLine());
         }
     }
