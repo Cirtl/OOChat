@@ -1,4 +1,6 @@
-package Repository;
+package Repository.Handle.House;
+
+import Repository.Handle.JDBC;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,36 +8,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * 数据库查询是否为好友
+ * 数据库查询是否登录
  *
  * @author 郭英贤
  */
-public class HandleIsFriend {
+public class HandleIsLogin {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleIsFriend() {
+    public HandleIsLogin() {
         con = new JDBC().getCon();
     }
 
     /**
-     * 向数据库查询是否为好友
+     * 向数据库查询是否已登录
      *
-     * @param id1 friend1.
-     * @param id2 friend2.
-     * @return 是否为好友
+     * @param id 用户ID
+     * @return 是否已登录
      * @see SQLException
      */
-    public boolean queryVerify(String id1, String id2) {
-        String sqlStr = "select * from `friend` where id_1=? and id_2=?";
+    public boolean queryVerify(String id) {
+        String sqlStr = "select isLogin from `user` where id=?";
         try {
             preSql = con.prepareStatement(sqlStr);
-            preSql.setString(1, id1);
-            preSql.setString(2, id2);
+            preSql.setString(1, id);
             ResultSet rs = preSql.executeQuery();
             if (rs.next() == true) {
+                boolean isLogin = rs.getBoolean("isLogin");
                 con.close();
-                return true;
+                return isLogin;
             } else {
                 con.close();
                 return false;

@@ -1,45 +1,44 @@
-package Repository;
+package Repository.Handle.House;
 
-import javax.swing.*;
+import Repository.Handle.JDBC;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * 数据库查询是否为房主
+ * 数据库查询是否存在该房间
  *
  * @author 郭英贤
  */
-public class HandleIsHost {
+public class HandleIsHouse {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleIsHost() {
+    public HandleIsHouse() {
         con = new JDBC().getCon();
     }
 
     /**
-     * 向数据库查询是否为房主
+     * 向数据库查询是否存在该房间
      *
-     * @param uid 用户账号
      * @param hid 房间号
-     * @return 是否为房主
+     * @return 房间是否仍存在
      * @see SQLException
      */
-    public boolean queryVerify(String uid, int hid) {
-        String sqlStr = "select * from `house` where host=? and id=?";
+    public boolean queryVerify(int hid) {
+        String sqlStr = "select * from `house` where id=?";
         try {
             preSql = con.prepareStatement(sqlStr);
-            preSql.setString(1, uid);
-            preSql.setInt(2, hid);
+            preSql.setInt(1, hid);
             ResultSet rs = preSql.executeQuery();
             if (rs.next() == true) {
                 con.close();
                 return true;
             } else {
                 con.close();
-                JOptionPane.showMessageDialog(null, "不是群主", "警告", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "房间不存在或已被销毁", "警告", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
         } catch (SQLException e) {

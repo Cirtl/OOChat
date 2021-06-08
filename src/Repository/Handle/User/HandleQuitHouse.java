@@ -1,6 +1,7 @@
-package Repository;
+package Repository.Handle.User;
 
-import javax.swing.*;
+import Repository.Handle.JDBC;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ public class HandleQuitHouse {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleQuitHouse() {
+    public HandleQuitHouse() {
         con = new JDBC().getCon();
     }
 
@@ -36,7 +37,7 @@ public class HandleQuitHouse {
             preSql.setInt(2, hid);
             int ok = preSql.executeUpdate();
             if (ok != 0) {
-                JOptionPane.showMessageDialog(null, "该房间已销毁", "警告", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "该房间已销毁", "警告", JOptionPane.WARNING_MESSAGE);
                 con.close();
                 return -1;
             }
@@ -51,7 +52,7 @@ public class HandleQuitHouse {
             preSql.setInt(2, hid);
             int ok = preSql.executeUpdate();
             con.close();
-            JOptionPane.showMessageDialog(null, "退出房间", "警告", JOptionPane.WARNING_MESSAGE);
+            // JOptionPane.showMessageDialog(null, "退出房间", "警告", JOptionPane.WARNING_MESSAGE);
             return 1;
         } catch (SQLException e) {
             System.out.println("QuitHouse_notHost:" + e);

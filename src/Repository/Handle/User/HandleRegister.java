@@ -1,6 +1,8 @@
-package Repository;
+package Repository.Handle.User;
 
-import javax.swing.*;
+import Repository.Handle.JDBC;
+import Repository.User;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -36,14 +38,14 @@ public class HandleRegister {
             int ok = preSql.executeUpdate();
             con.close();
             if (ok != 0) {
-                JOptionPane.showMessageDialog(null, "注册成功", "恭喜", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "注册成功", "恭喜", JOptionPane.WARNING_MESSAGE);
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "注册失败，用户名重复", "警告", JOptionPane.WARNING_MESSAGE);
+                // JOptionPane.showMessageDialog(null, "注册失败，用户名重复", "警告", JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "注册失败，用户名重复", "警告", JOptionPane.WARNING_MESSAGE);
-            System.out.println("Repository.HandleRegister:" + e);
+            // JOptionPane.showMessageDialog(null, "注册失败，用户名重复", "警告", JOptionPane.WARNING_MESSAGE);
+            System.out.println("Repository.Handle.User.HandleRegister:" + e);
         }
         return false;
     }

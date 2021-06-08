@@ -1,47 +1,49 @@
-package Repository;
+package Repository.Handle.User_House;
 
-import javax.swing.*;
+import Repository.Handle.JDBC;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * 数据库查询是否存在该房间
+ * 数据库查询用户是否在房间
  *
  * @author 郭英贤
  */
-public class HandleIsHouse {
+public class HandleIsUserInHouse {
     private final Connection con;
     private PreparedStatement preSql;
 
-    HandleIsHouse() {
+    public HandleIsUserInHouse() {
         con = new JDBC().getCon();
     }
 
     /**
-     * 向数据库查询是否存在该房间
+     * 向数据库查询用户是否在房间
      *
+     * @param id  用户ID
      * @param hid 房间号
-     * @return 房间是否仍存在
+     * @return 用户是否在该房间
      * @see SQLException
      */
-    public boolean queryVerify(int hid) {
-        String sqlStr = "select * from `house` where id=?";
+    public boolean queryVerify(String id, int hid) {
+        String sqlStr = "select * from `user_house` where user_id=? and house_id=?";
         try {
             preSql = con.prepareStatement(sqlStr);
-            preSql.setInt(1, hid);
+            preSql.setString(1, id);
+            preSql.setInt(2, hid);
             ResultSet rs = preSql.executeQuery();
             if (rs.next() == true) {
                 con.close();
                 return true;
             } else {
                 con.close();
-                JOptionPane.showMessageDialog(null, "房间不存在或已被销毁", "警告", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
         } catch (SQLException e) {
-            System.out.println("IsHouse:" + e);
+            System.out.println("SearchUserInHouse:" + e);
         }
         return false;
     }
