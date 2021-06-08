@@ -1,16 +1,6 @@
 package Server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintStream;
 import java.net.Socket;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
-import Server.Interfaces.ChatterInterface;
-import Server.Room.ChatThread;
 
 /**
  * 服务器线程处理，一个线程对应一个客户端

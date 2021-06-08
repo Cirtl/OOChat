@@ -3,14 +3,10 @@ package Server.Room;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
-import Server.Interfaces.ChatterInterface;
+import Server.ServerInterfaces.ChatterInterface;
 import Server.ServerThread;
 
 /**

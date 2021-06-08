@@ -3,16 +3,11 @@ package Server.Info;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
-import Repository.HandleLogin;
-import Repository.HandleRegister;
-import Repository.User;
-import Server.Interfaces.InfoInterface;
+import Server.ServerInterfaces.InfoInterface;
 import Server.Room.RoomServer;
 import Server.ServerThread;
 
@@ -125,22 +120,22 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
 
     @Override
     public void newRoom(String userID, int roomPort, String pwd) {
-        //todo:对数据操作
+        //todo:对数据库操作
         if(roomPort<0||roomPort>9000){
-            returnEnterRoom(false,-1);
+            sendToMe(makeOrder(InfoInterface.NEW_ROOM,FAIL, String.valueOf(-1)));
         }
         else if(rooms.containsKey(roomPort)){
-            returnEnterRoom(false,-1);
+            sendToMe(makeOrder(InfoInterface.NEW_ROOM,FAIL, String.valueOf(-2)));
         }else{
             try{
                 RoomServer roomServer = new RoomServer(roomPort,userID);
                 rooms.put(roomPort,roomServer);
                 new Thread(roomServer).start();
-                enterRoom(userID,roomPort,pwd);
+                sendToMe(makeOrder(InfoInterface.NEW_ROOM,SUCCESS, String.valueOf(roomPort)));
             }catch (IOException e){
                 e.printStackTrace();
                 rooms.remove(roomPort);
-                returnEnterRoom(false,-1);
+                sendToMe(makeOrder(InfoInterface.NEW_ROOM,FAIL, String.valueOf(-3)));
             }
         }
     }
@@ -151,12 +146,12 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
         if(rooms.containsKey(roomPort)){
             RoomServer roomServer = rooms.get(roomPort);
             if(roomServer.inRoom(userID))
-                returnEnterRoom(false,-1);
+                sendToMe(makeOrder(InfoInterface.ENTER_ROOM,FAIL, String.valueOf(-1)));
             else
-                returnEnterRoom(true,roomPort);
+                sendToMe(makeOrder(InfoInterface.ENTER_ROOM,SUCCESS, String.valueOf(roomPort)));
         }
         else
-            returnEnterRoom(false,-1);
+            sendToMe(makeOrder(InfoInterface.ENTER_ROOM,FAIL, String.valueOf(-2)));
     }
 
     @Override
@@ -179,11 +174,4 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
         }
     }
 
-    private void returnEnterRoom(boolean result,int port){
-        if(result){
-            sendToMe(makeOrder(InfoInterface.ENTER_ROOM,SUCCESS, String.valueOf(port)));
-        }else{
-            sendToMe(makeOrder(InfoInterface.ENTER_ROOM,FAIL, String.valueOf(port)));
-        }
-    }
 }

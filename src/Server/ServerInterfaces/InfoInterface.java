@@ -1,4 +1,4 @@
-package Server.Interfaces;
+package Server.ServerInterfaces;
 
 public interface InfoInterface {
     public static String DELETE_ROOM = "deleteRoom";
@@ -20,21 +20,25 @@ public interface InfoInterface {
     public void getMyRooms();
 
     /**
-     * 用户请求开新房间
-     * @param roomPort 房间号
+     * 用户开房间
+     * @param userID 用户ID
+     * @param roomPort 房间端口
      * @param pwd 房间密码
      */
     public void newRoom(String userID,int roomPort,String pwd);
 
     /**
-     * 向服务端请求进入某个房间
-     * @param roomPort 房间号
+     * 用户进入房间
+     * @param userID 用户ID
+     * @param roomPort 房间端口
      * @param pwd 房间密码
      */
     public void enterRoom(String userID,int roomPort,String pwd);
 
     /**
-     * 邀请好友加入房间
+     * 用户邀请友人加入房间
+     * @param userID 用户ID
+     * @param roomPort 房间端口号
      * @param friendID 友人ID
      */
     public void inviteFriend(String userID,int roomPort,String friendID);

@@ -1,20 +1,13 @@
 package Server.Login;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import Repository.*;
 import Repository.User;
-import Server.Interfaces.UserInterface;
+import Server.ServerInterfaces.UserInterface;
 import Server.ServerThread;
 
 public class LoginThread extends ServerThread implements UserInterface {

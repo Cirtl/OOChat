@@ -1,4 +1,4 @@
-package Server.Interfaces;
+package Server.ServerInterfaces;
 
 public interface UserInterface {
 
