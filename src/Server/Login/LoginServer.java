@@ -26,7 +26,7 @@ public class LoginServer implements Runnable {
         isRunning = true;
         clientMap = new ConcurrentHashMap<>();
         this.executorService = Executors.newFixedThreadPool(100);
-        System.out.println(serverSocket.getLocalSocketAddress() + ":登录注册服务器启动");
+        System.out.println(serverSocket.getInetAddress() + ":登录注册服务器启动");
     }
 
     @Override

@@ -27,7 +27,7 @@ public class InfoServer implements Runnable{
         isRunning = true;
         clientMap = new ConcurrentHashMap<>();
         this.executorService = Executors.newFixedThreadPool(100);
-        System.out.println(serverSocket.getLocalSocketAddress() + ":信息服务器启动");
+        System.out.println(serverSocket.getInetAddress() + ":信息服务器启动");
     }
 
     @Override

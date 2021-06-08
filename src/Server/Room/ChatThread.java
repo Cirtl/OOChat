@@ -52,7 +52,7 @@ public class ChatThread extends ServerThread implements ChatterInterface {
             this.isRunning = false;
             receiver.close();
             client.close();
-            System.out.println(userID + "leave room");
+            System.out.println(userID + " leave room " + client.getPort());
             clientMap.remove(userID);
         }catch (IOException e){
             System.out.println(e);

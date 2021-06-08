@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
+import Server.Room.ChatThread;
 import Server.ServerInterfaces.InfoInterface;
 import Server.Room.RoomServer;
 import Server.ServerThread;
@@ -52,7 +53,12 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
 
     @Override
     public void sendToSomeOne(String toID, String msg) {
-
+        for (Map.Entry<String, InfoThread> stringChatThreadEntry : clientMap.entrySet()) {
+            if (stringChatThreadEntry.getKey().equals(toID)) {
+                stringChatThreadEntry.getValue().sendToMe(msg);
+                break;
+            }
+        }
     }
 
     @Override
@@ -192,9 +198,15 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
     @Override
     public void inviteFriend(String userID, int roomPort, String friendID) {
         if(rooms.containsKey(roomPort)){
-
+            //todo:邀请好友加入
+            if(clientMap.containsKey(friendID)){
+                sendToSomeOne(friendID,makeOrder(INVITE_FRIEND,userID,String.valueOf(roomPort)));
+                sendToMe(makeOrder(INVITE_FRIEND,String.valueOf(0)));
+            }else{
+                sendToMe(makeOrder(INVITE_FRIEND,String.valueOf(-2)));
+            }
         }else{
-            sendToMe(makeOrder(INVITE_FRIEND,FAIL,String.valueOf(-3)));
+            sendToMe(makeOrder(INVITE_FRIEND,String.valueOf(-1)));
         }
     }
 
@@ -207,11 +219,11 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
                 rooms.remove(roomPort);
             } catch (IOException e) {
                 e.printStackTrace();
-                sendToMe(makeOrder(InfoInterface.SHUT_ROOM,FAIL));
+                sendToMe(makeOrder(InfoInterface.SHUT_ROOM,FAIL,String.valueOf(-1)));
             }
-            sendToMe(makeOrder(InfoInterface.SHUT_ROOM,SUCCESS));
+            sendToMe(makeOrder(InfoInterface.SHUT_ROOM,SUCCESS,String.valueOf(0)));
         }else{
-            sendToMe(makeOrder(InfoInterface.SHUT_ROOM,FAIL));
+            sendToMe(makeOrder(InfoInterface.SHUT_ROOM,FAIL,String.valueOf(-2)));
         }
     }
 

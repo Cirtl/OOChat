@@ -11,7 +11,6 @@ public class Test {
     static int port_login = 8000;
     static int port_chat = 8002;
     static int maxNum = 10;
-    static String host = "127.0.0.1";
 
     public static void main(String[] args) throws IOException, InterruptedException {
         /** 运行服务器 **/
@@ -20,4 +19,5 @@ public class Test {
         new Thread(infoServer).start();
         new Thread(loginServer).start();
     }
+
 }
