@@ -19,11 +19,6 @@ public class Test {
         new Thread(infoServer,"info").start();
         new Thread(loginServer,"login").start();
 
-        for (Thread t : Thread.getAllStackTraces().keySet()) {
-            if (t.getState()==Thread.State.RUNNABLE)
-               System.out.println(t.getName());
-        }
-
 //        Thread.sleep(10000);
 //        loginServer.closeServer();
 //        infoServer.closeServer();

@@ -55,7 +55,7 @@ public class RoomThread extends ServerThread implements ChatterInterface {
             this.isRunning = false;
             receiver.close();
             client.close();
-            System.out.println(userID + " leave room " + client.getPort());
+            System.out.println(userID + " leave room " + roomServer.portNum);
             clientMap.remove(userID);
         } catch (IOException e) {
             System.out.println("in close chat" + "  "+e);

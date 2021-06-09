@@ -21,7 +21,7 @@ import Server.ServerThread;
  */
 public class InfoThread extends ServerThread implements InfoInterface {
     //储存所有房间
-    private Map<Integer, RoomServer> rooms = new ConcurrentHashMap<>();
+    private Map<Integer, RoomServer> rooms;
     //储存所有登录线程的用户
     private Map<String, InfoThread> clientMap;
     //决定是否在运行
@@ -132,17 +132,6 @@ public class InfoThread extends ServerThread implements InfoInterface {
                             port = -1;
                         }
                         deleteRoom(info[1], port);
-                    }
-                } else if (data.startsWith(INVITE_FRIEND)) {
-                    String[] info = data.split(DIVIDER, 4);
-                    if (info.length > 3) {
-                        int port;
-                        try {
-                            port = Integer.parseInt(info[2]);
-                        } catch (Exception e) {
-                            port = -1;
-                        }
-                        inviteFriend(info[1], port, info[3]);
                     }
 
                 } else if (data.startsWith(SHUT_ROOM)) {
@@ -264,32 +253,13 @@ public class InfoThread extends ServerThread implements InfoInterface {
                 sendToMe(makeOrder(ENTER_ROOM, FAIL, String.valueOf(-3)));
             else {
                 if (new User(userID, "test").enterHouse(roomPort, pwd))
-                    sendToMe(makeOrder(InfoInterface.ENTER_ROOM, SUCCESS, String.valueOf(roomPort)));
+                    sendToMe(makeOrder(InfoInterface.ENTER_ROOM, SUCCESS, String.valueOf(roomPort),pwd));
                 else
                     sendToMe(makeOrder(ENTER_ROOM, FAIL, String.valueOf(-4)));
             }
         } else
             //房间不存在
             sendToMe(makeOrder(InfoInterface.ENTER_ROOM, FAIL, String.valueOf(-2)));
-    }
-
-    @Override
-    public void inviteFriend(String userID, int roomPort, String friendID) {
-        if (rooms.containsKey(roomPort)) {
-            //todo:邀请好友加入
-            System.out.println(clientMap);
-            if (clientMap.containsKey(friendID)) {
-                String pwd = rooms.get(roomPort).getPassWord();
-                sendToSomeOne(friendID, makeOrder(INVITE_FRIEND, userID, String.valueOf(roomPort),pwd));
-                sendToMe(makeOrder(INVITE_FRIEND, String.valueOf(0)));
-            } else {
-                //好友不在线
-                sendToMe(makeOrder(INVITE_FRIEND, String.valueOf(-2)));
-            }
-        } else {
-            //房间不存在
-            sendToMe(makeOrder(INVITE_FRIEND, String.valueOf(-1)));
-        }
     }
 
     @Override

@@ -6,7 +6,17 @@ public interface UserInterface {
     public static String LOGIN = "login";
     public static String REGISTER = "register";
     public static String MAKE_FRIEND = "makeFriend";
+    public static String INVITE_FRIEND = "inviteFriend";
+    public static String BE_INVITED = "beInvited";
 
+    /**
+     * 用户邀请友人加入房间
+     * @param userID 用户ID
+     * @param roomPort 房间端口号
+     * @param pwd 房间密码
+     * @param friendID 友人ID
+     */
+    public void inviteFriend(String userID,int roomPort,String pwd,String friendID);
 
     /**
      * 当前用户登出请求
