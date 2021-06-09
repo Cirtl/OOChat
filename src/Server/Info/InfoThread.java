@@ -189,7 +189,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
     @Override
     public void newRoom(String userID, int roomPort, String pwd) {
         //todo:对数据库操作
-        if(roomPort<0||roomPort>9000){
+        if(roomPort<1024||roomPort>65535){
             sendToMe(makeOrder(InfoInterface.NEW_ROOM,FAIL, String.valueOf(-1)));
         }
         else if(rooms.containsKey(roomPort)){

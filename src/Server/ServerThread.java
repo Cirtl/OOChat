@@ -3,7 +3,7 @@ package Server;
 import java.net.Socket;
 
 /**
- * 服务器线程处理，一个线程对应一个客户端
+ * 服务器基础线程
  */
 public abstract class ServerThread implements Runnable {
 
@@ -36,15 +36,16 @@ public abstract class ServerThread implements Runnable {
 
     /**
      * 产生符合格式的指令
-     * @param strings 需要合并的指令
+     * @param order 指令名
+     * @param result 指令结果
+     * @param info 额外提供的信息（不一定有）
      * @return 添加了DIVIDER的字符串
      */
-    public String makeOrder(String...strings){
+    public String makeOrder(String order,String result,String...info){
         StringBuilder builder = new StringBuilder();
-        for(int i=0;i<strings.length;i++){
-            builder.append(strings[i]);
-            if(i!=strings.length-1)
-                builder.append(DIVIDER);
+        builder.append(order).append(DIVIDER).append(result);
+        for(int i=0;i<info.length;i++){
+            builder.append(DIVIDER).append(info[i]);
         }
         return builder.toString();
     }
