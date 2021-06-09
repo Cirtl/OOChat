@@ -26,16 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Client/Test2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/ClientCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ClientInterfaces/ChatterInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientInterfaces/ChatterInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -385,7 +377,28 @@
       <option name="project" value="LOCAL" />
       <updated>1623170687274</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="客户端&#10;&#10;实现了发送好友申请 和收到好友申请的操作">
+      <created>1623179319215</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1623179319215</updated>
+    </task>
+    <task id="LOCAL-00028" summary="客户端&#10;&#10;實現了獲取服務器關閉的消息">
+      <created>1623209477371</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1623209477371</updated>
+    </task>
+    <task id="LOCAL-00029" summary="客户端&#10;&#10;實現了獲取服務器關閉的消息">
+      <created>1623209510763</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1623209510763</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -438,7 +451,9 @@
     <MESSAGE value="测试&#10;&#10;测试通过私聊向自己发送信息" />
     <MESSAGE value="测试&#10;&#10;实现了跨机聊天" />
     <MESSAGE value="客户端&#10;&#10;当用户执行无权限操作（如在未登录时企图加入房间等） 调用回调函数并返回失败" />
-    <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;当用户执行无权限操作（如在未登录时企图加入房间等） 调用回调函数并返回失败" />
+    <MESSAGE value="客户端&#10;&#10;实现了发送好友申请 和收到好友申请的操作" />
+    <MESSAGE value="客户端&#10;&#10;實現了獲取服務器關閉的消息" />
+    <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;實現了獲取服務器關閉的消息" />
   </component>
   <component name="WindowStateProjectService">
     <state x="626" y="267" key="#Notifications" timestamp="1623165693101">
@@ -449,10 +464,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="386" y="0" width="781" height="864" key="#Test_(1)/0.0.1536.864@0.0.1536.864" timestamp="1623167550784" />
-    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1623178611324">
+    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1623206285964">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1623178611324" />
+    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1623206285964" />
     <state x="568" y="79" key="#com.intellij.ide.util.MemberChooser/62.0.1474.864@62.0.1474.864" timestamp="1623051126766" />
     <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1622720090530">
       <screen x="0" y="0" width="1536" height="864" />
@@ -462,45 +477,45 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1622039880931" />
-    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1623170685230">
+    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1623209509401">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1623170685230" />
+    <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1623209509401" />
     <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1623111834474" />
-    <state x="526" y="128" key="FileChooserDialogImpl" timestamp="1623171312335">
+    <state x="526" y="128" key="FileChooserDialogImpl" timestamp="1623211985899">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="526" y="128" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1623171312335" />
+    <state x="526" y="128" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1623211985899" />
     <state x="567" y="128" key="FileChooserDialogImpl/62.0.1474.864@62.0.1474.864" timestamp="1623070159251" />
-    <state width="1510" height="269" key="GridCell.Tab.0.bottom" timestamp="1623179092702">
+    <state width="1510" height="202" key="GridCell.Tab.0.bottom" timestamp="1623209572685">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1510" height="269" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1623179092702" />
+    <state width="1510" height="202" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1623209572685" />
     <state width="1433" height="206" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1621651937984" />
-    <state width="1510" height="269" key="GridCell.Tab.0.center" timestamp="1623179092701">
+    <state width="1510" height="202" key="GridCell.Tab.0.center" timestamp="1623209572685">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1510" height="269" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1623179092701" />
+    <state width="1510" height="202" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1623209572685" />
     <state width="1433" height="206" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state width="1510" height="269" key="GridCell.Tab.0.left" timestamp="1623179092701">
+    <state width="1510" height="202" key="GridCell.Tab.0.left" timestamp="1623209572684">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1510" height="269" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1623179092701" />
+    <state width="1510" height="202" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1623209572684" />
     <state width="1433" height="206" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state width="1510" height="269" key="GridCell.Tab.0.right" timestamp="1623179092702">
+    <state width="1510" height="202" key="GridCell.Tab.0.right" timestamp="1623209572685">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1510" height="269" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1623179092702" />
+    <state width="1510" height="202" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1623209572685" />
     <state width="1433" height="206" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
     <state x="94" y="0" key="SettingsEditor" timestamp="1623165658886">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="94" y="0" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1623165658886" />
     <state x="152" y="0" key="SettingsEditor/62.0.1474.864@62.0.1474.864" timestamp="1621599814186" />
-    <state x="240" y="100" key="Vcs.Push.Dialog.v2" timestamp="1623165684745">
+    <state x="240" y="100" key="Vcs.Push.Dialog.v2" timestamp="1623179842388">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="240" y="100" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1623165684745" />
+    <state x="240" y="100" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1623179842388" />
     <state x="292" y="100" key="Vcs.Push.Dialog.v2/62.0.1474.864@62.0.1474.864" timestamp="1623111865651" />
     <state x="523" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1623156819134">
       <screen x="0" y="0" width="1536" height="864" />

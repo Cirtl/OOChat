@@ -56,8 +56,8 @@ public interface ClientCallback {
 
     /**
      * 新开房间
-     * @param result 0为成功，-1为失败
-     * @param roomPort 成功时返回房间号，房间号非法返回-1,房间已存在返回-2，其他错误-3
+     * @param result 0为成功，-1为失败，1為已擁有一個房間
+     * @param roomPort 1時返回已有房間號，0时返回新開房间号。失敗時房间号非法返回-1,房间已存在返回-2，其他錯誤-3
      */
     void onNewRoom(int result,int roomPort);
 
@@ -71,9 +71,9 @@ public interface ClientCallback {
      * 返回我的房间信息和对应密码
      * @param result 0表示有房间，-1表示无房间，-2其他错误
      * @param rooms 房间号，无房间时为null
-     * @param pwd 密码，无房间时为null
+     * @param owners 房间拥有者
      */
-    void onMyRoomList(int result,int[] rooms,int[] pwd);
+    void onMyRoomList(int result,List<Integer> rooms,List<String> owners);
 
     /**
      * 结交好友

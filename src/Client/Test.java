@@ -103,36 +103,25 @@ public class Test {
 
             }
         });
+        //登录
         client.userLogin("杨东浩","test1");
         Thread.sleep(300);
+        //获取房间
         client.getMyRooms();
         Thread.sleep(300);
+        //开房
         client.newRoom(8003,"123");
         Thread.sleep(300);
+        //进入房间
         client.enterRoom(8003,"123");
         Thread.sleep(300);
-//        client.enterRoom(8003,"123");
-//        Thread.sleep(300);
-//        client.getMyRooms();
-//        Thread.sleep(300);
-//        client.deleteRoom(8003);
-//        Thread.sleep(300);
-//        client.leaveRoom();
-//        Thread.sleep(300);
-//        client.newRoom(8003,"123");
-//        Thread.sleep(300);
-//        client.shutRoom(8003);
-//        Thread.sleep(300);
-//        client.newRoom(8003,"123");
-//        Thread.sleep(300);
-//        client.getMyRooms();
-        Thread.sleep(30000);
-//        Scanner scanner = new Scanner(System.in);
-//        while(true){
-//            String s = scanner.nextLine();
-//            if(s.equals("QUIT")) break;
-//            client.sendMsg(s);
-//        }
+        //输入
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            String s = scanner.nextLine();
+            if(s.equals("QUIT")) break;
+            client.sendMsg(s);
+        }
         client.closeClient();
     }
 }
