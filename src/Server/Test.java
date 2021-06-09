@@ -24,17 +24,17 @@ public class Test {
                System.out.println(t.getName());
         }
 
-        Thread.sleep(10000);
-        loginServer.closeServer();
-        infoServer.closeServer();
+//        Thread.sleep(10000);
+//        loginServer.closeServer();
+//        infoServer.closeServer();
 
         while(true){
             int nbRunning = 0;
             for (Thread t : Thread.getAllStackTraces().keySet()) {
                 if (t.getState()==Thread.State.RUNNABLE){
-
+                    nbRunning++;
                 }
-                    System.out.println(t.getName());
+//                    System.out.println(t.getName());
             }
             System.out.println("当前运行线程" + nbRunning);
             Thread.sleep(5000);

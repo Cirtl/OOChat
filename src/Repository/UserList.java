@@ -1,6 +1,6 @@
 package Repository;
 
-import Repository.Handle.User.HandleSearchUserListOfAll;
+import Repository.Handle.User.HandleGetUserListOfAll;
 
 import java.util.Vector;
 
@@ -39,7 +39,7 @@ public class UserList {
      * @return 用户列表
      */
     public Vector<String> getUserList() {
-        userList = new HandleSearchUserListOfAll().queryVerify();
+        userList = new HandleGetUserListOfAll().queryVerify();
         return userList;
     }
 

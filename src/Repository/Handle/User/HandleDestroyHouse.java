@@ -12,24 +12,25 @@ import java.sql.SQLException;
  *
  * @author 郭英贤
  */
-public class HandleQuitHouse {
+public class HandleDestroyHouse {
     private final Connection con;
     private PreparedStatement preSql;
 
-    public HandleQuitHouse() {
+    public HandleDestroyHouse() {
         con = new JDBC().getCon();
     }
 
     /**
-     * 向数据库操作用户退出房间
+     * 向数据库操作用户销毁房间
+     * 用户是房主则房间销毁
      *
      * @param uid 用户ID
      * @param hid 房间号
-     * @return 退出返回true,失败返回false
+     * @return 销毁返回true，失败返回false
      * @see SQLException
      */
     public boolean queryVerify(String uid, int hid) {
-        String sqlStr = "delete from `user_house` where user_id=? and house_id=?";
+        String sqlStr = "delete from `house` where host=? and id=?";
         try {
             preSql = con.prepareStatement(sqlStr);
             preSql.setString(1, uid);
@@ -41,10 +42,9 @@ public class HandleQuitHouse {
                 return true;
             }
             con.close();
-            // JOptionPane.showMessageDialog(null, "退出房间", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         } catch (SQLException e) {
-            System.out.println("QuitHouse_notHost:" + e);
+            System.out.println("QuitHouse_host:" + e);
         }
         return false;
     }

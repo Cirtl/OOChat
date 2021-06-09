@@ -3,13 +3,13 @@ database OO;
 create
 database OO;
 use
+
 OO;
 CREATE TABLE `user`
 (
     `id`       varchar(20) NOT NULL DEFAULT '',
     `password` varchar(20) NOT NULL DEFAULT '',
     `ip`       varchar(255)         DEFAULT '',
-    `isLogin` boolean DEFAULT FALSE,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 10

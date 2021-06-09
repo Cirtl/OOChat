@@ -13,11 +13,11 @@ import java.util.Vector;
  *
  * @author 郭英贤
  */
-public class HandleSearchUserListOfAll {
+public class HandleGetUserListOfAll {
     private final Connection con;
     private PreparedStatement preSql;
 
-    public HandleSearchUserListOfAll() {
+    public HandleGetUserListOfAll() {
         con = new JDBC().getCon();
     }
 
