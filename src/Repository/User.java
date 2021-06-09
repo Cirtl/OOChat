@@ -1,7 +1,7 @@
 package Repository;
 
 import Repository.Handle.User_House.HandleIsUserInHouse;
-import Repository.Handle.User_House.HandleSearchHouseListByUser;
+import Repository.Handle.User_House.HandleGetHouseListByUser;
 import Repository.Handle.House.HandleGetHomePass;
 import Repository.Handle.House.HandleIsHost;
 import Repository.Handle.House.HandleIsHouse;
@@ -110,7 +110,7 @@ public class User {
      * @return 用户所在房间号列表
      */
     public Vector<String> getHouseList() {
-        return new HandleSearchHouseListByUser().queryVerify(this.id);
+        return new HandleGetHouseListByUser().queryVerify(this.id);
     }
 
     /**
@@ -161,15 +161,16 @@ public class User {
      * 创建房间
      * 默认创建者为该房间房主
      *
+     * @param houseId 房间Id
      * @param houseName 房间名
      * @param pass      房间密码
      * @return 创建成功返回房间号，创建失败返回-1
      */
-    public int createHouse(String houseName, String pass) {
+    public int createHouse(int houseId, String houseName, String pass) {
         if (!judgeLogin()) {
-            return -1;
+            return -2;
         }
-        House house = new House(houseName, pass, this.id);
+        House house = new House(houseId, houseName, pass, this.id);
         return new HandleCreateHouse().writeRegisterModel(house);
     }
 
@@ -196,15 +197,31 @@ public class User {
      *
      * @param houseId 房间号
      */
-    public void quitHouse(int houseId) {
+    public boolean quitHouse(int houseId) {
         if (!judgeLogin() || !new HandleIsHouse().queryVerify(houseId)) {
-            return;
+            return false;
         }
         if (!new HandleIsUserInHouse().queryVerify(this.id, houseId)) {
             // JOptionPane.showMessageDialog(null, "不在房间", "警告", JOptionPane.WARNING_MESSAGE);
-            return;
+            return false;
         }
-        new HandleQuitHouse().queryVerify(this.id, houseId);
+        return new HandleQuitHouse().queryVerify(this.id, houseId);
+    }
+
+    /**
+     * 销毁房间
+     *
+     * @param houseId 房间号
+     */
+    public boolean destroyHouse(int houseId) {
+        if (!judgeLogin() || !new HandleIsHouse().queryVerify(houseId)) {
+            return false;
+        }
+        if (!new HandleIsHost().queryVerify(this.id, houseId)) {
+            // JOptionPane.showMessageDialog(null, "不在房间", "警告", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return new HandleDestroyHouse().queryVerify(this.id, houseId);
     }
 
     /**
@@ -266,6 +283,18 @@ public class User {
             return false;
         }
         return new HandleAddFriend().writeRegisterModel(this.id, id);
+    }
+
+    /**
+     * 返回好友列表
+     *
+     * @return 好友列表
+     */
+    public Vector<String> getFriendList() {
+        if (!judgeLogin()) {
+            return new Vector<String>();
+        }
+        return new HandleGetFriendList().queryVerify(this.id);
     }
 
     /**

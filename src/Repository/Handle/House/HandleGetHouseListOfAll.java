@@ -14,28 +14,32 @@ import java.util.Map;
  *
  * @author 郭英贤
  */
-public class HandleSearchHouseListOfAll {
+public class HandleGetHouseListOfAll {
     private final Connection con;
     private PreparedStatement preSql;
 
-    public HandleSearchHouseListOfAll() {
+    public HandleGetHouseListOfAll() {
         con = new JDBC().getCon();
     }
 
     /**
      * 向数据库查询所有房间
      *
-     * @return 所有房间号、房间名
+     * @return 所有房间号、房间信息【0：name；1：pass；2：host】
      * @see SQLException
      */
-    public Map<String, String> queryVerify() {
+    public Map<Integer, String[]> queryVerify() {
         String sqlStr = "select * from `house`";
-        Map<String, String> houseList = new HashMap<String, String>();
+        Map<Integer, String[]> houseList = new HashMap<Integer, String[]>();
         try {
             preSql = con.prepareStatement(sqlStr);
             ResultSet rs = preSql.executeQuery();
             while (rs.next()) {
-                houseList.put(rs.getString("id"), rs.getString("name"));
+                String[] info = new String[3];
+                info[0] = rs.getString("name");
+                info[1] = rs.getString("password");
+                info[2] = rs.getString("host");
+                houseList.put(rs.getInt("id"), info);
             }
             con.close();
         } catch (SQLException e) {

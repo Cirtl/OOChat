@@ -1,6 +1,6 @@
 package Repository;
 
-import Repository.Handle.House.HandleSearchHouseListOfAll;
+import Repository.Handle.House.HandleGetHouseListOfAll;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class HouseList {
     private static HouseList list;
-    private Map<String, String> houseList;
+    private Map<Integer, String[]> houseList;
 
     /**
      * 私有化构造
@@ -36,10 +36,10 @@ public class HouseList {
     /**
      * Getter 房间号、房间名
      *
-     * @return 房间号、房间名
+     * @return 所有房间号、房间信息【0：name；1：pass；2：host】
      */
-    public Map<String, String> getHouseList() {
-        houseList = new HandleSearchHouseListOfAll().queryVerify();
+    public Map<Integer, String[]> getHouseList() {
+        houseList = new HandleGetHouseListOfAll().queryVerify();
         return houseList;
     }
 
@@ -48,7 +48,7 @@ public class HouseList {
      *
      * @param houseList 房间列表
      */
-    public void setHouseList(Map<String, String> houseList) {
+    public void setHouseList(Map<Integer, String[]> houseList) {
         this.houseList = houseList;
     }
 
@@ -57,8 +57,8 @@ public class HouseList {
      */
     public void printInfo() {
         System.out.println("HouseList:");
-        for (String item : this.getHouseList().keySet()) {
-            System.out.println("id: " + item + " name: " + houseList.get(item));
+        for (int item : this.getHouseList().keySet()) {
+            System.out.println("id: " + item + " info: " + houseList.get(item));
         }
     }
 

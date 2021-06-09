@@ -143,7 +143,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
                 }else if(data.startsWith(InfoInterface.SHUT_ROOM)){
                     String[] info = data.split(DIVIDER,3);
                     if(info.length>2){
-                        String id = info[0],room = info[2];
+                        String id = info[1],room = info[2];
                         int room_port;
                         try {
                             room_port = Integer.parseInt(room);
@@ -218,6 +218,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
                     RoomServer roomServer = new RoomServer(roomPort,userID,pwd);
                     rooms.put(roomPort,roomServer);
                     new Thread(roomServer,String.valueOf(roomPort)).start();
+                    new User(userID,"test").createHouse(roomPort,String.valueOf(roomPort),pwd);
                     sendToMe(makeOrder(NEW_ROOM,String.valueOf(0), String.valueOf(roomPort)));
                 }catch (IOException e){
                     e.printStackTrace();
@@ -241,9 +242,12 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
             else if(!roomServer.checkPassword(pwd))
                 //密码错误
                 sendToMe(makeOrder(ENTER_ROOM,FAIL,String.valueOf(-3)));
-            else
-                //成功邀请
-                sendToMe(makeOrder(InfoInterface.ENTER_ROOM,SUCCESS, String.valueOf(roomPort)));
+            else {
+                if (new User(userID, "test").enterHouse(roomPort, pwd))
+                    sendToMe(makeOrder(InfoInterface.ENTER_ROOM, SUCCESS, String.valueOf(roomPort)));
+                else
+                    sendToMe(makeOrder(ENTER_ROOM, FAIL, String.valueOf(-4)));
+            }
         }
         else
             //房间不存在
@@ -274,6 +278,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
             try {
                 roomServer.closeServer();
                 rooms.remove(roomPort);
+                System.out.println(userID + " to delete " + new User(userID,"test").destroyHouse(roomPort) + " on delete room " + roomPort);
             } catch (IOException e) {
                 System.out.println(e + "in shut room");
                 sendToMe(makeOrder(InfoInterface.SHUT_ROOM,FAIL,String.valueOf(-1)));

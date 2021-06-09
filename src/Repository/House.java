@@ -1,8 +1,7 @@
 package Repository;
 
-import Repository.Handle.User_House.HandleSearchUserListByHouse;
+import Repository.Handle.User_House.HandleGetUserListByHouse;
 
-import java.util.Random;
 import java.util.Vector;
 
 /**
@@ -24,8 +23,8 @@ public class House {
      * @param pass    密码
      * @param host_id 房主ID
      */
-    House(String name, String pass, String host_id) {
-        this.id = new Random().nextInt(1000000000);
+    House(int id, String name, String pass, String host_id) {
+        this.id = id;
         this.name = name;
         this.pass = pass;
         this.host_id = host_id;
@@ -39,8 +38,8 @@ public class House {
      * @param ip      房间IP地址
      * @param host_id 房主ID
      */
-    House(String name, String pass, String ip, String host_id) {
-        this.id = new Random().nextInt(1000000000);
+    House(int id, String name, String pass, String ip, String host_id) {
+        this.id = id;
         this.name = name;
         this.pass = pass;
         this.ip = ip;
@@ -141,7 +140,7 @@ public class House {
      * @return 房间内用户ID列表
      */
     public Vector<String> getUserList() {
-        return new HandleSearchUserListByHouse().queryVerify(this.id);
+        return new HandleGetUserListByHouse().queryVerify(this.id);
     }
 
     /**
