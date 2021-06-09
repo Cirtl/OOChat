@@ -99,6 +99,16 @@ public class Test2 {
             public void onGetRoomInfo(int result, List<String> chatters) {
 
             }
+
+            @Override
+            public void onRunRoom(int result, int roomPort) {
+
+            }
+
+            @Override
+            public void onGetFriends(int result, List<String> friends) {
+
+            }
         });
         client.userLogin("test2","test2");
         Thread.sleep(300);

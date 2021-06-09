@@ -8,7 +8,8 @@ public interface InfoInterface {
     public static String INVITE_FRIEND = "inviteFriend";
     public static String BE_INVITED = "beInvited";
     public static String SHUT_ROOM = "shutRoom";
-
+    public static String RUN_ROOM = "runRoom";
+    public static String GET_FRIENDS = "getFriends";
     /**
      * 删除房间
      * @param port 房间号
@@ -44,4 +45,15 @@ public interface InfoInterface {
      * 关闭房间
      */
     public void shutRoom(int roomPort);
+
+    /**
+     * 运行房间
+     * @param roomPort 房间号
+     */
+    public void runRoom(int roomPort);
+
+    /**
+     * 获取好友列表
+     */
+    public void getFriends();
 }

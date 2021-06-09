@@ -66,7 +66,6 @@ public class Test {
 
             }
 
-
             @Override
             public void onMakeFriend(int result, String friendID) {
 
@@ -102,26 +101,17 @@ public class Test {
             public void onGetRoomInfo(int result, List<String> chatters) {
 
             }
+
+            @Override
+            public void onRunRoom(int result, int roomPort) {
+
+            }
+
+            @Override
+            public void onGetFriends(int result, List<String> friends) {
+
+            }
         });
-        //登录
-        client.userLogin("杨东浩","test1");
-        Thread.sleep(300);
-        //获取房间
-        client.getMyRooms();
-        Thread.sleep(300);
-        //开房
-        client.newRoom(8003,"123");
-        Thread.sleep(300);
-        //进入房间
-        client.enterRoom(8003,"123");
-        Thread.sleep(300);
-        //输入
-        Scanner scanner = new Scanner(System.in);
-        while(true){
-            String s = scanner.nextLine();
-            if(s.equals("QUIT")) break;
-            client.sendMsg(s);
-        }
         client.closeClient();
     }
 }

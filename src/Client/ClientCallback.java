@@ -91,7 +91,7 @@ public interface ClientCallback {
 
     /**
      * 关闭房间
-     * @param result 0为成功，-1表示不是房主，-2其他错误
+     * @param result 0为成功，-1表示不是房主，-2表示房间不在运行中
      */
     void onShutRoom(int result);
 
@@ -120,5 +120,19 @@ public interface ClientCallback {
      * @param chatters 如果用户不在房间中,返回null 否则返回当前用户列表，按顺序为每个用户的ID
      */
     void onGetRoomInfo(int result, List<String> chatters);
+
+    /**
+     * 运行房间返回结果
+     * @param result 0成功,-1失败
+     * @param  roomPort 成功时返回房间号 失败时：-1已在运行 -2房间不存在 -3无权限 -4其他错误
+     */
+    void onRunRoom(int result,int roomPort);
+
+    /**
+     * 获取好友结果
+     * @param result 成功 0 失败-1
+     * @param friends 成功列表 失败null
+     */
+    void onGetFriends(int result,List<String> friends);
 
 }
