@@ -180,7 +180,7 @@ public class RoomThread extends ServerThread implements ChatterInterface {
     @Override
     public void leaveRoom(int way) {
         //todo:数据库测试
-        user.quitHouse(roomServer.portNum);
+//        user.quitHouse(roomServer.portNum);
         sendToMe(ChatterInterface.LEAVE_ROOM + DIVIDER + way);
         closeThread();
     }

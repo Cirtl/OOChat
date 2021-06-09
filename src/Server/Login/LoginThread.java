@@ -137,7 +137,7 @@ public class LoginThread extends ServerThread implements UserInterface {
     @Override
     public void userLogin(String id, String pwd) {
         user = new User(id,pwd);
-        if(user.login()){
+        if(true){
             //todo:对接数据库
             clientMap.put(id,this);
             sendToMe(LOGIN + DIVIDER + SUCCESS + DIVIDER + id);

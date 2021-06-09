@@ -8,10 +8,15 @@ import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
 import Repository.User;
+import Server.Room.RoomThread;
 import Server.ServerInterfaces.InfoInterface;
 import Server.Room.RoomServer;
 import Server.ServerThread;
 
+/**
+ * 信息线程，用于处理用户新建房间 进出房间 邀请加入房间 获取房间列表等操作
+ * @author 杨东浩
+ */
 public class InfoThread  extends ServerThread implements  InfoInterface {
     //储存所有房间
     private static Map<Integer, RoomServer> rooms = new ConcurrentHashMap<>();
@@ -177,12 +182,16 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
     public void getMyRooms() {
         StringBuilder builder = new StringBuilder();
         if(rooms.keySet().isEmpty()){
-            sendToMe(makeOrder(InfoInterface.MY_ROOMS,"empty"));
+            sendToMe(makeOrder(MY_ROOMS,FAIL));
         }else{
-            for(Integer port:rooms.keySet()){
-                builder.append(port).append(DIVIDER);
+            int cnt = 0;
+            for (Map.Entry<Integer, RoomServer> entry : rooms.entrySet()) {
+                String host = entry.getValue().getHost();
+                int port = entry.getKey();
+                builder.append(port).append("_").append(host).append(DIVIDER);
+                cnt++;
             }
-            sendToMe(makeOrder(InfoInterface.MY_ROOMS,builder.toString()));
+            sendToMe(makeOrder(MY_ROOMS,SUCCESS,String.valueOf(cnt),builder.toString()));
         }
     }
 
@@ -190,20 +199,32 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
     public void newRoom(String userID, int roomPort, String pwd) {
         //todo:对数据库操作
         if(roomPort<1024||roomPort>65535){
-            sendToMe(makeOrder(InfoInterface.NEW_ROOM,FAIL, String.valueOf(-1)));
+            sendToMe(makeOrder(InfoInterface.NEW_ROOM,String.valueOf(-1), String.valueOf(-1)));
         }
         else if(rooms.containsKey(roomPort)){
-            sendToMe(makeOrder(InfoInterface.NEW_ROOM,FAIL, String.valueOf(-2)));
-        }else{
-            try{
-                RoomServer roomServer = new RoomServer(roomPort,userID,pwd);
-                rooms.put(roomPort,roomServer);
-                new Thread(roomServer).start();
-                sendToMe(makeOrder(InfoInterface.NEW_ROOM,SUCCESS, String.valueOf(roomPort)));
-            }catch (IOException e){
-                e.printStackTrace();
-                rooms.remove(roomPort);
-                sendToMe(makeOrder(InfoInterface.NEW_ROOM,FAIL, String.valueOf(-3)));
+            sendToMe(makeOrder(InfoInterface.NEW_ROOM,String.valueOf(-1), String.valueOf(-2)));
+        }
+        else{
+            boolean flag = true;
+            for (Map.Entry<Integer, RoomServer> allRoom : rooms.entrySet()) {
+                if (allRoom.getValue().getHost().equals(userID)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                try{
+                    RoomServer roomServer = new RoomServer(roomPort,userID,pwd);
+                    rooms.put(roomPort,roomServer);
+                    new Thread(roomServer).start();
+                    sendToMe(makeOrder(NEW_ROOM,String.valueOf(0), String.valueOf(roomPort)));
+                }catch (IOException e){
+                    e.printStackTrace();
+                    rooms.remove(roomPort);
+                    sendToMe(makeOrder(NEW_ROOM,String.valueOf(-1), String.valueOf(-3)));
+                }
+            }else{
+                sendToMe(makeOrder(NEW_ROOM,String.valueOf(1), String.valueOf(-3)));
             }
         }
     }

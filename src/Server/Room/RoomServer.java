@@ -74,4 +74,11 @@ public class RoomServer implements Runnable {
         }
     }
 
+    public int getPortNum() {
+        return portNum;
+    }
+
+    public String getHost() {
+        return host;
+    }
 }
