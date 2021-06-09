@@ -99,12 +99,13 @@ public interface ClientCallback {
      * 被邀请加入房间
      * @param invitorID 邀请人ID
      * @param roomPort 房间ID
+     * @return 同意则进入房间 拒绝则无操作
      */
-    void onBeingInvited(String invitorID, int roomPort);
+    boolean onBeingInvited(String invitorID, int roomPort);
 
     /**
      * 邀请别人的结果
-     * @param result 0成功发送邀请，-1房间不存在，-2用户不存在，-3其他错误
+     * @param result 0成功发送邀请，-1用户不在线
      */
     void onInviteFriend(int result);
 

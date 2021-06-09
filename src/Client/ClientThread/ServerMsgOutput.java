@@ -19,6 +19,7 @@ public class ServerMsgOutput {
     }
 
     protected void write(String str){
+        System.out.println(str);
         printStream.println(str);
     }
 

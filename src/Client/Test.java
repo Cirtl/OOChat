@@ -83,8 +83,8 @@ public class Test {
             }
 
             @Override
-            public void onBeingInvited(String invitorID, int roomPort) {
-
+            public boolean onBeingInvited(String invitorID, int roomPort) {
+                return true;
             }
 
             @Override
@@ -112,6 +112,47 @@ public class Test {
 
             }
         });
+
+        client.userRegister("123","621ydh");
+        Thread.sleep(300);
+        client.userLogin("123","622ydh");
+        Thread.sleep(300);
+        client.userLogin("123","621ydh");
+        Thread.sleep(300);
+        client.enterRoom(8003,"123");
+        Thread.sleep(300);
+        client.deleteRoom(8003);
+        Thread.sleep(300);
+        client.sendMsg("no!!");
+        Thread.sleep(300);
+        client.leaveRoom();
+        Thread.sleep(300);
+        client.enterRoom(8003,"123");
+        Thread.sleep(300);
+        client.leaveRoom();
+        Thread.sleep(300);
+        client.shutRoom(8003);
+        Thread.sleep(300);
+        client.deleteRoom(8003);
+        Thread.sleep(300);
+        client.newRoom(8003,"213");
+        Thread.sleep(300);
+        client.leaveRoom();
+        Thread.sleep(300);
+        client.shutRoom(8003);
+        Thread.sleep(300);
+        client.runRoom(8003);
+        Thread.sleep(300);
+        client.enterRoom(8003,"213");
+        Thread.sleep(300);
+        client.makeFriend("test2");
+        Thread.sleep(300);
+        client.inviteFriend("test2");
+        Thread.sleep(300);
+        client.getFriends();
+        Thread.sleep(300);
+        client.getMyRooms();
+        Thread.sleep(15000);
         client.closeClient();
     }
 }

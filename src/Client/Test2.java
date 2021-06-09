@@ -70,8 +70,8 @@ public class Test2 {
 
             @Override
             public boolean onAskedBeFriend(String friendID) {
-                System.out.println("refuse friend " + friendID);
-                return false;
+                System.out.println("accept friend " + friendID);
+                return true;
             }
 
 
@@ -81,8 +81,9 @@ public class Test2 {
             }
 
             @Override
-            public void onBeingInvited(String invitorID, int roomPort) {
-
+            public boolean onBeingInvited(String invitorID, int roomPort) {
+                System.out.println(invitorID + roomPort);
+                return true;
             }
 
             @Override
@@ -110,16 +111,16 @@ public class Test2 {
 
             }
         });
+        client.userRegister("test2","test2");
+        Thread.sleep(300);
         client.userLogin("test2","test2");
         Thread.sleep(300);
         client.newRoom(8004,"213");
+        Thread.sleep(300);
+        client.shutRoom(8004);
+        Thread.sleep(300);
+        client.deleteRoom(8004);
         Thread.sleep(30000);
-//        Scanner scanner = new Scanner(System.in);
-//        while(true){
-//            String s = scanner.nextLine();
-//            if(s.equals("QUIT")) break;
-//            client.sendMsg(s);
-//        }
         client.closeClient();
     }
 }

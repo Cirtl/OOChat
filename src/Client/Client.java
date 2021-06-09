@@ -22,17 +22,18 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public static final String SUCCESS = "SUCCESS";
     public static final String UNCONFIRMED = "UNCONFIRMED";
     public static final String DIVIDER = " ";
-    private static final String host = "192.186.43.1";
+    private static final String host = "0.0.0.0";
     private static final int port_user = 8000;
     private static final int port_info = 8001;
     private ClientThread chatThread;
-    private ClientThread userThread;
-    private ClientThread infoThread;
+    private final ClientThread userThread;
+    private final ClientThread infoThread;
     private final List<ClientCallback> callbackList;
     private boolean isLogin;
     private boolean inRoom;
     private String id;
     private int roomPort;
+    private String roomPwd;
 
     /**
      * 新建服务端链接
@@ -168,6 +169,21 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                         else
                             makeFriend(toID, FAIL);
                     }
+                } else if (option.startsWith(BE_INVITED)) {
+                    String invitor = info[0];
+                    int roomPort = Integer.parseInt(info[1]);
+                    String pwd = info[2];
+                    boolean flag = true;
+                    System.out.println("hello here");
+                    for (ClientCallback callback : callbackList)
+                        flag = flag && callback.onBeingInvited(invitor, roomPort);
+                    if (flag) {
+                        enterRoom(roomPort, pwd);
+                    }
+                } else if (option.startsWith(INVITE_FRIEND)) {
+                    int result = Integer.parseInt(info[0]);
+                    for (ClientCallback callback : callbackList)
+                        callback.onShutRoom(result);
                 } else if (option.startsWith(DISCONNECT)) {
                     userThread.closeThread();
                     for (ClientCallback callback : callbackList)
@@ -258,29 +274,42 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                         callback.onNewRoom(flag, port);
                 } else if (option.startsWith(InfoInterface.ENTER_ROOM)) {
                     //成功进入房间
-                    if (info.length > 1) {
-                        int port = Integer.parseInt(info[1]);
-                        if (info[0].equals(SUCCESS)) {
-                            try {
-                                chatThread = new ClientThread(host, port);
-                                initChatThread();
-                                chatThread.runThread();
-                                inRoom = true;
-                                roomPort = port;
-                                sendMsg(id);
-                            } catch (IOException e) {
-                                inRoom = false;
-                                System.out.println(e);
-                                for (ClientCallback callback : callbackList)
-                                    callback.onEnterRoom(-1, -3);
-                            }
-                        } else {
+                    int port = Integer.parseInt(info[1]);
+                    if (info[0].equals(SUCCESS)) {
+                        String pwd = info[2];
+                        try {
+                            chatThread = new ClientThread(host, port);
+                            initChatThread();
+                            chatThread.runThread();
+                            inRoom = true;
+                            roomPwd = pwd;
+                            roomPort = port;
+                            sendMsg(id);
+                        } catch (IOException e) {
+                            inRoom = false;
+                            roomPwd = null;
+                            System.out.println(e);
                             for (ClientCallback callback : callbackList)
-                                callback.onEnterRoom(-1, port);
+                                callback.onEnterRoom(-1, -3);
                         }
+                    } else {
+                        for (ClientCallback callback : callbackList)
+                            callback.onEnterRoom(-1, port);
                     }
                 } else if (option.startsWith(InfoInterface.DELETE_ROOM)) {
-
+                    if(info[0].equals(SUCCESS)){
+                        for(ClientCallback callback:callbackList)
+                            callback.onDeleteRoom(0);
+                    }else{
+                        int result;
+                        try{
+                            result = Integer.parseInt(info[1]);
+                        }catch (Exception e){
+                            result = -1;
+                        }
+                        for(ClientCallback callback:callbackList)
+                            callback.onDeleteRoom(result);
+                    }
                 } else if (option.startsWith(InfoInterface.SHUT_ROOM)) {
                     int result = Integer.parseInt(info[1]);
                     if (info[0].equals(SUCCESS)) {
@@ -290,15 +319,6 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                         for (ClientCallback callback : callbackList)
                             callback.onShutRoom(result);
                     }
-                } else if (option.startsWith(BE_INVITED)) {
-                    String invitor = info[0];
-                    int roomPort = Integer.parseInt(info[1]);
-                    for (ClientCallback callback : callbackList)
-                        callback.onBeingInvited(invitor, roomPort);
-                } else if (option.startsWith(INVITE_FRIEND)) {
-                    int result = Integer.parseInt(info[0]);
-                    for (ClientCallback callback : callbackList)
-                        callback.onShutRoom(result);
                 } else if (option.startsWith(RUN_ROOM)) {
                     int result = info[0].equals(SUCCESS) ? 0 : -1;
                     int port = Integer.parseInt(info[1]);
@@ -408,8 +428,8 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     @Override
     public void inviteFriend(String friendID) {
         if (isLogin && inRoom) {
-            String builder = InfoInterface.INVITE_FRIEND + DIVIDER + id + DIVIDER + roomPort + DIVIDER + friendID;
-            infoThread.sendMsg(builder);
+            String builder = InfoInterface.INVITE_FRIEND + DIVIDER + id + DIVIDER + roomPort + DIVIDER + roomPwd +DIVIDER + friendID;
+            userThread.sendMsg(builder);
         } else {
             for (ClientCallback callback : callbackList)
                 callback.onInviteFriend(-1);
