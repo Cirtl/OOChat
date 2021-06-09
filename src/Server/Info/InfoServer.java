@@ -8,6 +8,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import Server.Room.RoomServer;
+
 public class InfoServer implements Runnable{
 
     ServerSocket serverSocket;
@@ -17,6 +19,8 @@ public class InfoServer implements Runnable{
     Boolean isRunning = false;
 
     protected Map<String, InfoThread> clientMap;//存储所有的用户信息
+
+    private static Map<Integer, RoomServer> rooms = new ConcurrentHashMap<>();
 
     public InfoServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
@@ -33,7 +37,7 @@ public class InfoServer implements Runnable{
                 Socket client = serverSocket.accept();
                 System.out.println("新用户链接信息端口:" + client.getInetAddress() + ",端口" + client.getPort());
                 //新建服务端线程去处理客户
-                executorService.submit(new InfoThread(client,clientMap));
+                executorService.submit(new InfoThread(client,clientMap,rooms));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -41,6 +45,9 @@ public class InfoServer implements Runnable{
     }
 
     public void closeServer() throws IOException {
+        for (Map.Entry<Integer, RoomServer> stringChatThreadEntry : rooms.entrySet()) {
+            stringChatThreadEntry.getValue().closeServer();
+        }
         for (Map.Entry<String, InfoThread> stringChatThreadEntry : clientMap.entrySet()) {
             stringChatThreadEntry.getValue().closeThread();
         }

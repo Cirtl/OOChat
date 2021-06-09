@@ -19,7 +19,7 @@ import Server.ServerThread;
  */
 public class InfoThread  extends ServerThread implements  InfoInterface {
     //储存所有房间
-    private static Map<Integer, RoomServer> rooms = new ConcurrentHashMap<>();
+    private Map<Integer, RoomServer> rooms = new ConcurrentHashMap<>();
     //储存所有登录线程的用户
     private Map<String, InfoThread> clientMap;
     //决定是否在运行
@@ -27,10 +27,11 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
     //读入器
     Scanner scanner;
 
-    public InfoThread(Socket client,Map<String, InfoThread> clientMap) {
+    public InfoThread(Socket client,Map<String, InfoThread> clientMap,Map<Integer, RoomServer> rooms) {
         super(client);
         this.isRunning = true;
         this.clientMap = clientMap;
+        this.rooms = rooms;
     }
 
     @Override
@@ -216,7 +217,7 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
                 try{
                     RoomServer roomServer = new RoomServer(roomPort,userID,pwd);
                     rooms.put(roomPort,roomServer);
-                    new Thread(roomServer).start();
+                    new Thread(roomServer,String.valueOf(roomPort)).start();
                     sendToMe(makeOrder(NEW_ROOM,String.valueOf(0), String.valueOf(roomPort)));
                 }catch (IOException e){
                     e.printStackTrace();

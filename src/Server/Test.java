@@ -16,14 +16,25 @@ public class Test {
         /** 运行服务器 **/
         LoginServer loginServer = new LoginServer(port_login);
         InfoServer infoServer = new InfoServer(port_info);
-        new Thread(infoServer).start();
-        new Thread(loginServer).start();
+        new Thread(infoServer,"info").start();
+        new Thread(loginServer,"login").start();
+
+        for (Thread t : Thread.getAllStackTraces().keySet()) {
+            if (t.getState()==Thread.State.RUNNABLE)
+               System.out.println(t.getName());
+        }
+
+        Thread.sleep(10000);
+        loginServer.closeServer();
+        infoServer.closeServer();
 
         while(true){
             int nbRunning = 0;
             for (Thread t : Thread.getAllStackTraces().keySet()) {
-                if (t.getState()==Thread.State.RUNNABLE)
-                    nbRunning++;
+                if (t.getState()==Thread.State.RUNNABLE){
+
+                }
+                    System.out.println(t.getName());
             }
             System.out.println("当前运行线程" + nbRunning);
             Thread.sleep(5000);

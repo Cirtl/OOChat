@@ -65,13 +65,13 @@ public class RoomServer implements Runnable {
     }
 
     public void closeServer() throws IOException {
+        for (Map.Entry<String, RoomThread> stringChatThreadEntry : clientMap.entrySet()) {
+            stringChatThreadEntry.getValue().leaveRoom(2);
+        }
         System.out.println(portNum+" 聊天室关闭 ");
         isRunning = false;
         executorService.shutdown();
         serverSocket.close();
-        for (Map.Entry<String, RoomThread> stringChatThreadEntry : clientMap.entrySet()) {
-            stringChatThreadEntry.getValue().leaveRoom(2);
-        }
     }
 
     public int getPortNum() {
