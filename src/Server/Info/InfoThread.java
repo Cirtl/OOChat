@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
+import Repository.User;
 import Server.ServerInterfaces.InfoInterface;
 import Server.Room.RoomServer;
 import Server.ServerThread;
@@ -213,13 +214,17 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
         if(rooms.containsKey(roomPort)){
             RoomServer roomServer = rooms.get(roomPort);
             if(roomServer.inRoom(userID))
+                //已在房间里
                 sendToMe(makeOrder(InfoInterface.ENTER_ROOM,FAIL, String.valueOf(-1)));
             else if(!roomServer.checkPassword(pwd))
+                //密码错误
                 sendToMe(makeOrder(ENTER_ROOM,FAIL,String.valueOf(-3)));
             else
+                //成功邀请
                 sendToMe(makeOrder(InfoInterface.ENTER_ROOM,SUCCESS, String.valueOf(roomPort)));
         }
         else
+            //房间不存在
             sendToMe(makeOrder(InfoInterface.ENTER_ROOM,FAIL, String.valueOf(-2)));
     }
 
@@ -231,9 +236,11 @@ public class InfoThread  extends ServerThread implements  InfoInterface {
                 sendToSomeOne(friendID,makeOrder(INVITE_FRIEND,userID,String.valueOf(roomPort)));
                 sendToMe(makeOrder(INVITE_FRIEND,String.valueOf(0)));
             }else{
+                //好友不在线
                 sendToMe(makeOrder(INVITE_FRIEND,String.valueOf(-2)));
             }
         }else{
+            //房间不存在
             sendToMe(makeOrder(INVITE_FRIEND,String.valueOf(-1)));
         }
     }

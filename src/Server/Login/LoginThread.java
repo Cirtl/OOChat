@@ -22,9 +22,14 @@ public class LoginThread extends ServerThread implements UserInterface {
     //读入器
     private Scanner scanner;
 
-    //
+    //运行标志
     private boolean isRunning;
 
+    /**
+     * 构造进程来服务用户登录注册
+     * @param client 用户socket
+     * @param clientMap 用户集合
+     */
     LoginThread(Socket client, Map<String, LoginThread> clientMap) {
         super(client);
         this.clientMap = clientMap;
@@ -85,7 +90,8 @@ public class LoginThread extends ServerThread implements UserInterface {
                 if(scanner.hasNext())
                     data = scanner.nextLine();
                 if(data.isEmpty()){
-                    System.out.println("login break down ");
+                    //如果用户异常退出 则关闭线程
+                    System.out.println(" login break down ");
                     closeThread();
                     break;
                 }
@@ -119,56 +125,67 @@ public class LoginThread extends ServerThread implements UserInterface {
     @Override
     public void userLogout() {
         //todo:对接数据库的操作
-        clientMap.remove(user.getId());
-        user = null;
-        sendToMe(UserInterface.LOGOUT + DIVIDER + SUCCESS);
+        if(user.logout()){
+            clientMap.remove(user.getId());
+            user = null;
+            sendToMe(LOGOUT + DIVIDER + SUCCESS);
+        }else{
+            sendToMe(makeOrder(LOGOUT,FAIL));
+        }
     }
 
     @Override
     public void userLogin(String id, String pwd) {
-        if(this.user==null){
+        user = new User(id,pwd);
+        if(user.login()){
             //todo:对接数据库
-            user = new User(id,pwd);
-            if(true){
-                clientMap.put(id,this);
-                sendToMe(UserInterface.LOGIN + DIVIDER + SUCCESS + DIVIDER + id);
-            }
+            clientMap.put(id,this);
+            sendToMe(LOGIN + DIVIDER + SUCCESS + DIVIDER + id);
         }else{
-            sendToMe(UserInterface.LOGIN + DIVIDER + FAIL + DIVIDER + -1);
+            sendToMe(LOGIN + DIVIDER + FAIL + DIVIDER + -1);
         }
     }
 
     @Override
     public void userRegister(String id, String pwd) {
+        User newUser = new User(id,pwd);
         //todo:对接数据库
-        if(true){
-            sendToMe(UserInterface.REGISTER + DIVIDER + SUCCESS);
+        if(newUser.register()){
+            sendToMe(makeOrder(REGISTER,SUCCESS));
         }else{
-            sendToMe(UserInterface.REGISTER + DIVIDER + FAIL);
+            sendToMe(makeOrder(REGISTER,FAIL));
         }
-
     }
 
     @Override
     public void makeFriend(String toID,String state) {
         //todo:实现交友
         if(user!=null){
-            if(state.equals(SUCCESS)){
-                //由接受邀请方发来，交友成功
-                sendToSomeOne(toID,makeOrder(MAKE_FRIEND,SUCCESS,String.valueOf(0),user.getId()));
-                sendToMe(makeOrder(MAKE_FRIEND,SUCCESS,String.valueOf(0),toID));
-            }else if(state.equals(FAIL)){
-                //由接受邀请方发来，交友拒绝
-                sendToSomeOne(toID,makeOrder(MAKE_FRIEND,FAIL,String.valueOf(-1),user.getId()));
-            }else if(state.equals(UNCONFIRMED)){
-                //由发送邀请方发来，请求未决
-                System.out.println(clientMap.keySet());
-                if(clientMap.containsKey(toID)){
-                    sendToSomeOne(toID,makeOrder(MAKE_FRIEND,UNCONFIRMED,user.getId()));
-                }else{
-                    //用户不在线
-                    sendToMe(makeOrder(MAKE_FRIEND,FAIL,String.valueOf(-2),toID));
-                }
+            switch (state) {
+                case SUCCESS:
+                    //由接受邀请方发来，交友成功
+                    if (user.addFriend(toID)) {
+                        sendToSomeOne(toID, makeOrder(MAKE_FRIEND, SUCCESS, String.valueOf(0), user.getId()));
+                        sendToMe(makeOrder(MAKE_FRIEND, SUCCESS, String.valueOf(0), toID));
+                    } else {
+                        sendToSomeOne(toID, makeOrder(MAKE_FRIEND, FAIL, String.valueOf(-3), user.getId()));
+                        sendToMe(makeOrder(MAKE_FRIEND, FAIL, String.valueOf(-3), toID));
+                    }
+                    break;
+                case FAIL:
+                    //由接受邀请方发来，交友拒绝
+                    sendToSomeOne(toID, makeOrder(MAKE_FRIEND, FAIL, String.valueOf(-1), user.getId()));
+                    break;
+                case UNCONFIRMED:
+                    //由发送邀请方发来，请求未决
+                    System.out.println(clientMap.keySet());
+                    if (clientMap.containsKey(toID)) {
+                        sendToSomeOne(toID, makeOrder(MAKE_FRIEND, UNCONFIRMED, user.getId()));
+                    } else {
+                        //用户不在线
+                        sendToMe(makeOrder(MAKE_FRIEND, FAIL, String.valueOf(-2), toID));
+                    }
+                    break;
             }
         }else{
             sendToMe(makeOrder(MAKE_FRIEND,FAIL,String.valueOf(-3),toID));

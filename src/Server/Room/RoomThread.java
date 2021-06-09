@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.Map;
 import java.util.Scanner;
 
+import Repository.User;
 import Server.ServerInterfaces.ChatterInterface;
 import Server.ServerThread;
 
@@ -23,6 +24,8 @@ public class RoomThread extends ServerThread implements ChatterInterface {
     protected Map<String, RoomThread> clientMap;
 
     private Scanner receiver;
+
+    private User user;
 
     public RoomThread(Socket client, Map<String, RoomThread> clientMap, RoomServer roomServer) {
         super(client);
@@ -83,7 +86,9 @@ public class RoomThread extends ServerThread implements ChatterInterface {
      * @param userID
      */
     private void init(String userID) {
+        user = new User(userID,"-1");
         this.userID = userID;
+        //todo:修改房间
         if (this.userID != null && !this.clientMap.containsKey(userID)) {
             this.clientMap.put(userID, this);
             sendMsg("我进入了聊天室");
@@ -154,6 +159,9 @@ public class RoomThread extends ServerThread implements ChatterInterface {
             for (Map.Entry<String, RoomThread> stringChatThreadEntry : clientMap.entrySet()) {
                 if (stringChatThreadEntry.getKey().equals(receiverID)) {
                     stringChatThreadEntry.getValue().leaveRoom(1);
+                    //todo:结合数据库的移出房间
+                    User removedUser = new User(receiverID,"-1");
+                    removedUser.quitHouse(roomServer.portNum);
                     break;
                 }
             }
@@ -171,6 +179,8 @@ public class RoomThread extends ServerThread implements ChatterInterface {
 
     @Override
     public void leaveRoom(int way) {
+        //todo:数据库测试
+        user.quitHouse(roomServer.portNum);
         sendToMe(ChatterInterface.LEAVE_ROOM + DIVIDER + way);
         closeThread();
     }
