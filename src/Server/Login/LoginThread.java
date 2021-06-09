@@ -80,8 +80,10 @@ public class LoginThread extends ServerThread implements UserInterface {
         //建立输入输出流
         try {
             //初始化，如果已存在则返回
-            if (clientMap.containsValue(this))
+            if (clientMap.containsValue(this)){
+                closeThread();
                 return;
+            }
             clientMap.put(client.toString(), this);
             scanner = new Scanner(client.getInputStream());
             sendToMe("进入登录注册服务器");
@@ -124,7 +126,6 @@ public class LoginThread extends ServerThread implements UserInterface {
 
     @Override
     public void userLogout() {
-        //todo:对接数据库的操作
         if(user.logout()){
             clientMap.remove(user.getId());
             user = null;
@@ -137,9 +138,7 @@ public class LoginThread extends ServerThread implements UserInterface {
     @Override
     public void userLogin(String id, String pwd) {
         user = new User(id,pwd);
-        user.logout();
         if(user.login()){
-            //todo:对接数据库
             clientMap.put(id,this);
             sendToMe(LOGIN + DIVIDER + SUCCESS + DIVIDER + id);
         }else{
@@ -150,7 +149,6 @@ public class LoginThread extends ServerThread implements UserInterface {
     @Override
     public void userRegister(String id, String pwd) {
         User newUser = new User(id,pwd);
-        //todo:对接数据库
         if(newUser.register()){
             sendToMe(makeOrder(REGISTER,SUCCESS));
         }else{
@@ -160,7 +158,6 @@ public class LoginThread extends ServerThread implements UserInterface {
 
     @Override
     public void makeFriend(String toID,String state) {
-        //todo:实现交友
         if(user!=null){
             switch (state) {
                 case SUCCESS:

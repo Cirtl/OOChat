@@ -212,16 +212,17 @@ public class User {
      * 销毁房间
      *
      * @param houseId 房间号
+     * @return 成功返回0，失败返回-1，房间不存在返回-2，非房主返回-3
      */
-    public boolean destroyHouse(int houseId) {
+    public int destroyHouse(int houseId) {
         if (!judgeLogin() || !new HandleIsHouse().queryVerify(houseId)) {
-            return false;
+            return -2;
         }
         if (!new HandleIsHost().queryVerify(this.id, houseId)) {
             // JOptionPane.showMessageDialog(null, "不在房间", "警告", JOptionPane.WARNING_MESSAGE);
-            return false;
+            return -3;
         }
-        return new HandleDestroyHouse().queryVerify(this.id, houseId);
+        return new HandleDestroyHouse().queryVerify(this.id, houseId) ?0:-1;
     }
 
     /**

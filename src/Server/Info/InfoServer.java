@@ -8,9 +8,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import Repository.HouseList;
 import Server.Room.RoomServer;
 
 public class InfoServer implements Runnable{
+
+    InfoServer infoServer;
 
     ServerSocket serverSocket;
 
@@ -22,16 +25,47 @@ public class InfoServer implements Runnable{
 
     private static Map<Integer, RoomServer> rooms = new ConcurrentHashMap<>();
 
-    public InfoServer(int port) throws IOException {
+    private InfoServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
         isRunning = true;
         clientMap = new ConcurrentHashMap<>();
         this.executorService = Executors.newFixedThreadPool(100);
-        System.out.println(serverSocket.getInetAddress() + ":信息服务器启动");
+    }
+
+    public InfoServer getInstance(int port) throws IOException {
+        if(infoServer==null)
+            infoServer = new InfoServer(port);
+        return infoServer;
+    }
+
+    private boolean init(){
+        try{
+            Map<Integer, String[]> houseList =  HouseList.getInstance().getHouseList();
+            for(Map.Entry<Integer,String[]> house : houseList.entrySet()){
+                int roomPort = house.getKey();
+                String[] info = house.getValue();
+                RoomServer roomServer = new RoomServer(roomPort,info[2],info[1]);
+                rooms.put(roomPort,roomServer);
+                new Thread(roomServer).start();
+            }
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public void run() {
+        if(!init()){
+            try {
+                closeServer();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(serverSocket.getInetAddress() + ":信息服务器启动失败");
+            return;
+        }
+        System.out.println(serverSocket.getInetAddress() + ":信息服务器启动成功");
         while (isRunning) {
             try {
                 Socket client = serverSocket.accept();
