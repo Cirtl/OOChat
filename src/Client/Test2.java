@@ -58,9 +58,10 @@ public class Test2 {
             }
 
             @Override
-            public void onMyRoomList(int result,int[] rooms,int[] pwd) {
+            public void onMyRoomList(int result, List<Integer> rooms, List<String> owners) {
 
             }
+
 
             @Override
             public void onMakeFriend(int result, String friendID) {
@@ -100,8 +101,10 @@ public class Test2 {
             }
         });
         client.userLogin("test2","test2");
+        Thread.sleep(300);
+        client.newRoom(8004,"213");
         Thread.sleep(30000);
-        Scanner scanner = new Scanner(System.in);
+//        Scanner scanner = new Scanner(System.in);
 //        while(true){
 //            String s = scanner.nextLine();
 //            if(s.equals("QUIT")) break;

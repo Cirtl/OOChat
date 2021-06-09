@@ -33,8 +33,6 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     private boolean inRoom;
     private String id;
     private int roomPort;
-    private boolean ownRoom;
-    private int ownRoomPort;
     /**
      * 新建服务端链接
      *
@@ -169,6 +167,10 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                         else
                             makeFriend(toID,FAIL);
                     }
+                } else if(option.startsWith(DISCONNECT)){
+                    userThread.closeThread();
+                    for(ClientCallback callback:callbackList)
+                        callback.onDisconnect(1);
                 }
             }
         });
@@ -209,6 +211,9 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                     List<String> users = new ArrayList<>(Arrays.asList(info));
                     for(ClientCallback callback:callbackList)
                         callback.onGetRoomInfo(0,users);
+                }else if(option.startsWith(DISCONNECT)){
+                    for(ClientCallback callback:callbackList)
+                        callback.onDisconnect(3);
                 }
             }
 
@@ -223,34 +228,31 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
             @Override
             public void onReceiveMessage(String option, String[] info) {
                 if (option.startsWith(MY_ROOMS)) {
-                    if (info[0].startsWith("empty")) {
+                    if (info[0].equals(FAIL)) {
                         for (ClientCallback callback : callbackList)
                             callback.onMyRoomList(-1, null, null);
-                    } else {
+                    } else if(info[0].equals(SUCCESS)){
                         //读出房间号
-                        int[] rooms = new int[info.length];
+                        int roomNum = Integer.parseInt(info[1]);
+                        List<Integer> ports = new ArrayList<>();
+                        List<String> hosts = new ArrayList<>();
                         try {
-                            for (int i = 0; i < info.length; i++) {
-                                int room = Integer.parseInt(info[i]);
-                                rooms[i] = room;
+                            for (int i = 0; i < roomNum; i++) {
+                                String roomInfo = info[2+i];
+                                String[] detail = roomInfo.split("_",2);
+                                ports.add(Integer.parseInt(detail[0]));
+                                hosts.add(detail[1]);
                             }
+                            for (ClientCallback callback : callbackList)
+                                callback.onMyRoomList(0, ports, hosts);
                         } catch (Exception e) {
                             for (ClientCallback callback : callbackList)
-                                callback.onMyRoomList(-1, null, null);
+                                callback.onMyRoomList(-2, null, null);
                         }
-                        for (ClientCallback callback : callbackList)
-                            callback.onMyRoomList(0, rooms, rooms);
                     }
                 } else if (option.startsWith(InfoInterface.NEW_ROOM)) {
-                    int flag;
+                    int flag = Integer.parseInt(info[0]);
                     int port = Integer.parseInt(info[1]);
-                    if(info[0].equals(SUCCESS)){
-                        flag = 0;
-                        ownRoom = true;
-                        ownRoomPort = port;
-                    }
-                    else
-                        flag = -1;
                     for (ClientCallback callback : callbackList)
                         callback.onNewRoom(flag,port);
                 } else if (option.startsWith(InfoInterface.ENTER_ROOM)) {
@@ -296,6 +298,9 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                     int result = Integer.parseInt(info[0]);
                     for (ClientCallback callback : callbackList)
                         callback.onShutRoom(result);
+                }else if(option.startsWith(DISCONNECT)){
+                    for(ClientCallback callback:callbackList)
+                        callback.onDisconnect(2);
                 }
             }
 
@@ -365,7 +370,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
             infoThread.sendMsg(InfoInterface.MY_ROOMS);
         else{
             for(ClientCallback callback:callbackList)
-                callback.onMyRoomList(-1,null,null);
+                callback.onMyRoomList(-2,null,null);
         }
     }
 

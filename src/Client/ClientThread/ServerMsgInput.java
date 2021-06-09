@@ -43,9 +43,14 @@ public class ServerMsgInput implements Runnable{
 
     @Override
     public void run() {
-        while (scanner.hasNext()){
-            onReceiveMsg(scanner.nextLine());
+        try{
+            while (scanner.hasNext()){
+                onReceiveMsg(scanner.nextLine());
+            }
+        }catch (Exception e){
+            System.out.println(e + " when receive");
         }
+
     }
 
     protected void close(){

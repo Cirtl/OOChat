@@ -58,9 +58,14 @@ public class Test {
             }
 
             @Override
-            public void onMyRoomList(int result,int[] rooms,int[] pwd) {
+            public void onMyRoomList(int result, List<Integer> rooms, List<String> owners) {
+                if(result==0){
+                    for(int i=0;i<rooms.size();i++)
+                        System.out.println(rooms.get(i) + "拥有者为" + owners.get(i));
+                }
 
             }
+
 
             @Override
             public void onMakeFriend(int result, String friendID) {
@@ -100,23 +105,29 @@ public class Test {
         });
         client.userLogin("杨东浩","test1");
         Thread.sleep(300);
-        client.newRoom(8003,"123");
+        client.getMyRooms();
         Thread.sleep(300);
-        client.enterRoom(8003,"456");
+        client.newRoom(8003,"123");
         Thread.sleep(300);
         client.enterRoom(8003,"123");
         Thread.sleep(300);
-        client.deleteRoom(8003);
-        Thread.sleep(300);
-        client.leaveRoom();
-        Thread.sleep(300);
-        client.shutRoom(8003);
-        Thread.sleep(300);
-        client.deleteRoom(8003);
-        Thread.sleep(300);
-        client.makeFriend("test2");
-        Thread.sleep(15000);
-        Scanner scanner = new Scanner(System.in);
+//        client.enterRoom(8003,"123");
+//        Thread.sleep(300);
+//        client.getMyRooms();
+//        Thread.sleep(300);
+//        client.deleteRoom(8003);
+//        Thread.sleep(300);
+//        client.leaveRoom();
+//        Thread.sleep(300);
+//        client.newRoom(8003,"123");
+//        Thread.sleep(300);
+//        client.shutRoom(8003);
+//        Thread.sleep(300);
+//        client.newRoom(8003,"123");
+//        Thread.sleep(300);
+//        client.getMyRooms();
+        Thread.sleep(30000);
+//        Scanner scanner = new Scanner(System.in);
 //        while(true){
 //            String s = scanner.nextLine();
 //            if(s.equals("QUIT")) break;
