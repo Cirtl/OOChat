@@ -13,7 +13,7 @@ import Server.Room.RoomServer;
 
 public class InfoServer implements Runnable{
 
-    InfoServer infoServer;
+    private static InfoServer infoServer;
 
     ServerSocket serverSocket;
 
@@ -32,7 +32,7 @@ public class InfoServer implements Runnable{
         this.executorService = Executors.newFixedThreadPool(100);
     }
 
-    public InfoServer getInstance(int port) throws IOException {
+    public static InfoServer getInstance(int port) throws IOException {
         if(infoServer==null)
             infoServer = new InfoServer(port);
         return infoServer;

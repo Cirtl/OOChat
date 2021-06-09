@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 public class LoginServer implements Runnable {
 
-    LoginServer loginServer;
+    private static LoginServer loginServer;
 
     ServerSocket serverSocket;
 
@@ -28,7 +28,7 @@ public class LoginServer implements Runnable {
         System.out.println(serverSocket.getInetAddress() + ":登录注册服务器启动");
     }
 
-    public LoginServer getInstance(int port) throws IOException {
+    public static LoginServer getInstance(int port) throws IOException {
         if(loginServer==null)
             loginServer = new LoginServer(port);
         return loginServer;

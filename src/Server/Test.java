@@ -14,8 +14,8 @@ public class Test {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         /** 运行服务器 **/
-        LoginServer loginServer = new LoginServer(port_login);
-        InfoServer infoServer = new InfoServer(port_info);
+        LoginServer loginServer = LoginServer.getInstance(port_login);
+        InfoServer infoServer = InfoServer.getInstance(port_info);
         new Thread(infoServer,"info").start();
         new Thread(loginServer,"login").start();
 
