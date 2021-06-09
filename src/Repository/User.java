@@ -5,7 +5,6 @@ import Repository.Handle.User_House.HandleGetHouseListByUser;
 import Repository.Handle.House.HandleGetHomePass;
 import Repository.Handle.House.HandleIsHost;
 import Repository.Handle.House.HandleIsHouse;
-import Repository.Handle.House.HandleIsLogin;
 import Repository.Handle.User.*;
 
 import java.util.Vector;
@@ -103,7 +102,7 @@ public class User {
      */
     public void printInfo() {
         System.out.println("id:" + this.getId() + " password" + this.getPass() +
-                " ip:" + this.getIp() + " isLogin:" + new HandleIsLogin().queryVerify(id));
+                " ip:" + this.getIp());
     }
 
     /**
@@ -119,10 +118,10 @@ public class User {
      * @return 是否成功登录
      */
     private boolean judgeLogin() {
-        if (!new HandleIsLogin().queryVerify(this.id)) {
-            // JOptionPane.showMessageDialog(null, "请先登录", "警告", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
+//        if (!new HandleIsLogin().queryVerify(this.id)) {
+//            // JOptionPane.showMessageDialog(null, "请先登录", "警告", JOptionPane.WARNING_MESSAGE);
+//            return false;
+//        }
         return true;
     }
 
@@ -141,7 +140,7 @@ public class User {
      * @return 登录成功与否
      */
     public boolean login() {
-        if (new HandleIsLogin().queryVerify(this.id)) {
+        if (judgeLogin()) {
             // JOptionPane.showMessageDialog(null, "您已登录，不能重复登陆", "警告", JOptionPane.WARNING_MESSAGE);
             return false;
         }
@@ -154,7 +153,8 @@ public class User {
      * @return 注销成功与否
      */
     public boolean logout() {
-        return new HandleLogout().queryVerify(this.id, this.pass);
+        return true;
+        //return new HandleLogout().queryVerify(this.id, this.pass);
     }
 
     /**

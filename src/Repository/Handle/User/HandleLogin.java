@@ -30,15 +30,14 @@ public class HandleLogin {
      * @see SQLException
      */
     public boolean queryVerify(String id, String pass) {
-        String sqlStr = "update `user` set isLogin=? where id=? and password=?";
+        String sqlStr = "select * from `user`  where id=? and password=?";
         try {
             preSql = con.prepareStatement(sqlStr);
-            preSql.setBoolean(1, true);
-            preSql.setString(2, id);
-            preSql.setString(3, pass);
-            int ok = preSql.executeUpdate();
+            preSql.setString(1, id);
+            preSql.setString(2, pass);
+            ResultSet rs = preSql.executeQuery();
             con.close();
-            if (ok != 0) {
+            if (rs.next()) {
                 // JOptionPane.showMessageDialog(null, "登录成功", "恭喜", JOptionPane.WARNING_MESSAGE);
                 return true;
             } else {
