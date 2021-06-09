@@ -96,7 +96,7 @@ public class InfoThread extends ServerThread implements InfoInterface {
                     break;
                 }
                 System.out.println("receive from INFO " + client + " " + data);
-                if (data.startsWith(InfoInterface.NEW_ROOM)) {
+                if (data.startsWith(NEW_ROOM)) {
                     String[] info = data.split(DIVIDER, 4);
                     if (info.length > 3) {
                         String id = info[1], room = info[2], pwd = info[3];
@@ -108,7 +108,7 @@ public class InfoThread extends ServerThread implements InfoInterface {
                         }
                         newRoom(id, room_port, pwd);
                     }
-                } else if (data.startsWith(InfoInterface.ENTER_ROOM)) {
+                } else if (data.startsWith(ENTER_ROOM)) {
                     String[] info = data.split(DIVIDER, 4);
                     if (info.length > 3) {
                         String id = info[1], room = info[2], pwd = info[3];
@@ -120,9 +120,9 @@ public class InfoThread extends ServerThread implements InfoInterface {
                         }
                         enterRoom(id, room_port, pwd);
                     }
-                } else if (data.startsWith(InfoInterface.MY_ROOMS)) {
+                } else if (data.startsWith(MY_ROOMS)) {
                     getMyRooms();
-                } else if (data.startsWith(InfoInterface.DELETE_ROOM)) {
+                } else if (data.startsWith(DELETE_ROOM)) {
                     String[] info = data.split(DIVIDER, 3);
                     if (info.length > 2) {
                         int port;
@@ -133,7 +133,7 @@ public class InfoThread extends ServerThread implements InfoInterface {
                         }
                         deleteRoom(info[1], port);
                     }
-                } else if (data.startsWith(InfoInterface.INVITE_FRIEND)) {
+                } else if (data.startsWith(INVITE_FRIEND)) {
                     String[] info = data.split(DIVIDER, 4);
                     if (info.length > 3) {
                         int port;
@@ -145,7 +145,7 @@ public class InfoThread extends ServerThread implements InfoInterface {
                         inviteFriend(info[1], port, info[3]);
                     }
 
-                } else if (data.startsWith(InfoInterface.SHUT_ROOM)) {
+                } else if (data.startsWith(SHUT_ROOM)) {
                     String[] info = data.split(DIVIDER, 3);
                     if (info.length > 2) {
                         String id = info[1], room = info[2];
