@@ -127,6 +127,7 @@ public class LoginThread extends ServerThread implements UserInterface {
     @Override
     public void userLogout() {
         if(user.logout()){
+            System.out.println(user.getId() + " logout");
             clientMap.remove(user.getId());
             user = null;
             sendToMe(LOGOUT + DIVIDER + SUCCESS);
@@ -141,6 +142,7 @@ public class LoginThread extends ServerThread implements UserInterface {
         if(user.login()){
             clientMap.put(id,this);
             sendToMe(LOGIN + DIVIDER + SUCCESS + DIVIDER + id);
+            System.out.println(id + " login");
         }else{
             sendToMe(LOGIN + DIVIDER + FAIL + DIVIDER + -1);
         }

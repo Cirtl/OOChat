@@ -140,10 +140,6 @@ public class User {
      * @return 登录成功与否
      */
     public boolean login() {
-        if (judgeLogin()) {
-            // JOptionPane.showMessageDialog(null, "您已登录，不能重复登陆", "警告", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
         return new HandleLogin().queryVerify(this.id, this.pass);
     }
 

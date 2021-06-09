@@ -35,7 +35,7 @@ public class HandleGetFriendList {
             preSql.setString(1, id);
             ResultSet rs = preSql.executeQuery();
             while (rs.next()) {
-                userList.add(rs.getString("user_id"));
+                userList.add(rs.getString("id_1"));
             }
             con.close();
         } catch (SQLException e) {
