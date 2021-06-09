@@ -2,9 +2,8 @@ drop
 database OO;
 create
 database OO;
-use
+use OO;
 
-OO;
 CREATE TABLE `user`
 (
     `id`       varchar(20) NOT NULL DEFAULT '',

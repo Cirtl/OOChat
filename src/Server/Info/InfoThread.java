@@ -278,7 +278,8 @@ public class InfoThread extends ServerThread implements InfoInterface {
         if (rooms.containsKey(roomPort)) {
             //todo:邀请好友加入
             if (clientMap.containsKey(friendID)) {
-                sendToSomeOne(friendID, makeOrder(INVITE_FRIEND, userID, String.valueOf(roomPort)));
+                String pwd = rooms.get(roomPort).getPassWord();
+                sendToSomeOne(friendID, makeOrder(INVITE_FRIEND, userID, String.valueOf(roomPort),pwd));
                 sendToMe(makeOrder(INVITE_FRIEND, String.valueOf(0)));
             } else {
                 //好友不在线

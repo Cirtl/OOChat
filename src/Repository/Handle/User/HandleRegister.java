@@ -28,13 +28,12 @@ public class HandleRegister {
      * @see SQLException
      */
     public boolean writeRegisterModel(User user) {
-        String sqlStr = "insert into `user` values(?,?,?,?)";
+        String sqlStr = "insert into `user` values(?,?,?)";
         try {
             preSql = con.prepareStatement(sqlStr);
             preSql.setString(1, user.getId());
             preSql.setString(2, user.getPass());
             preSql.setString(3, user.getIp());
-            preSql.setBoolean(4, false);
             int ok = preSql.executeUpdate();
             con.close();
             if (ok != 0) {

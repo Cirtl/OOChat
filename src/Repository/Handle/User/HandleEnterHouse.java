@@ -36,7 +36,7 @@ public class HandleEnterHouse {
             preSql.setInt(1, houseId);
             preSql.setString(2, pass);
             ResultSet rs = preSql.executeQuery();
-            if (rs.next() == false) {
+            if (!rs.next()) {
                 // JOptionPane.showMessageDialog(null, "进入失败,房间号或密码错误", "警告", JOptionPane.WARNING_MESSAGE);
                 con.close();
                 return false;
@@ -56,9 +56,8 @@ public class HandleEnterHouse {
             if (ok != 0) {
                 // JOptionPane.showMessageDialog(null, "进入成功", "恭喜", JOptionPane.WARNING_MESSAGE);
                 return true;
-            } else {
-                // JOptionPane.showMessageDialog(null, "进入失败，增加信息失败", "警告", JOptionPane.WARNING_MESSAGE);
-            }
+            }  // JOptionPane.showMessageDialog(null, "进入失败，增加信息失败", "警告", JOptionPane.WARNING_MESSAGE);
+
         } catch (SQLException e) {
             // JOptionPane.showMessageDialog(null, "进入失败", "警告", JOptionPane.WARNING_MESSAGE);
             System.out.println("EnterHouse_insert_user_house:" + e);

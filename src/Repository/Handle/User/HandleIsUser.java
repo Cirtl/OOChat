@@ -33,7 +33,7 @@ public class HandleIsUser {
             preSql = con.prepareStatement(sqlStr);
             preSql.setString(1, id);
             ResultSet rs = preSql.executeQuery();
-            if (rs.next() == true) {
+            if (rs.next()) {
                 con.close();
                 return true;
             } else {

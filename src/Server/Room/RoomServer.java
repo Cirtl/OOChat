@@ -81,4 +81,8 @@ public class RoomServer implements Runnable {
     public String getHost() {
         return host;
     }
+
+    public String getPassWord() {
+        return passWord;
+    }
 }

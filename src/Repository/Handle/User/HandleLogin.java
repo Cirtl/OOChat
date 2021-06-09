@@ -22,11 +22,11 @@ public class HandleLogin {
     }
 
     /**
-     * 向数据库更新登录状态为已登录
+     * 查询用户账号密码是否正确
      *
      * @param id 用户ID
      * @param pass 密码
-     * @return 更新状态成功与否
+     * @return 正确返回true
      * @see SQLException
      */
     public boolean queryVerify(String id, String pass) {
@@ -36,12 +36,13 @@ public class HandleLogin {
             preSql.setString(1, id);
             preSql.setString(2, pass);
             ResultSet rs = preSql.executeQuery();
-            con.close();
             if (rs.next()) {
                 // JOptionPane.showMessageDialog(null, "登录成功", "恭喜", JOptionPane.WARNING_MESSAGE);
+                con.close();
                 return true;
-            } else {
-                // JOptionPane.showMessageDialog(null, "登录失败", "警告", JOptionPane.WARNING_MESSAGE);
+            }else{
+                con.close();
+                return false;
             }
         } catch (SQLException e) {
             // JOptionPane.showMessageDialog(null, "登录失败", "警告", JOptionPane.WARNING_MESSAGE);

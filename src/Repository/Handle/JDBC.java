@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class JDBC {
     // MySQL 8.0 以上版本 - Repository.Handle.JDBC 驱动名及数据库 URL
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/oo?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/oo?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai";
     private static final String USER = "root";
     private static final String PASSWORD = "12345";
     private Connection con;
