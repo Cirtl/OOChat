@@ -231,7 +231,8 @@ public class InfoThread extends ServerThread implements InfoInterface {
             }
             if (flag) {
                 if (new User(userID, "test").createHouse(roomPort, String.valueOf(roomPort), pwd) == -1)
-                    sendToMe(makeOrder(NEW_ROOM, String.valueOf(-1), String.valueOf(-3)));
+                    //该房间已经被创建
+                    sendToMe(makeOrder(NEW_ROOM, String.valueOf(-2), String.valueOf(-1)));
                 else {
                     try {
                         RoomServer roomServer = new RoomServer(roomPort, userID, pwd);
