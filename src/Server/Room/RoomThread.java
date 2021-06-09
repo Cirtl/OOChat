@@ -181,6 +181,7 @@ public class RoomThread extends ServerThread implements ChatterInterface {
     public void leaveRoom(int way) {
         //todo:数据库测试
 //        user.quitHouse(roomServer.portNum);
+        sendMsg("[我离开了房间]");
         sendToMe(ChatterInterface.LEAVE_ROOM + DIVIDER + way);
         closeThread();
     }
