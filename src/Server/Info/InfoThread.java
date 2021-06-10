@@ -180,7 +180,8 @@ public class InfoThread extends ServerThread implements InfoInterface {
             //房间运行中 无法删除
             sendToMe(makeOrder(DELETE_ROOM, FAIL, String.valueOf(-1)));
         } else {
-            int resultCode = new User(userID, "admin").destroyHouse(port);
+//            int resultCode = new User(userID, "admin").destroyHouse(port);
+            int resultCode = 0;
             String result = resultCode == 0 ? SUCCESS : FAIL;
             sendToMe(makeOrder(DELETE_ROOM, result, String.valueOf(resultCode)));
         }
@@ -219,10 +220,10 @@ public class InfoThread extends ServerThread implements InfoInterface {
                 }
             }
             if (flag) {
-                if (new User(userID, "test").createHouse(roomPort, String.valueOf(roomPort), pwd) == -1)
-                    //该房间已经被创建
-                    sendToMe(makeOrder(NEW_ROOM, String.valueOf(-2), String.valueOf(-1)));
-                else {
+//                if (new User(userID, "test").createHouse(roomPort, String.valueOf(roomPort), pwd) == -1)
+//                    //该房间已经被创建
+//                    sendToMe(makeOrder(NEW_ROOM, String.valueOf(-2), String.valueOf(-1)));
+//                else {
                     try {
                         RoomServer roomServer = new RoomServer(roomPort, userID, pwd);
                         rooms.put(roomPort, roomServer);
@@ -231,10 +232,10 @@ public class InfoThread extends ServerThread implements InfoInterface {
                     } catch (IOException e) {
                         e.printStackTrace();
                         rooms.remove(roomPort);
-                        new User(userID, "test").destroyHouse(roomPort);
+//                        new User(userID, "test").destroyHouse(roomPort);
                         sendToMe(makeOrder(NEW_ROOM, String.valueOf(-1), String.valueOf(-3)));
                     }
-                }
+//                }
             } else {
                 sendToMe(makeOrder(NEW_ROOM, String.valueOf(1), String.valueOf(-3)));
             }
@@ -252,10 +253,10 @@ public class InfoThread extends ServerThread implements InfoInterface {
                 //密码错误
                 sendToMe(makeOrder(ENTER_ROOM, FAIL, String.valueOf(-3)));
             else {
-                if (new User(userID, "test").enterHouse(roomPort, pwd))
+//                if (new User(userID, "test").enterHouse(roomPort, pwd))
                     sendToMe(makeOrder(InfoInterface.ENTER_ROOM, SUCCESS, String.valueOf(roomPort),pwd));
-                else
-                    sendToMe(makeOrder(ENTER_ROOM, FAIL, String.valueOf(-4)));
+//                else
+//                    sendToMe(makeOrder(ENTER_ROOM, FAIL, String.valueOf(-4)));
             }
         } else
             //房间不存在
@@ -284,8 +285,9 @@ public class InfoThread extends ServerThread implements InfoInterface {
         if (rooms.containsKey(roomPort)) {
             sendToMe(makeOrder(RUN_ROOM, FAIL, String.valueOf(-1)));
         } else {
-            Map<Integer, String[]> houses = HouseList.getInstance().getHouseList();
-            String[] info = houses.getOrDefault(roomPort, null);
+//            Map<Integer, String[]> houses = HouseList.getInstance().getHouseList();
+//            String[] info = houses.getOrDefault(roomPort, null);
+            String info[] = null;
             if (info == null) {
                 sendToMe(makeOrder(RUN_ROOM, FAIL, String.valueOf(-2)));
             } else {
@@ -311,7 +313,8 @@ public class InfoThread extends ServerThread implements InfoInterface {
 
     @Override
     public void getFriends(String userID) {
-        Vector<String> friendList = new User(userID, "admin").getFriendList();
+//        Vector<String> friendList = new User(userID, "admin").getFriendList();
+        String[] friendList = new String[]{"hello","there","is","no","database"};
         StringBuilder builder = new StringBuilder();
         for (String person : friendList) {
             builder.append(person).append(DIVIDER);

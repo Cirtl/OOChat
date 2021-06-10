@@ -7,11 +7,11 @@ package Repository;
  */
 public class Test {
     public static void main(String[] args) {
-        User u1 = new User("u55", "123");
-        u1.register();
-        u1.login();
-        System.out.println(u1.createHouse(1,"1","1"));
-        System.out.println(u1.destroyHouse(1));
+//        User u1 = new User("u55", "123");
+//        u1.register();
+//        u1.login();
+//        System.out.println(u1.createHouse(1,"1","1"));
+//        System.out.println(u1.destroyHouse(1));
 //        User u2 = new User("u1", "1rgr23");
 //        User u3 = new User("u3", "123w");
 //

@@ -138,36 +138,36 @@ public class LoginThread extends ServerThread implements UserInterface {
 
     @Override
     public void userLogout() {
-        if (user.logout()) {
+//        if (user.logout()) {
             System.out.println(user.getId() + " logout");
             clientMap.remove(user.getId());
             user = null;
             sendToMe(LOGOUT + DIVIDER + SUCCESS);
-        } else {
-            sendToMe(makeOrder(LOGOUT, FAIL));
-        }
+//        } else {
+//            sendToMe(makeOrder(LOGOUT, FAIL));
+//        }
     }
 
     @Override
     public void userLogin(String id, String pwd) {
         user = new User(id, pwd);
-        if (user.login()) {
+//        if (user.login()) {
             clientMap.put(id, this);
             sendToMe(LOGIN + DIVIDER + SUCCESS + DIVIDER + id);
             System.out.println(id + " login");
-        } else {
-            sendToMe(LOGIN + DIVIDER + FAIL + DIVIDER + -1);
-        }
+//        } else {
+//            sendToMe(LOGIN + DIVIDER + FAIL + DIVIDER + -1);
+//        }
     }
 
     @Override
     public void userRegister(String id, String pwd) {
         User newUser = new User(id, pwd);
-        if (newUser.register()) {
+//        if (newUser.register()) {
             sendToMe(makeOrder(REGISTER, SUCCESS));
-        } else {
-            sendToMe(makeOrder(REGISTER, FAIL));
-        }
+//        } else {
+//            sendToMe(makeOrder(REGISTER, FAIL));
+//        }
     }
 
     @Override
@@ -187,7 +187,7 @@ public class LoginThread extends ServerThread implements UserInterface {
             switch (state) {
                 case SUCCESS:
                     //由接受邀请方发来，交友成功
-                    if (user.addFriend(toID)) {
+                    if (true) {
                         sendToSomeOne(toID, makeOrder(MAKE_FRIEND, SUCCESS, String.valueOf(0), user.getId()));
                         sendToMe(makeOrder(MAKE_FRIEND, SUCCESS, String.valueOf(0), toID));
                     } else {

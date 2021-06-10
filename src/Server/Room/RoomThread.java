@@ -160,8 +160,8 @@ public class RoomThread extends ServerThread implements ChatterInterface {
                 if (stringChatThreadEntry.getKey().equals(receiverID)) {
                     stringChatThreadEntry.getValue().leaveRoom(1);
                     //todo:结合数据库的移出房间
-                    User removedUser = new User(receiverID,"-1");
-                    removedUser.quitHouse(roomServer.portNum);
+//                    User removedUser = new User(receiverID,"-1");
+//                    removedUser.quitHouse(roomServer.portNum);
                     break;
                 }
             }
@@ -180,13 +180,13 @@ public class RoomThread extends ServerThread implements ChatterInterface {
     @Override
     public void leaveRoom(int way) {
         //todo:数据库测试
-        if(user.quitHouse(roomServer.portNum)){
+//        if(user.quitHouse(roomServer.portNum)){
             sendToMe(ChatterInterface.LEAVE_ROOM + DIVIDER + way);
             closeThread();
-        }else{
-            //todo:退出房间失败
-            sendToMe(makeOrder(LEAVE_ROOM,FAIL));
-        }
+//        }else{
+//            //todo:退出房间失败
+//            sendToMe(makeOrder(LEAVE_ROOM,FAIL));
+//        }
     }
 
     @Override

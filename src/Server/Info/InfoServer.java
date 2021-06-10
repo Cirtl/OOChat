@@ -56,15 +56,15 @@ public class InfoServer implements Runnable{
 
     @Override
     public void run() {
-        if(!init()){
-            try {
-                closeServer();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println(serverSocket.getInetAddress() + ":信息服务器启动失败");
-            return;
-        }
+//        if(!init()){
+//            try {
+//                closeServer();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            System.out.println(serverSocket.getInetAddress() + ":信息服务器启动失败");
+//            return;
+//        }
         System.out.println(serverSocket.getInetAddress() + ":信息服务器启动成功");
         while (isRunning) {
             try {
