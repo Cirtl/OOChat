@@ -9,6 +9,12 @@ public class House {
     private User host;
     private Vector<User> users;
 
+    public House(int id, String name) {
+        this.id = id;
+        this.name = name;
+        this.users = new Vector<>();
+    }
+
     public String getName() {
         return name;
     }
@@ -23,5 +29,9 @@ public class House {
 
     public Vector<User> getUsers() {
         return users;
+    }
+
+    public void setUsers(Vector<User> users) {
+        this.users = users;
     }
 }

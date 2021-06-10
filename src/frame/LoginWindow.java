@@ -1,16 +1,22 @@
 package src.frame;
 
+import src.Client.Client;
+import src.entity.House;
+import src.entity.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.ExecutionException;
+import java.io.IOException;
+import java.util.Vector;
 
 public class LoginWindow extends JFrame implements ActionListener {
     private final JTextField textName;
     private final JPasswordField textPwd;
     private final JButton jButtonLogin;
     private final JButton jButtonRegister;
+    private Client logClient;
 
     public LoginWindow() throws HeadlessException {
         super("Login Window");
@@ -52,12 +58,12 @@ public class LoginWindow extends JFrame implements ActionListener {
 
         //button panel
         jButtonLogin = new JButton("登录");
-        jButtonLogin.setFont(new Font("宋体", Font.CENTER_BASELINE, 22));
+        jButtonLogin.setFont(new Font("宋体", Font.BOLD, 22));
         jButtonLogin.setBounds(100, 30, 145, 40);
         jButtonLogin.addActionListener(this);
 
         jButtonRegister = new JButton("注册");
-        jButtonRegister.setFont(new Font("宋体", Font.CENTER_BASELINE, 22));
+        jButtonRegister.setFont(new Font("宋体", Font.BOLD, 22));
         jButtonRegister.setBounds(300, 30, 145, 40);
         jButtonRegister.addActionListener(this);
 
@@ -72,9 +78,9 @@ public class LoginWindow extends JFrame implements ActionListener {
         panelButton.add(jButtonLogin);
         panelButton.add(jButtonRegister);
 
-        this.add(panelWelcome);
-        this.add(panelInput);
-        this.add(panelButton);
+        this.getContentPane().add(panelWelcome);
+        this.getContentPane().add(panelInput);
+        this.getContentPane().add(panelButton);
 
         this.setVisible(true);
         this.validate();
@@ -84,14 +90,14 @@ public class LoginWindow extends JFrame implements ActionListener {
 
     /**
      * 检查输入是否符合基本要求
-     * @return
+     * @return 布尔值标志结果
      */
     public boolean checkInput() {
         try {
             String name = textName.getText().trim();
             String pwd = textPwd.getText().trim();
             if (name.equals("") || pwd.equals("")) {
-                JOptionPane.showMessageDialog(null, "请输入用户名或密码", "【输入错误】", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(this, "请输入用户名或密码", "【输入错误】", JOptionPane.PLAIN_MESSAGE);
                 return false;
             } else {
                 return true;
@@ -103,6 +109,7 @@ public class LoginWindow extends JFrame implements ActionListener {
     }
 
     /**
+     * todo:实现数据获取
      * 检查用户名与密码的对应关系
      * @return 登录成功返回true, 否则返回false
      */
@@ -111,6 +118,68 @@ public class LoginWindow extends JFrame implements ActionListener {
     }
 
 
+    /**
+     * todo:实现数据获取
+     * @return 登录用户
+     */
+    private User getUser() {
+        return new User("19373803", "123456");
+    }
+
+
+    /**
+     * todo:实现数据获取
+     * @return 当前所有房间列表
+     */
+    private Vector<House> getRooms() {
+        Vector<House> rooms = new Vector<>();
+        House room = new House(0, "0");
+        Vector<User> users = new Vector<>();
+        users.add(new User("1", "1"));
+        users.add(new User("2", "2"));
+        users.add(new User("3", "3"));
+        users.add(new User("1", "1"));
+        users.add(new User("2", "2"));
+        users.add(new User("3", "3"));
+        users.add(new User("1", "1"));
+        users.add(new User("2", "2"));
+        users.add(new User("3", "3"));
+        users.add(new User("1", "1"));
+        users.add(new User("2", "2"));
+        users.add(new User("3", "3"));
+        users.add(new User("1", "1"));
+        users.add(new User("2", "2"));
+        users.add(new User("3", "3"));
+        users.add(new User("1", "1"));
+        users.add(new User("2", "2"));
+        users.add(new User("3", "3"));
+        users.add(new User("1", "1"));
+        users.add(new User("2", "2"));
+        room.setUsers(users);
+        rooms.add(room);
+        rooms.add(new House(1, "1"));
+        rooms.add(new House(2, "2"));
+        rooms.add(new House(3, "3"));
+        rooms.add(new House(4, "4"));
+        rooms.add(new House(5, "5"));
+        rooms.add(new House(6, "6"));
+        rooms.add(new House(7, "7"));
+        rooms.add(new House(8, "8"));
+        rooms.add(new House(9, "9"));
+        rooms.add(new House(10, "10"));
+        rooms.add(new House(11, "11"));
+        rooms.add(new House(12, "12"));
+        rooms.add(new House(13, "13"));
+        rooms.add(new House(14, "14"));
+        rooms.add(new House(15, "15"));
+        rooms.add(new House(16, "16"));
+        return rooms;
+    }
+
+
+    /**
+     * 实现对本界面按钮点击事件的监听
+     */
     private boolean loginSuccess = false;
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -126,11 +195,14 @@ public class LoginWindow extends JFrame implements ActionListener {
      * login commands
      */
     private void loginCommands() {
+        System.out.println("click login");
         if (checkInput()) {
             System.out.println("thread begins");
+            jButtonLogin.removeActionListener(this);
+            jButtonRegister.removeActionListener(this);
             SwingWorker<Boolean, Object> login = new SwingWorker<Boolean, Object>() {
                 @Override
-                protected Boolean doInBackground() throws Exception {
+                protected Boolean doInBackground() {
                     System.out.println("in thread");
                     loginSuccess = checkLogin();
                     return loginSuccess;
@@ -144,7 +216,10 @@ public class LoginWindow extends JFrame implements ActionListener {
 
             if (loginSuccess) {
                 this.dispose();
-                new MainWindow();
+                new MainWindow(getUser(), getRooms());
+            } else {
+                jButtonLogin.addActionListener(this);
+                jButtonRegister.addActionListener(this);
             }
             System.out.println("finished");
         }
