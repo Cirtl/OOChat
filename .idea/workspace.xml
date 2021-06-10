@@ -19,8 +19,9 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:ydh" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/ydh_2" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
@@ -30,7 +31,10 @@
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ServerInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientCallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Test2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +86,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="src.Client" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Documents\2021Spring\Java\OOC_client\src" />
     </key>
@@ -133,6 +140,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.Client.Test2" />
+      <module name="OOChat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.Client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.Client.Test" />
+      <module name="OOChat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.Client.Interfaces.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.Client.Test" />
       <module name="OOChat" />
@@ -149,6 +182,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Test (1)" />
+        <item itemvalue="Application.Test2" />
         <item itemvalue="Application.MyFrame" />
         <item itemvalue="Application.Test" />
       </list>
@@ -245,7 +279,154 @@
       <option name="project" value="LOCAL" />
       <updated>1622724294061</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="客户端&#10;&#10;修复空格Bug">
+      <created>1622725193536</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1622725193537</updated>
+    </task>
+    <task id="LOCAL-00013" summary="客户端&#10;&#10;修复空格Bug">
+      <created>1622725546161</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1622725546161</updated>
+    </task>
+    <task id="LOCAL-00014" summary="客户端&#10;&#10;重写了所有接口和回调，实现了规范化">
+      <created>1623047952654</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1623047952654</updated>
+    </task>
+    <task id="LOCAL-00015" summary="接口优化&#10;&#10;客户端和服务端都保存id和房间号，因此无需作为端口参数，保证了安全性">
+      <created>1623050190423</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1623050190423</updated>
+    </task>
+    <task id="LOCAL-00016" summary="接口优化&#10;&#10;增加了删除房间 房间进入需要密码">
+      <created>1623051835295</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1623051835295</updated>
+    </task>
+    <task id="LOCAL-00017" summary="服务器设定&#10;&#10;改为手动启动服务器">
+      <created>1623052128164</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1623052128164</updated>
+    </task>
+    <task id="LOCAL-00018" summary="接口优化&#10;&#10;新建房间需要用户提供房间号">
+      <created>1623061842295</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1623061842295</updated>
+    </task>
+    <task id="LOCAL-00019" summary="接口优化&#10;&#10;将指令保存在接口中 便于对接">
+      <created>1623111836008</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1623111836008</updated>
+    </task>
+    <task id="LOCAL-00020" summary="测试&#10;&#10;通过信息和注册登录">
+      <created>1623141534873</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1623141534873</updated>
+    </task>
+    <task id="LOCAL-00021" summary="测试&#10;&#10;修复了shutroom的BUG">
+      <created>1623143705282</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1623143705282</updated>
+    </task>
+    <task id="LOCAL-00022" summary="测试&#10;&#10;实现了进入聊天室发消息">
+      <created>1623148689815</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1623148689815</updated>
+    </task>
+    <task id="LOCAL-00023" summary="测试&#10;&#10;测试通过私聊向自己发送信息">
+      <created>1623156484153</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1623156484153</updated>
+    </task>
+    <task id="LOCAL-00024" summary="测试&#10;&#10;测试通过私聊向自己发送信息">
+      <created>1623156594936</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1623156594936</updated>
+    </task>
+    <task id="LOCAL-00025" summary="测试&#10;&#10;实现了跨机聊天">
+      <created>1623165680071</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1623165680071</updated>
+    </task>
+    <task id="LOCAL-00026" summary="客户端&#10;&#10;当用户执行无权限操作（如在未登录时企图加入房间等） 调用回调函数并返回失败">
+      <created>1623170687274</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1623170687274</updated>
+    </task>
+    <task id="LOCAL-00027" summary="客户端&#10;&#10;实现了发送好友申请 和收到好友申请的操作">
+      <created>1623179319215</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1623179319215</updated>
+    </task>
+    <task id="LOCAL-00028" summary="客户端&#10;&#10;實現了獲取服務器關閉的消息">
+      <created>1623209477371</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1623209477371</updated>
+    </task>
+    <task id="LOCAL-00029" summary="客户端&#10;&#10;實現了獲取服務器關閉的消息">
+      <created>1623209510763</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1623209510763</updated>
+    </task>
+    <task id="LOCAL-00030" summary="客户端&#10;&#10;實現了獲取服務器關閉的消息">
+      <created>1623212344658</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1623212344658</updated>
+    </task>
+    <task id="LOCAL-00031" summary="客户端&#10;&#10;获取好友列表">
+      <created>1623229547499</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1623229547500</updated>
+    </task>
+    <task id="LOCAL-00032" summary="客户端&#10;&#10;获取好友列表和开启房间">
+      <created>1623229596735</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1623229596735</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,7 +443,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ydh" />
+                        <option value="origin/ydh_2" />
                       </list>
                     </value>
                   </entry>
@@ -276,7 +457,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="本地化完成" />
     <MESSAGE value="添加客户端" />
     <MESSAGE value="客户端测试&#10;&#10;能够从服务端获取函数并显示" />
     <MESSAGE value="客户端测试 &#10;&#10;发送关闭指令" />
@@ -285,13 +465,39 @@
     <MESSAGE value="客户端&#10;&#10;简易接口" />
     <MESSAGE value="客户端&#10;&#10;实现获取房间和回调" />
     <MESSAGE value="客户端&#10;&#10;实现登录-&gt;获取-&gt;聊天流程" />
-    <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;实现登录-&gt;获取-&gt;聊天流程" />
+    <MESSAGE value="客户端&#10;&#10;修复空格Bug" />
+    <MESSAGE value="客户端&#10;&#10;重写了所有接口和回调，实现了规范化" />
+    <MESSAGE value="接口优化&#10;&#10;客户端和服务端都保存id和房间号，因此无需作为端口参数，保证了安全性" />
+    <MESSAGE value="接口优化&#10;&#10;增加了删除房间 房间进入需要密码" />
+    <MESSAGE value="服务器设定&#10;&#10;改为手动启动服务器" />
+    <MESSAGE value="接口优化&#10;&#10;新建房间需要用户提供房间号" />
+    <MESSAGE value="接口优化&#10;&#10;将指令保存在接口中 便于对接" />
+    <MESSAGE value="测试&#10;&#10;通过信息和注册登录" />
+    <MESSAGE value="测试&#10;&#10;修复了shutroom的BUG" />
+    <MESSAGE value="测试&#10;&#10;实现了进入聊天室发消息" />
+    <MESSAGE value="测试&#10;&#10;测试通过私聊向自己发送信息" />
+    <MESSAGE value="测试&#10;&#10;实现了跨机聊天" />
+    <MESSAGE value="客户端&#10;&#10;当用户执行无权限操作（如在未登录时企图加入房间等） 调用回调函数并返回失败" />
+    <MESSAGE value="客户端&#10;&#10;实现了发送好友申请 和收到好友申请的操作" />
+    <MESSAGE value="客户端&#10;&#10;實現了獲取服務器關閉的消息" />
+    <MESSAGE value="客户端&#10;&#10;获取好友列表" />
+    <MESSAGE value="客户端&#10;&#10;获取好友列表和开启房间" />
+    <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;获取好友列表和开启房间" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1622722196488">
+    <state x="626" y="267" key="#Notifications" timestamp="1623217455822">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1622722196488" />
+    <state x="626" y="267" key="#Notifications/0.0.1536.864@0.0.1536.864" timestamp="1623217455822" />
+    <state x="386" y="0" width="781" height="864" key="#Test_(1)" timestamp="1623167550784">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="386" y="0" width="781" height="864" key="#Test_(1)/0.0.1536.864@0.0.1536.864" timestamp="1623167550784" />
+    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1623229563595">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="527" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1623229563595" />
+    <state x="568" y="79" key="#com.intellij.ide.util.MemberChooser/62.0.1474.864@62.0.1474.864" timestamp="1623051126766" />
     <state x="498" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1622720090530">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -300,51 +506,62 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="463" y="119" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1622039880931" />
-    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1622724291332">
+    <state x="272" y="0" key="CommitChangelistDialog2" timestamp="1623229595483">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1622724291332" />
-    <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1621651914627" />
-    <state x="526" y="128" key="FileChooserDialogImpl" timestamp="1622030819662">
+    <state x="272" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1623229595483" />
+    <state x="323" y="0" key="CommitChangelistDialog2/62.0.1474.864@62.0.1474.864" timestamp="1623111834474" />
+    <state x="526" y="128" key="FileChooserDialogImpl" timestamp="1623257900986">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="526" y="128" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1622030819662" />
-    <state width="1435" height="206" key="GridCell.Tab.0.bottom" timestamp="1622724841894">
+    <state x="526" y="128" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1623257900986" />
+    <state x="567" y="128" key="FileChooserDialogImpl/62.0.1474.864@62.0.1474.864" timestamp="1623070159251" />
+    <state width="1510" height="202" key="GridCell.Tab.0.bottom" timestamp="1623267498560">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
+    <state width="1510" height="202" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1623267498560" />
     <state width="1433" height="206" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1621651937984" />
-    <state width="1435" height="206" key="GridCell.Tab.0.center" timestamp="1622724841894">
+    <state width="1510" height="202" key="GridCell.Tab.0.center" timestamp="1623267498560">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
+    <state width="1510" height="202" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1623267498560" />
     <state width="1433" height="206" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state width="1435" height="206" key="GridCell.Tab.0.left" timestamp="1622724841894">
+    <state width="1510" height="202" key="GridCell.Tab.0.left" timestamp="1623267498560">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
+    <state width="1510" height="202" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1623267498560" />
     <state width="1433" height="206" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state width="1435" height="206" key="GridCell.Tab.0.right" timestamp="1622724841894">
+    <state width="1510" height="202" key="GridCell.Tab.0.right" timestamp="1623267498560">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1435" height="206" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1622724841894" />
+    <state width="1510" height="202" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1623267498560" />
     <state width="1433" height="206" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1621651937983" />
-    <state x="152" y="0" key="SettingsEditor" timestamp="1621599814186">
-      <screen x="62" y="0" width="1474" height="864" />
-    </state>
-    <state x="152" y="0" key="SettingsEditor/62.0.1474.864@62.0.1474.864" timestamp="1621599814186" />
-    <state x="240" y="100" key="Vcs.Push.Dialog.v2" timestamp="1622724309149">
+    <state x="94" y="0" key="SettingsEditor" timestamp="1623165658886">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="240" y="100" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1622724309149" />
-    <state x="292" y="100" key="Vcs.Push.Dialog.v2/62.0.1474.864@62.0.1474.864" timestamp="1621599517184" />
+    <state x="94" y="0" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1623165658886" />
+    <state x="152" y="0" key="SettingsEditor/62.0.1474.864@62.0.1474.864" timestamp="1621599814186" />
+    <state x="240" y="100" key="Vcs.Push.Dialog.v2" timestamp="1623229601025">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="240" y="100" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1623229601025" />
+    <state x="292" y="100" key="Vcs.Push.Dialog.v2/62.0.1474.864@62.0.1474.864" timestamp="1623111865651" />
+    <state x="523" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1623217473705">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="523" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1623217473705" />
     <state x="474" y="176" key="git4idea.merge.GitPullDialog" timestamp="1621599459818">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="474" y="176" key="git4idea.merge.GitPullDialog/62.0.1474.864@62.0.1474.864" timestamp="1621599459818" />
-    <state x="341" y="193" key="run.anything.popup" timestamp="1622043217879">
+    <state x="341" y="193" key="run.anything.popup" timestamp="1623212349658">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="341" y="193" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1622043217879" />
+    <state x="341" y="193" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1623212349658" />
+    <state x="390" y="193" key="run.anything.popup/62.0.1474.864@62.0.1474.864" timestamp="1623111854298" />
+    <state x="347" y="-1" width="840" height="1034" key="search.everywhere.popup" timestamp="1623176962418">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="347" y="-1" width="840" height="1034" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1623176962418" />
   </component>
 </project>

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Test {
+public class Test2 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Client client = new Client();
@@ -59,12 +59,9 @@ public class Test {
 
             @Override
             public void onMyRoomList(int result, List<Integer> rooms, List<String> owners) {
-                if(result==0){
-                    for(int i=0;i<rooms.size();i++)
-                        System.out.println(rooms.get(i) + "拥有者为" + owners.get(i));
-                }
 
             }
+
 
             @Override
             public void onMakeFriend(int result, String friendID) {
@@ -73,7 +70,8 @@ public class Test {
 
             @Override
             public boolean onAskedBeFriend(String friendID) {
-                return false;
+                System.out.println("accept friend " + friendID);
+                return true;
             }
 
 
@@ -84,6 +82,7 @@ public class Test {
 
             @Override
             public boolean onBeingInvited(String invitorID, int roomPort) {
+                System.out.println(invitorID + roomPort);
                 return true;
             }
 
@@ -112,47 +111,16 @@ public class Test {
 
             }
         });
-
-        client.userRegister("123","621ydh");
+        client.userRegister("test2","test2");
         Thread.sleep(300);
-        client.userLogin("123","622ydh");
+        client.userLogin("test2","test2");
         Thread.sleep(300);
-        client.userLogin("123","621ydh");
+        client.newRoom(8004,"213");
         Thread.sleep(300);
-        client.enterRoom(8003,"123");
+        client.shutRoom(8004);
         Thread.sleep(300);
-        client.deleteRoom(8003);
-        Thread.sleep(300);
-        client.sendMsg("no!!");
-        Thread.sleep(300);
-        client.leaveRoom();
-        Thread.sleep(300);
-        client.enterRoom(8003,"123");
-        Thread.sleep(300);
-        client.leaveRoom();
-        Thread.sleep(300);
-        client.shutRoom(8003);
-        Thread.sleep(300);
-        client.deleteRoom(8003);
-        Thread.sleep(300);
-        client.newRoom(8003,"213");
-        Thread.sleep(300);
-        client.leaveRoom();
-        Thread.sleep(300);
-        client.shutRoom(8003);
-        Thread.sleep(300);
-        client.runRoom(8003);
-        Thread.sleep(300);
-        client.enterRoom(8003,"213");
-        Thread.sleep(300);
-        client.makeFriend("test2");
-        Thread.sleep(300);
-        client.inviteFriend("test2");
-        Thread.sleep(300);
-        client.getFriends();
-        Thread.sleep(300);
-        client.getMyRooms();
-        Thread.sleep(15000);
+        client.deleteRoom(8004);
+        Thread.sleep(30000);
         client.closeClient();
     }
 }

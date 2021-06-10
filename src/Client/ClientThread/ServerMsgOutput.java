@@ -10,20 +10,21 @@ import java.net.Socket;
  */
 public class ServerMsgOutput {
     Socket serve;
-
     PrintStream printStream;
 
 
     protected ServerMsgOutput(Socket serve) throws IOException {
         this.serve = serve;
-        printStream = new PrintStream(serve.getOutputStream());
+        printStream = new PrintStream(serve.getOutputStream(),true);
     }
 
     protected void write(String str){
+        System.out.println(str);
         printStream.println(str);
     }
 
-    protected void close() throws IOException {
+    protected void close(){
+        printStream.println("QUIT");
         printStream.close();
     }
 }
