@@ -27,14 +27,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/out/production/OOChat/src/entity/House.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/OOChat/src/entity/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/OOChat/src/frame/HouseWindow.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/OOChat/src/frame/LoginWindow.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/OOChat/src/frame/RegisterWindow.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frame/HouseWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frame/LoginWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frame/MainWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frame/RegisterWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Client/Test.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/ClientCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientCallback.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ServerMsgOutput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client/Test2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Test2.java" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,16 +104,16 @@
       <recent name="D:\Documents\2021Spring\Java\OOC_client\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test (1)">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+  <component name="RunManager" selected="Application.Entry">
+    <configuration name="Entry" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.Entry" />
+      <module name="OOChat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -179,8 +190,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.MyFrame" />
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.Test (1)" />
+      <item itemvalue="Application.Entry" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Entry" />
         <item itemvalue="Application.Test (1)" />
         <item itemvalue="Application.Test2" />
         <item itemvalue="Application.MyFrame" />
@@ -188,7 +217,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -484,6 +513,7 @@
     <MESSAGE value="客户端&#10;&#10;获取好友列表和开启房间" />
     <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;获取好友列表和开启房间" />
   </component>
+
   <component name="WindowStateProjectService">
     <state x="626" y="267" key="#Notifications" timestamp="1623217455822">
       <screen x="0" y="0" width="1536" height="864" />
