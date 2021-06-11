@@ -1,43 +1,42 @@
 package src.component;
 
-import src.entity.Room;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class RoomCard extends JPanel {
+public class MemberCard extends JPanel {
 
-    public RoomCard(Room room, ActionListener applyListener, ActionListener deleteListener) {
+    public MemberCard(String userId, ActionListener whisperListener, ActionListener kickListener) {
         super();
+        
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
         JLabel label = new JLabel();
-        label.setText(String.valueOf(room.getId()));
-        label.setFont(new Font(null, Font.BOLD, 25));
-        JButton applyButton = new JButton("申请加入");
-        applyButton.setFont(new Font(null, Font.PLAIN, 18));
-        applyButton.addActionListener(applyListener);
-        JButton deleteButton = new JButton("删除房间");
-        deleteButton.setFont(new Font(null, Font.PLAIN, 18));
-        deleteButton.addActionListener(deleteListener);
+        label.setText(userId);
+        label.setFont(new Font(null, Font.BOLD, 20));
+        JButton whisperButton = new JButton("私聊");
+        whisperButton.setFont(new Font(null, Font.PLAIN, 16));
+        whisperButton.addActionListener(whisperListener);
+        JButton kickButton = new JButton("踢出");
+        kickButton.setFont(new Font(null, Font.PLAIN, 16));
+        kickButton.addActionListener(kickListener);
 
         this.add(label);
-        this.add(applyButton);
-        this.add(deleteButton);
+        this.add(whisperButton);
+        this.add(kickButton);
 
         SpringLayout.Constraints labelCons = layout.getConstraints(label);
         labelCons.setX(Spring.constant(5));
         labelCons.setY(Spring.constant(5));
 
-        SpringLayout.Constraints applyCons = layout.getConstraints(applyButton);
+        SpringLayout.Constraints applyCons = layout.getConstraints(whisperButton);
         applyCons.setX(Spring.sum(
                 labelCons.getConstraint(SpringLayout.EAST),
                 Spring.constant(15)
         ));
         applyCons.setY(Spring.constant(5));
 
-        SpringLayout.Constraints deleteCons = layout.getConstraints(deleteButton);
+        SpringLayout.Constraints deleteCons = layout.getConstraints(kickButton);
         deleteCons.setX(Spring.sum(
                 applyCons.getConstraint(SpringLayout.EAST),
                 Spring.constant(15)

@@ -44,7 +44,7 @@ public class ClientThread {
 
     /**
      * 添加接收到信息的回调
-     * @param e
+     * @param e 待添加接口
      */
     public void addCallback(ChatCallback e){
         chatCallbackList.add(e);
@@ -52,7 +52,7 @@ public class ClientThread {
 
     /**
      * 移出回调
-     * @param e
+     * @param e 待移除接口
      */
     public void removeCallback(ChatCallback e){
         chatCallbackList.remove(e);
@@ -60,7 +60,7 @@ public class ClientThread {
 
     /**
      * 发送信息
-     * @param msg
+     * @param msg 消息
      */
     public void sendMsg(String msg){
         serverMsgOutput.write(msg);
