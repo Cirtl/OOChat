@@ -54,9 +54,16 @@ public class RoomThread extends ServerThread implements ChatterInterface {
             sendToMe(makeOrder(DISCONNECT, "CHAT"));
             this.isRunning = false;
             receiver.close();
+            clientMap.remove(userID);
+            //房间内其他成员刷新用户列表
+            StringBuilder userIDs = new StringBuilder();
+            for (String userID : clientMap.keySet()) {
+                userIDs.append(userID).append(DIVIDER);
+            }
+            sendToAll(makeOrder(ROOM_INFO, userIDs.toString()));
+            //
             client.close();
             System.out.println(userID + " leave room " + roomServer.portNum);
-            clientMap.remove(userID);
         } catch (IOException e) {
             System.out.println("in close chat" + "  "+e);
         }
@@ -181,6 +188,8 @@ public class RoomThread extends ServerThread implements ChatterInterface {
     public void leaveRoom(int way) {
         //todo:数据库测试
         if(user.quitHouse(roomServer.portNum)){
+            //发送离开信息
+            sendMsg("[离开了聊天室]");
             sendToMe(ChatterInterface.LEAVE_ROOM + DIVIDER + way);
             closeThread();
         }else{
