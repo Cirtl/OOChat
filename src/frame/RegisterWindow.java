@@ -1,22 +1,26 @@
 package src.frame;
 
-import src.Entry;
+import src.dao.Repository;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-public class RegisterWindow extends JFrame implements ActionListener {
+public class RegisterWindow extends JFrame implements ActionListener, WindowListener {
+    private final LoginWindow pre;
+
     private final JTextField textName;
     private final JPasswordField textPwd;
     private final JButton jButtonRegister;
     private final JButton jButtonBack;
 
-    public RegisterWindow() throws HeadlessException {
+    public RegisterWindow(LoginWindow pre) throws HeadlessException {
         super("Register Window");
+        this.pre = pre;
+
         this.setBounds(500, 250, 650, 450);
         this.setLayout(new GridLayout(3, 1));
         this.setResizable(false);
@@ -54,12 +58,12 @@ public class RegisterWindow extends JFrame implements ActionListener {
 
         //button panel
         jButtonRegister = new JButton("注册");
-        jButtonRegister.setFont(new Font("宋体", Font.CENTER_BASELINE, 22));
+        jButtonRegister.setFont(new Font("宋体", Font.BOLD, 22));
         jButtonRegister.setBounds(100, 30, 145, 40);
         jButtonRegister.addActionListener(this);
 
         jButtonBack = new JButton("返回");
-        jButtonBack.setFont(new Font("宋体", Font.CENTER_BASELINE, 22));
+        jButtonBack.setFont(new Font("宋体", Font.BOLD, 22));
         jButtonBack.setBounds(300, 30, 145, 40);
         jButtonBack.addActionListener(this);
 
@@ -81,6 +85,8 @@ public class RegisterWindow extends JFrame implements ActionListener {
         this.setVisible(true);
         this.validate();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        this.addWindowListener(this);
     }
 
     @Override
@@ -94,43 +100,72 @@ public class RegisterWindow extends JFrame implements ActionListener {
 
 
     /**
-     * register commands
+     * 注册按钮操作
      */
     private void registerCommands() {
-        try {
-            String name = textName.getText().trim();
-            String pwd = textPwd.getText().trim();
-            if (name.equals("") || pwd.equals("")) {
-                JOptionPane.showMessageDialog(null, "请正确输入用户名和密码", "【输入错误】", JOptionPane.PLAIN_MESSAGE);
-            } else {
-                System.out.println(name);
-                System.out.println(pwd);
-            }
-        }catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+        String name = textName.getText().trim();
+        String pwd = textPwd.getText().trim();
+        if (name.equals("") || pwd.equals("")) {
+            JOptionPane.showMessageDialog(null, "请正确输入用户名和密码", "【输入错误】", JOptionPane.PLAIN_MESSAGE);
+        } else {
+            SwingWorker<Boolean, Object> register = new SwingWorker<Boolean, Object>() {
+                @Override
+                protected Boolean doInBackground() {
+                    if (Repository.getRepository() != null) {
+                        Repository.getRepository().register(RegisterWindow.this, name, pwd);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            };
+            register.execute();
         }
     }
 
 
     /**
-     * back commands
+     * 返回按钮操作
      */
     private void backCommands() {
         this.dispose();
-        Entry.start();
     }
 
 
     /**
-     * get the ip address of local computer
-     * @return if return "Unknown Error", there is something wrong
+     * 回调函数中注册成功时调用该方法
      */
-    private String getLocalIp() {
-        try {
-            InetAddress address = InetAddress.getLocalHost();
-            return address.getHostAddress();
-        } catch (UnknownHostException exception) {
-            return "Unknown Error";
-        }
+    public void registerSuccess() {
+        JOptionPane.showMessageDialog(null, "注册成功");
+        this.dispose();
     }
+
+
+    /**
+     * 回调函数中注册失败时调用该方法
+     */
+    public void registerFail() {
+        JOptionPane.showMessageDialog(null, "注册失败，请在此尝试");
+        textName.setText("");
+        textPwd.setText("");
+    }
+
+
+    @Override
+    public void windowOpened(WindowEvent e) {}
+    @Override
+    public void windowClosing(WindowEvent e) {}
+    @Override
+    public void windowClosed(WindowEvent e) {
+        pre.setVisible(true);
+    }
+    @Override
+    public void windowIconified(WindowEvent e) {}
+    @Override
+    public void windowDeiconified(WindowEvent e) {}
+    @Override
+    public void windowActivated(WindowEvent e) {}
+    @Override
+    public void windowDeactivated(WindowEvent e) {}
+
 }
