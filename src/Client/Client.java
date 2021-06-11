@@ -14,7 +14,7 @@ import src.Client.ClientInterfaces.UserInterface;
 /**
  * 向UI层提供的接口
  * 需要手动启动和关闭
- * 顺序 user->info->chat
+ * 顺序 user-info-chat
  */
 public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public static final String DISCONNECT = "QUIT";
@@ -23,6 +23,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
     public static final String UNCONFIRMED = "UNCONFIRMED";
     public static final String DIVIDER = " ";
     private static final String host = "0.0.0.0";
+//    private static final String host = "192.168.43.119";
     private static final int port_user = 8000;
     private static final int port_info = 8001;
     private ClientThread chatThread;
@@ -88,6 +89,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
 
     /**
      * 当前是否登录
+     * @return true已登录，false反之
      */
     public boolean isLogin() {
         return isLogin;
@@ -95,6 +97,7 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
 
     /**
      * 查询是否在房间中
+     * @return true在房间，false反之
      */
     public boolean isInRoom() {
         return inRoom;
@@ -285,6 +288,8 @@ public class Client implements ChatterInterface, InfoInterface, UserInterface {
                             roomPwd = pwd;
                             roomPort = port;
                             sendMsg(id);
+                            for (ClientCallback callback : callbackList)
+                                callback.onEnterRoom(0, roomPort);
                         } catch (IOException e) {
                             inRoom = false;
                             roomPwd = null;

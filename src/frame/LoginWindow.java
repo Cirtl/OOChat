@@ -1,22 +1,22 @@
 package src.frame;
 
-import src.Client.Client;
-import src.entity.House;
+import src.dao.Repository;
 import src.entity.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.Vector;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-public class LoginWindow extends JFrame implements ActionListener {
+public class LoginWindow extends JFrame implements ActionListener, WindowListener {
     private final JTextField textName;
     private final JPasswordField textPwd;
     private final JButton jButtonLogin;
     private final JButton jButtonRegister;
-    private Client logClient;
+
+    private User tempUser;
 
     public LoginWindow() throws HeadlessException {
         super("Login Window");
@@ -82,6 +82,7 @@ public class LoginWindow extends JFrame implements ActionListener {
         this.getContentPane().add(panelInput);
         this.getContentPane().add(panelButton);
 
+        this.addWindowListener(this);
         this.setVisible(true);
         this.validate();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -100,6 +101,7 @@ public class LoginWindow extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "请输入用户名或密码", "【输入错误】", JOptionPane.PLAIN_MESSAGE);
                 return false;
             } else {
+                tempUser = new User(name);
                 return true;
             }
         }catch (NullPointerException e) {
@@ -108,79 +110,67 @@ public class LoginWindow extends JFrame implements ActionListener {
         }
     }
 
+
     /**
-     * todo:实现数据获取
-     * 检查用户名与密码的对应关系
-     * @return 登录成功返回true, 否则返回false
+     * 隐藏窗口
      */
-    private boolean checkLogin() {
-        return true;
+    private void hideSelf() {
+        textName.setText("");
+        textPwd.setText("");
+        this.setVisible(false);
     }
 
 
     /**
-     * todo:实现数据获取
-     * @return 登录用户
+     * 登录按钮操作
      */
-    private User getUser() {
-        return new User("19373803", "123456");
+    private void loginCommands() {
+        if (checkInput()) {
+            SwingWorker<Boolean, Object> login = new SwingWorker<Boolean, Object>() {
+                @Override
+                protected Boolean doInBackground() {
+                    if (Repository.getRepository() != null) {
+                        Repository.getRepository().login(LoginWindow.this, textName.getText().trim(), textPwd.getText().trim());
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            };
+            login.execute();
+        }
     }
 
 
     /**
-     * todo:实现数据获取
-     * @return 当前所有房间列表
+     * 注册按钮操作
      */
-    private Vector<House> getRooms() {
-        Vector<House> rooms = new Vector<>();
-        House room = new House(0, "0");
-        Vector<User> users = new Vector<>();
-        users.add(new User("1", "1"));
-        users.add(new User("2", "2"));
-        users.add(new User("3", "3"));
-        users.add(new User("1", "1"));
-        users.add(new User("2", "2"));
-        users.add(new User("3", "3"));
-        users.add(new User("1", "1"));
-        users.add(new User("2", "2"));
-        users.add(new User("3", "3"));
-        users.add(new User("1", "1"));
-        users.add(new User("2", "2"));
-        users.add(new User("3", "3"));
-        users.add(new User("1", "1"));
-        users.add(new User("2", "2"));
-        users.add(new User("3", "3"));
-        users.add(new User("1", "1"));
-        users.add(new User("2", "2"));
-        users.add(new User("3", "3"));
-        users.add(new User("1", "1"));
-        users.add(new User("2", "2"));
-        room.setUsers(users);
-        rooms.add(room);
-        rooms.add(new House(1, "1"));
-        rooms.add(new House(2, "2"));
-        rooms.add(new House(3, "3"));
-        rooms.add(new House(4, "4"));
-        rooms.add(new House(5, "5"));
-        rooms.add(new House(6, "6"));
-        rooms.add(new House(7, "7"));
-        rooms.add(new House(8, "8"));
-        rooms.add(new House(9, "9"));
-        rooms.add(new House(10, "10"));
-        rooms.add(new House(11, "11"));
-        rooms.add(new House(12, "12"));
-        rooms.add(new House(13, "13"));
-        rooms.add(new House(14, "14"));
-        rooms.add(new House(15, "15"));
-        rooms.add(new House(16, "16"));
-        return rooms;
+    private void registerCommands() {
+        hideSelf();
+        SwingUtilities.invokeLater(() -> new RegisterWindow(LoginWindow.this));
+    }
+
+
+    /**
+     * 登录成功时调用此方法，跳转界面
+     */
+    public void loginSuccess() {
+        hideSelf();
+        SwingUtilities.invokeLater(() -> new MainWindow(LoginWindow.this, tempUser));
+    }
+
+
+    /**
+     * 登录失败时调用此方法
+     */
+    public void loginFail() {
+        JOptionPane.showMessageDialog(this, "登录失败，请检查账号密码后重试");
     }
 
 
     /**
      * 实现对本界面按钮点击事件的监听
      */
-    private boolean loginSuccess = false;
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == jButtonLogin) {
@@ -192,46 +182,28 @@ public class LoginWindow extends JFrame implements ActionListener {
 
 
     /**
-     * login commands
+     * 窗口事件处理
+     * @param e ...
      */
-    private void loginCommands() {
-        System.out.println("click login");
-        if (checkInput()) {
-            System.out.println("thread begins");
-            jButtonLogin.removeActionListener(this);
-            jButtonRegister.removeActionListener(this);
-            SwingWorker<Boolean, Object> login = new SwingWorker<Boolean, Object>() {
-                @Override
-                protected Boolean doInBackground() {
-                    System.out.println("in thread");
-                    loginSuccess = checkLogin();
-                    return loginSuccess;
-                }
-            };
-            login.execute();
+    @Override
+    public void windowOpened(WindowEvent e) {
 
-            while (true) {
-                if (login.isDone()) break;
-            }
-
-            if (loginSuccess) {
-                this.dispose();
-                new MainWindow(getUser(), getRooms());
-            } else {
-                jButtonLogin.addActionListener(this);
-                jButtonRegister.addActionListener(this);
-            }
-            System.out.println("finished");
+    }
+    @Override
+    public void windowClosing(WindowEvent e) {}
+    @Override
+    public void windowClosed(WindowEvent e) {
+        if (Repository.getRepository() != null) {
+            Repository.getRepository().close();
+            System.out.println("连接断开");
         }
     }
-
-
-    /**
-     * register commands
-     */
-    private void registerCommands() {
-        this.dispose();
-        new RegisterWindow();
-    }
-
+    @Override
+    public void windowIconified(WindowEvent e) {}
+    @Override
+    public void windowDeiconified(WindowEvent e) {}
+    @Override
+    public void windowActivated(WindowEvent e) {}
+    @Override
+    public void windowDeactivated(WindowEvent e) {}
 }

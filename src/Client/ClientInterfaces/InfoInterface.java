@@ -43,6 +43,7 @@ public interface InfoInterface {
 
     /**
      * 关闭房间
+     * @param roomPort 待关闭房间序号
      */
     public void shutRoom(int roomPort);
 

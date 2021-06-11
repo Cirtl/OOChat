@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -26,21 +29,30 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/MemeberCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/component/RoomCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/Repository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/ViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/frame/RoomWindow.java" afterDir="false" />
+    <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="界面框架搭建">
+      <change afterPath="$PROJECT_DIR$/src/entity/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/entity/House.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/entity/House.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/entity/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Entry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Entry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/entity/House.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/frame/HouseWindow.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/frame/LoginWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/frame/LoginWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/House.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/House.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frame/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/LoginWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/frame/RegisterWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/frame/RegisterWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientInterfaces/InfoInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientInterfaces/InfoInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/ClientThread/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/ClientThread/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/MemeberCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/MemberCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/RoomCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/RoomCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/ViewModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/House.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frame/HouseWindow.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frame/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frame/RoomWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/RoomWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +69,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="hiddenUrls">
@@ -185,19 +205,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Test2" />
       <item itemvalue="Application.MyFrame" />
@@ -215,7 +222,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -228,6 +235,10 @@
       <updated>1621575944419</updated>
       <workItem from="1621575948447" duration="2022000" />
       <workItem from="1621596081734" duration="2006000" />
+      <workItem from="1623373527397" duration="187000" />
+      <workItem from="1623374528374" duration="13271000" />
+      <workItem from="1623408189854" duration="19974000" />
+      <workItem from="1623428980173" duration="585000" />
     </task>
     <task id="LOCAL-00001" summary="本地化完成">
       <created>1621599476676</created>
@@ -453,7 +464,35 @@
       <option name="project" value="LOCAL" />
       <updated>1623229596735</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="界面框架搭建">
+      <created>1623320165531</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1623320165531</updated>
+    </task>
+    <task id="LOCAL-00034" summary="修复Client类中未处理onEnterRoom回调的bug">
+      <created>1623411735482</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1623411735482</updated>
+    </task>
+    <task id="LOCAL-00035" summary="完善Register界面">
+      <created>1623412166608</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1623412166608</updated>
+    </task>
+    <task id="LOCAL-00036" summary="完善Login界面">
+      <created>1623412222583</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1623412222583</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,10 +523,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加客户端" />
-    <MESSAGE value="客户端测试&#10;&#10;能够从服务端获取函数并显示" />
-    <MESSAGE value="客户端测试 &#10;&#10;发送关闭指令" />
-    <MESSAGE value="客户端测试 &#10;&#10;发送注册信息" />
     <MESSAGE value="客户端&#10;&#10;简化流程" />
     <MESSAGE value="客户端&#10;&#10;简易接口" />
     <MESSAGE value="客户端&#10;&#10;实现获取房间和回调" />
@@ -509,6 +544,10 @@
     <MESSAGE value="客户端&#10;&#10;實現了獲取服務器關閉的消息" />
     <MESSAGE value="客户端&#10;&#10;获取好友列表" />
     <MESSAGE value="客户端&#10;&#10;获取好友列表和开启房间" />
-    <option name="LAST_COMMIT_MESSAGE" value="客户端&#10;&#10;获取好友列表和开启房间" />
+    <MESSAGE value="界面框架搭建" />
+    <MESSAGE value="修复Client类中未处理onEnterRoom回调的bug" />
+    <MESSAGE value="完善Register界面" />
+    <MESSAGE value="完善Login界面" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善Login界面" />
   </component>
 </project>
