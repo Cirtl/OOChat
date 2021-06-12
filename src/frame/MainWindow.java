@@ -115,6 +115,7 @@ public class MainWindow extends JFrame implements WindowListener {
                             @Override
                             protected Boolean doInBackground() {
                                 if (Repository.getRepository() != null) {
+                                    Repository.getRepository().shutDownRoom(MainWindow.this, room.getId());
                                     Repository.getRepository().deleteRoom(MainWindow.this, room.getId());
                                     return true;
                                 } else

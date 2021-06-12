@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="OOChat:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -31,9 +36,12 @@
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="界面框架搭建">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frame/RoomWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/RoomWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frame/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/MainWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +95,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.uml" />
@@ -101,7 +109,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Entry">
-    <configuration name="Entry" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Entry" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.Entry" />
       <module name="OOChat" />
       <extension name="coverage">
@@ -186,15 +194,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -233,7 +239,9 @@
       <workItem from="1623374528374" duration="13271000" />
       <workItem from="1623408189854" duration="19974000" />
       <workItem from="1623428980173" duration="1409000" />
-      <workItem from="1623463007209" duration="2223000" />
+      <workItem from="1623463007209" duration="3001000" />
+      <workItem from="1623466719691" duration="665000" />
+      <workItem from="1623471551824" duration="2023000" />
     </task>
     <task id="LOCAL-00001" summary="本地化完成">
       <created>1621599476676</created>
@@ -494,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623430006722</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="修复了直接关闭房间窗口时无法退出登录的bug">
+      <created>1623465477401</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1623465477401</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,7 +540,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="客户端&#10;&#10;简易接口" />
     <MESSAGE value="客户端&#10;&#10;实现获取房间和回调" />
     <MESSAGE value="客户端&#10;&#10;实现登录-&gt;获取-&gt;聊天流程" />
     <MESSAGE value="客户端&#10;&#10;修复空格Bug" />
@@ -550,6 +564,7 @@
     <MESSAGE value="完善Register界面" />
     <MESSAGE value="完善Login界面" />
     <MESSAGE value="实现完整功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="实现完整功能" />
+    <MESSAGE value="修复了直接关闭房间窗口时无法退出登录的bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复了直接关闭房间窗口时无法退出登录的bug" />
   </component>
 </project>

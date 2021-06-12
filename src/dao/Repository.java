@@ -113,6 +113,17 @@ public class Repository {
 
 
     /**
+     * 关闭房间
+     * @param caller 调用者
+     * @param roomPort 关闭的房间号
+     */
+    public void shutDownRoom(MainWindow caller, int roomPort) {
+        mainCaller = caller;
+        client.shutRoom(roomPort);
+    }
+
+
+    /**
      * 删除房间
      * @param caller 调用者
      * @param roomPort 删除的房间号
@@ -255,7 +266,6 @@ public class Repository {
 
         @Override
         public void onEnterRoom(int result, int roomPort) {
-            System.out.println("call back");
             switch (result) {
                 case 0:
                     mainCaller.enterRoomSuccess(roomPort);
