@@ -1,6 +1,7 @@
 package Server;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 import Server.Info.InfoServer;
 import Server.Login.LoginServer;
@@ -18,23 +19,18 @@ public class Test {
         InfoServer infoServer = InfoServer.getInstance(port_info);
         new Thread(infoServer,"info").start();
         new Thread(loginServer,"login").start();
-
-//        Thread.sleep(10000);
-//        loginServer.closeServer();
-//        infoServer.closeServer();
-
-        while(true){
-            int nbRunning = 0;
-            for (Thread t : Thread.getAllStackTraces().keySet()) {
-                if (t.getState()==Thread.State.RUNNABLE){
-                    nbRunning++;
-                }
-//                    System.out.println(t.getName());
-            }
-            System.out.println("当前运行线程" + nbRunning);
-            Thread.sleep(5000);
+        System.out.println("服务器启动完成，输入 QUIT 关闭服务器");
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNext()){
+            String order = scanner.nextLine();
+            if (order.equals("QUIT"))
+                break;
+            else
+                System.out.println("未知命令");
         }
-
+        scanner.close();
+        loginServer.closeServer();
+        infoServer.closeServer();
     }
 
 }

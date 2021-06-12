@@ -53,7 +53,6 @@ public class RoomThread extends ServerThread implements ChatterInterface {
         try {
             sendToMe(makeOrder(DISCONNECT, "CHAT"));
             this.isRunning = false;
-            receiver.close();
             clientMap.remove(userID);
             //房间内其他成员刷新用户列表
             StringBuilder userIDs = new StringBuilder();
@@ -98,6 +97,12 @@ public class RoomThread extends ServerThread implements ChatterInterface {
         //todo:修改房间
         if (this.userID != null && !this.clientMap.containsKey(userID)) {
             this.clientMap.put(userID, this);
+            //房间内其他成员刷新用户列表
+            StringBuilder idBuilder = new StringBuilder();
+            for (String id : clientMap.keySet()) {
+                idBuilder.append(id).append(DIVIDER);
+            }
+            sendToAll(makeOrder(ROOM_INFO, idBuilder.toString()));
             sendMsg("我进入了聊天室");
         } else {
             sendToMe(SEND_MSG + DIVIDER + userID + "你已经在聊天室中啦");
@@ -115,7 +120,7 @@ public class RoomThread extends ServerThread implements ChatterInterface {
                     data = receiver.nextLine();
                 if (data.isEmpty()) {
                     System.out.println("chat break down ");
-                    closeThread();
+                    leaveRoom(1);
                     break;
                 }
                 System.out.println("receive from CHAT " + client + " " + data);
@@ -166,9 +171,6 @@ public class RoomThread extends ServerThread implements ChatterInterface {
             for (Map.Entry<String, RoomThread> stringChatThreadEntry : clientMap.entrySet()) {
                 if (stringChatThreadEntry.getKey().equals(receiverID)) {
                     stringChatThreadEntry.getValue().leaveRoom(1);
-                    //todo:结合数据库的移出房间
-                    User removedUser = new User(receiverID,"-1");
-                    removedUser.quitHouse(roomServer.portNum);
                     break;
                 }
             }

@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Java_OO:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Java_OO_jar</output-path>
+    <root id="archive" name="Java_OO.jar">
+      <element id="module-output" name="Java_OO" />
+      <element id="library" level="project" name="mysql-connector-java-8.0.25" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/mysql-connector-java-8.0.16.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
