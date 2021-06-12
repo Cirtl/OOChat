@@ -69,6 +69,21 @@ public class RoomThread extends ServerThread implements ChatterInterface {
 
     }
 
+    /**
+     * 通知其他成员刷新列表
+     */
+    public void informEnter(){
+        StringBuilder idBuilder = new StringBuilder();
+        for (String id : clientMap.keySet()) {
+            idBuilder.append(id).append(DIVIDER);
+        }
+        String msg = makeOrder(ROOM_INFO, idBuilder.toString());
+        for (Map.Entry<String, RoomThread> stringChatThreadEntry : clientMap.entrySet()) {
+            if(stringChatThreadEntry.getKey().equals(userID)) continue;
+            stringChatThreadEntry.getValue().sendToMe(msg);
+        }
+    }
+
     @Override
     public void sendToAll(String msg) {
         for (Map.Entry<String, RoomThread> stringChatThreadEntry : clientMap.entrySet()) {
@@ -97,12 +112,8 @@ public class RoomThread extends ServerThread implements ChatterInterface {
         //todo:修改房间
         if (this.userID != null && !this.clientMap.containsKey(userID)) {
             this.clientMap.put(userID, this);
-            //房间内其他成员刷新用户列表
-            StringBuilder idBuilder = new StringBuilder();
-            for (String id : clientMap.keySet()) {
-                idBuilder.append(id).append(DIVIDER);
-            }
-            sendToAll(makeOrder(ROOM_INFO, idBuilder.toString()));
+//            房间内其他成员刷新用户列表
+            informEnter();
             sendMsg("我进入了聊天室");
         } else {
             sendToMe(SEND_MSG + DIVIDER + userID + "你已经在聊天室中啦");
@@ -118,7 +129,7 @@ public class RoomThread extends ServerThread implements ChatterInterface {
                 String data = "";
                 if (receiver.hasNext())
                     data = receiver.nextLine();
-                if (data.isEmpty()) {
+                if (data.equals("")) {
                     System.out.println("chat break down ");
                     leaveRoom(1);
                     break;
