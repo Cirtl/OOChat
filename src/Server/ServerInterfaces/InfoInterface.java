@@ -1,5 +1,8 @@
 package Server.ServerInterfaces;
 
+/**
+ * 信息获取接口
+ */
 public interface InfoInterface {
     public static String DELETE_ROOM = "deleteRoom";
     public static String MY_ROOMS = "myRooms";

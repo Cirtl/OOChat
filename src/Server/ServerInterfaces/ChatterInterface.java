@@ -1,5 +1,8 @@
 package Server.ServerInterfaces;
 
+/**
+ * 聊天室接口
+ */
 public interface ChatterInterface {
 
     public static String WHISPER = "whisper";

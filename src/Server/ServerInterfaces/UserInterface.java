@@ -1,5 +1,8 @@
 package Server.ServerInterfaces;
 
+/**
+ * 用户操作接口
+ */
 public interface UserInterface {
 
     public static String LOGOUT = "logout";
