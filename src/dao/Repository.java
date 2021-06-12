@@ -206,7 +206,7 @@ public class Repository {
     /**
      * 内部类，负责实现回调函数
      */
-    public class ClientResponse implements ClientCallback {
+    private class ClientResponse implements ClientCallback {
         @Override
         public void onDisconnect(int channel) {
 

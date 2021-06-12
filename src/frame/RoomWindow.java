@@ -172,17 +172,7 @@ public class RoomWindow extends JFrame implements WindowListener {
                     JOptionPane.YES_NO_CANCEL_OPTION
             );
             if (result == JOptionPane.YES_OPTION){
-                SwingWorker<Boolean, Object> leaveThread = new SwingWorker<Boolean, Object>() {
-                    @Override
-                    protected Boolean doInBackground() {
-                        if (Repository.getRepository() != null) {
-                            Repository.getRepository().leaveRoom(RoomWindow.this);
-                            return true;
-                        } else
-                            return false;
-                    }
-                };
-                leaveThread.execute();
+                leaveRoom();
             }
         });
         clearButton.addActionListener(e -> inputArea.setText(""));
@@ -289,6 +279,25 @@ public class RoomWindow extends JFrame implements WindowListener {
 
 
     /**
+     * 离开房间
+     */
+    private void leaveRoom() {
+        SwingWorker<Boolean, Object> leaveThread = new SwingWorker<Boolean, Object>() {
+            @Override
+            protected Boolean doInBackground() {
+                if (Repository.getRepository() != null) {
+                    Repository.getRepository().leaveRoom(RoomWindow.this);
+                    return true;
+                } else
+                    return false;
+            }
+        };
+        leaveThread.execute();
+    }
+
+
+    private boolean isNormalLeave = false;
+    /**
      * 用户点击离开时回调该函数
      * @param result 处理结果
      */
@@ -309,7 +318,8 @@ public class RoomWindow extends JFrame implements WindowListener {
                 break;
         }
         JOptionPane.showMessageDialog(null, info);
-        this.dispose();
+        isNormalLeave = true;
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 
 
@@ -337,7 +347,7 @@ public class RoomWindow extends JFrame implements WindowListener {
                 builder.append(content);
                 builder.append("\n");
             } else {
-                builder.append(currentUser.getId());
+                builder.append("你");
                 builder.append(" 私聊 ");
                 builder.append(receiver);
                 builder.append("：\n        ");
@@ -359,12 +369,14 @@ public class RoomWindow extends JFrame implements WindowListener {
 
     @Override
     public void windowOpened(WindowEvent e) {
-        System.out.println("window opened");
+
     }
 
     @Override
     public void windowClosing(WindowEvent e) {
-        System.out.println("window closing");
+        if (! isNormalLeave) {
+            leaveRoom();
+        }
     }
 
     @Override

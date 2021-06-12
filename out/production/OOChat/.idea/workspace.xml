@@ -30,25 +30,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="411c552e-2143-4dab-94e8-a96e1d164e84" name="Default Changelist" comment="界面框架搭建">
-      <change afterPath="$PROJECT_DIR$/src/entity/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/entity/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/Entry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/Entry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/entity/House.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/frame/HouseWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/frame/LoginWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/frame/LoginWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOChat/src/frame/RegisterWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOChat/src/frame/RegisterWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/MemeberCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/MemberCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/RoomCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/RoomCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/ViewModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/House.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frame/HouseWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frame/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/MainWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frame/RoomWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/RoomWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,14 +89,14 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.uml" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="src.Client" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Documents\2021Spring\Java\OOC_client\src" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="src.Client" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Entry">
@@ -247,7 +230,9 @@
       <workItem from="1621596081734" duration="2006000" />
       <workItem from="1623373527397" duration="187000" />
       <workItem from="1623374528374" duration="13271000" />
-      <workItem from="1623408189854" duration="12764000" />
+      <workItem from="1623408189854" duration="19974000" />
+      <workItem from="1623428980173" duration="1409000" />
+      <workItem from="1623463007209" duration="1606000" />
     </task>
     <task id="LOCAL-00001" summary="本地化完成">
       <created>1621599476676</created>
@@ -501,7 +486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623412222583</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="实现完整功能">
+      <created>1623430006722</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1623430006722</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -532,7 +524,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="客户端&#10;&#10;简化流程" />
     <MESSAGE value="客户端&#10;&#10;简易接口" />
     <MESSAGE value="客户端&#10;&#10;实现获取房间和回调" />
     <MESSAGE value="客户端&#10;&#10;实现登录-&gt;获取-&gt;聊天流程" />
@@ -557,17 +548,7 @@
     <MESSAGE value="修复Client类中未处理onEnterRoom回调的bug" />
     <MESSAGE value="完善Register界面" />
     <MESSAGE value="完善Login界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善Login界面" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/dao/Repository.java</url>
-          <line>334</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="实现完整功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="实现完整功能" />
   </component>
 </project>
